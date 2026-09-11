@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma, getPrismaClient } from "@/lib/prisma";
 import {
   DEMO_BRANDS,
   DEMO_CATEGORIES,
@@ -18,8 +18,10 @@ import type {
 let dbReadyPromise: Promise<boolean> | null = null;
 
 export function isDbReady(): Promise<boolean> {
+  const client = getPrismaClient();
+  if (!client) return Promise.resolve(false);
   if (!dbReadyPromise) {
-    dbReadyPromise = prisma
+    dbReadyPromise = client
       .$queryRaw`SELECT 1`
       .then(() => true)
       .catch(() => false);
