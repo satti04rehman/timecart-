@@ -5,6 +5,7 @@
  * Requires a live DATABASE_URL (Supabase Postgres) — see .env.example.
  */
 import "dotenv/config";
+import pg from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client.ts";
 import type { Gender } from "../src/generated/prisma/enums.ts";
@@ -17,7 +18,15 @@ if (!connectionString || connectionString.includes("your-supabase")) {
   process.exit(1);
 }
 
-const adapter = new PrismaPg({ connectionString });
+const poolUrl = new URL(connectionString);
+poolUrl.search = "";
+const pool = new pg.Pool({
+  connectionString: poolUrl.toString(),
+  ssl: poolUrl.hostname.includes("pooler.supabase.com")
+    ? { rejectUnauthorized: false }
+    : undefined,
+});
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 const DEMO_CATEGORIES = [
