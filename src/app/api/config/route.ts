@@ -1,0 +1,12 @@
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+  const configured =
+    url.length > 0 &&
+    key.length > 0 &&
+    !url.includes("your-project") &&
+    !key.includes("your-anon-key");
+  return NextResponse.json({ supabaseConfigured: configured });
+}
