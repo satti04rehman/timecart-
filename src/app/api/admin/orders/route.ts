@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/require-admin";
 
 const DEMO_ORDERS = [
   { number: "TC-220191", customer: "Ahmed R.", phone: "0300-1234567", items: 2, total: 28750, payment: "Cash on Delivery", status: "Processing", date: "2026-09-10", city: "Karachi" },
@@ -12,10 +13,15 @@ const DEMO_ORDERS = [
 ];
 
 export async function GET() {
+  const { response } = await requireAdmin();
+  if (response) return response;
   return NextResponse.json({ orders: DEMO_ORDERS });
 }
 
 export async function PUT(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   const body = await req.json();
   const { number, status } = body;
   if (!number || !status)

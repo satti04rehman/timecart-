@@ -2,12 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { isDbReady } from "@/lib/data";
 import { data as demoRows } from "@/lib/demo-admin";
+import { requireAdmin } from "@/lib/require-admin";
 
 function DB_ERROR() {
   return NextResponse.json({ ok: false, error: "Database operation failed" }, { status: 400 });
 }
 
 export async function GET(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   const url = new URL(req.url);
   const q = (url.searchParams.get("q") ?? "").toLowerCase();
   const ready = await isDbReady();
@@ -52,6 +56,9 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   const body = await req.json();
   const ready = await isDbReady();
   if (ready) {
@@ -66,6 +73,9 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   const body = await req.json();
   const { id, ...data } = body;
   if (!id) {
@@ -84,6 +94,9 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   const url = new URL(req.url);
   const id = url.searchParams.get("id");
   if (!id) {

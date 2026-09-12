@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/require-admin";
 
 export async function POST(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
   try {
     const body = await req.json();
     const { code, delete: isDelete, isActive } = body;

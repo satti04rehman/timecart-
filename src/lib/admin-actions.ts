@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { verifySessionToken, sessionCookieName } from "@/lib/admin-auth";
+import { verifySessionToken, sessionCookieName } from "@/lib/admin-token";
 
 export interface AdminSession {
   username: string;

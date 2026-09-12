@@ -23,11 +23,13 @@ export default function AdminLoginPage() {
         <Suspense>
           <LoginForm />
         </Suspense>
-        <p className="mt-6 text-xs text-ivory/40">
-          Default demo credentials:{" "}
-          <code className="bg-white/5 px-1 py-0.5">admin</code> /{" "}
-          <code className="bg-white/5 px-1 py-0.5">admin123</code>
-        </p>
+        {process.env.NODE_ENV !== "production" && (
+          <p className="mt-6 text-xs text-ivory/40">
+            Default demo credentials:{" "}
+            <code className="bg-white/5 px-1 py-0.5">admin</code> /{" "}
+            <code className="bg-white/5 px-1 py-0.5">admin123</code>
+          </p>
+        )}
       </div>
       <div className="relative ml-auto hidden flex-1 lg:block">
         <video

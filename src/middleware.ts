@@ -1,22 +1,28 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isAdminTokenValid } from "@/lib/admin-token";
 
 const COOKIE_NAME = "tc-admin-session";
 
-// Lightweight middleware-side gate for demo/admin sessions.
-// A real Supabase deployment should keep using the Supabase branch below;
-// demo mode falls back to the local signed cookie (see admin-auth.ts).
+// Lightweight middleware-side gate for admin sessions.
+// Verifies the HMAC signature on tc-admin-session (not just its presence)
+// so forged cookies are rejected, not just missing ones.
 export async function updateSession(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  const isAdminRoute = path.startsWith("/admin");
+  const isAdminApi = path.startsWith("/api/admin");
+  const isLoginPage = path === "/admin/login";
 
-  // ---- Demo-local admin auth (works with or without Supabase) ----
-  if (path.startsWith("/admin")) {
-    const hasSession =
-      request.cookies.has(COOKIE_NAME) && request.cookies.get(COOKIE_NAME)?.value;
+  if (isAdminRoute || isAdminApi) {
+    const rawToken = request.cookies.get(COOKIE_NAME)?.value ?? "";
+    const verified = rawToken ? await isAdminTokenValid(rawToken) : false;
 
-    const isLoginPage = path === "/admin/login";
+    if (isAdminApi) {
+      if (!verified) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.next({ request });
+    }
 
-    if (!hasSession) {
+    if (!verified) {
       if (!isLoginPage) {
         const url = request.nextUrl.clone();
         url.pathname = "/admin/login";
