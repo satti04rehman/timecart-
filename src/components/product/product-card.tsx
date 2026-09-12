@@ -15,9 +15,14 @@ import { toast } from "sonner";
 interface ProductCardProps {
   product: ProductSummary;
   onQuickView?: (product: ProductSummary) => void;
+  priority?: boolean;
 }
 
-export function ProductCard({ product, onQuickView }: ProductCardProps) {
+export function ProductCard({
+  product,
+  onQuickView,
+  priority = false,
+}: ProductCardProps) {
   const { addToCart, toggleWishlist, isWishlisted } = useStore();
   const wished = isWishlisted(product.id);
 
@@ -68,7 +73,8 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
+              loading={priority ? undefined : "lazy"}
+              priority={priority}
             />
           ) : (
             <div className="flex h-full items-center justify-center bg-soft-gray/50 text-text-gray">

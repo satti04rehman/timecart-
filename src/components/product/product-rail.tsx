@@ -8,9 +8,11 @@ import { QuickViewDialog } from "@/components/product/quick-view";
 export function ProductRail({
   products,
   columns = 4,
+  priorityFirst = false,
 }: {
   products: ProductSummary[];
   columns?: 2 | 3 | 4;
+  priorityFirst?: boolean;
 }) {
   const [quickView, setQuickView] = React.useState<ProductSummary | null>(null);
 
@@ -19,6 +21,7 @@ export function ProductRail({
       <ProductGrid
         products={products}
         columns={columns}
+        priorityFirst={priorityFirst}
         onQuickView={setQuickView}
       />
       <QuickViewDialog product={quickView} onClose={() => setQuickView(null)} />

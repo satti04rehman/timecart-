@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { isDbReady } from "@/lib/data";
 import { data as demoRows } from "@/lib/demo-admin";
@@ -6,6 +7,12 @@ import { requireAdmin } from "@/lib/require-admin";
 
 function DB_ERROR() {
   return NextResponse.json({ ok: false, error: "Database operation failed" }, { status: 400 });
+}
+
+function invalidateProductCache(slug?: string) {
+  revalidatePath("/watches");
+  revalidatePath("/");
+  if (slug) revalidatePath(`/watches/${slug}`);
 }
 
 export async function GET(req: Request) {
@@ -64,6 +71,7 @@ export async function POST(req: Request) {
   if (ready) {
     try {
       await prisma.product.create({ data: body });
+      invalidateProductCache(body.slug);
       return NextResponse.json({ ok: true });
     } catch {
       return DB_ERROR();
@@ -85,6 +93,7 @@ export async function PUT(req: Request) {
   if (ready) {
     try {
       await prisma.product.update({ where: { id }, data });
+      invalidateProductCache(data.slug);
       return NextResponse.json({ ok: true });
     } catch {
       return DB_ERROR();
@@ -106,6 +115,7 @@ export async function DELETE(req: Request) {
   if (ready) {
     try {
       await prisma.product.delete({ where: { id } });
+      invalidateProductCache();
       return NextResponse.json({ ok: true });
     } catch {
       return DB_ERROR();

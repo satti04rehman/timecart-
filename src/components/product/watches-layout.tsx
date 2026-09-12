@@ -49,7 +49,7 @@ export function WatchesLayout({
           </div>
         ) : (
           <div className="mt-6">
-            <ProductRail products={products} />
+            <ProductRail products={products} priorityFirst />
             {pages > 1 && <Pagination page={page} pages={pages} />}
           </div>
         )}

@@ -27,12 +27,16 @@ export function ScrollScrubVideo({
   const sectionRef = React.useRef<HTMLElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [hasLoaded, setHasLoaded] = React.useState(false);
-  const [fallback, setFallback] = React.useState(false);
+  const [fallback, setFallback] = React.useState(
+    () =>
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   const durationRef = React.useRef(0);
   const frameIntMs = 1000 / fps;
   const lastSeekRef = React.useRef(0);
-  const targetFrameRef = React.useRef(0);
   const pendingSeekRef = React.useRef(false);
 
   const currentSrc = mobileSrc ? mobileSrc : src;
@@ -42,22 +46,16 @@ export function ScrollScrubVideo({
     const video = videoRef.current;
     if (!section || !video) return;
 
-    const reduced =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setFallback(true);
-      return;
-    }
-
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
-    video.preload = "auto";
+    video.preload = "metadata";
     video.pause();
 
     let active = false;
     let raf = 0;
+    let loadTimeout = 0;
+    let loadKicked = false;
 
     // Map scroll progress to a proportional video time, throttled to ~fps
     // seeks per second so even jumpy/heroic scroll feels like a smooth scrub.
@@ -121,6 +119,17 @@ export function ScrollScrubVideo({
           active = true;
           computeFrame();
           raf = requestAnimationFrame(fpsLoop);
+          if (!loadKicked && video.readyState < 3) {
+            loadKicked = true;
+            loadTimeout = window.setTimeout(() => {
+              try {
+                video.preload = "auto";
+                video.load();
+              } catch {
+                setFallback(true);
+              }
+            }, 400);
+          }
         } else {
           active = false;
           cancelAnimationFrame(raf);
@@ -141,11 +150,12 @@ export function ScrollScrubVideo({
     return () => {
       io.disconnect();
       cancelAnimationFrame(raf);
+      window.clearTimeout(loadTimeout);
       video.removeEventListener("loadedmetadata", onLoaded);
       video.removeEventListener("seeked", onSeeked);
       video.removeEventListener("error", onError);
     };
-  }, [currentSrc, fps]);
+  }, [currentSrc, fps, frameIntMs]);
 
   return (
     <section
@@ -172,7 +182,7 @@ export function ScrollScrubVideo({
             poster={poster}
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ willChange: "transform" }}

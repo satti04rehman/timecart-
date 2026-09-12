@@ -33,11 +33,12 @@ export default function AdminLoginPage() {
       </div>
       <div className="relative ml-auto hidden flex-1 lg:block">
         <video
-          src="/videos/animatio-30fps.mp4"
+          src="/videos/animatio-30fps.mp4?v2"
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-obsidian/70" />

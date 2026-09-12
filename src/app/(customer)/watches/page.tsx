@@ -4,7 +4,8 @@ import { getProducts, getCategories, getBrands } from "@/lib/data";
 import { X } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
+export const revalidate = 60;
 
 interface WatchesPageProps {
   searchParams: Promise<{

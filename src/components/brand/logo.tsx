@@ -60,6 +60,7 @@ export function Logo({ className, variant = "dark", compact = false }: LogoProps
       <span
         className={cn(
           "font-heading text-xl font-semibold uppercase tracking-[0.28em]",
+          "hidden min-[420px]:inline",
           variant === "dark" ? "text-obsidian" : "text-ivory"
         )}
       >

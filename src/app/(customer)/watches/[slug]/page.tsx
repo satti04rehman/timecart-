@@ -10,9 +10,22 @@ import { SectionHeader } from "@/components/home/section-header";
 import { Rating } from "@/components/ui/rating";
 import { Badge } from "@/components/ui/badge";
 import { getProductBySlug, getRelatedProducts, getProductReviews } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import { cn, formatPrice } from "@/lib/utils";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  try {
+    const products = await prisma.product.findMany({
+      where: { isActive: true },
+      select: { slug: true },
+    });
+    return products.map((product) => ({ slug: product.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;

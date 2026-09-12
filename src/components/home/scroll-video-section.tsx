@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 export function ScrollVideoSection() {
   return (
     <ScrollScrubVideo
-      src="/videos/animatio-30fps.mp4"
-      mobileSrc="/videos/animatio-mobile.mp4"
+      src="/videos/animatio-30fps.mp4?v2"
+      mobileSrc="/videos/animatio-mobile.mp4?v2"
       poster="/images/video-poster.jpg"
       fps={30}
       hint="Scroll to explore"

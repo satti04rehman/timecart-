@@ -46,6 +46,22 @@ export async function updateSession(request: NextRequest) {
 
   if (!configured) return supabaseResponse;
 
+  // Fast path: requests without Supabase auth cookies can't be signed in, so
+  // there's no token to refresh and the account gate needs no network round
+  // trip — skip auth.getUser() for them (a large share of all traffic).
+  const hasAuthCookies = request.cookies
+    .getAll()
+    .some(({ name }) => name.startsWith("sb-"));
+  if (!hasAuthCookies) {
+    if (path.startsWith("/account")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("redirect", path);
+      return NextResponse.redirect(url);
+    }
+    return supabaseResponse;
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

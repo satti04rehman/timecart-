@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "sonner";
-import { ReactQueryProvider } from "@/providers/react-query";
 import { StoreProvider } from "@/providers/store-provider";
 import "./globals.css";
 
@@ -54,9 +53,13 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background font-sans text-foreground">
-        <ReactQueryProvider>
-          <StoreProvider>{children}</StoreProvider>
-        </ReactQueryProvider>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-obsidian focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ivory focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        <StoreProvider>{children}</StoreProvider>
         <Toaster
           position="top-center"
           toastOptions={{

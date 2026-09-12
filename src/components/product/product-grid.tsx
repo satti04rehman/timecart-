@@ -8,12 +8,14 @@ import { cn } from "@/lib/utils";
 interface ProductGridProps {
   products: ProductSummary[];
   columns?: 2 | 3 | 4;
+  priorityFirst?: boolean;
   onQuickView?: (product: ProductSummary) => void;
 }
 
 export function ProductGrid({
   products,
   columns = 4,
+  priorityFirst = false,
   onQuickView,
 }: ProductGridProps) {
   return (
@@ -24,11 +26,12 @@ export function ProductGrid({
         columns >= 4 && "lg:grid-cols-4"
       )}
     >
-      {products.map((product) => (
+      {products.map((product, index) => (
         <ProductCard
           key={product.id}
           product={product}
           onQuickView={onQuickView}
+          priority={priorityFirst && index === 0}
         />
       ))}
     </div>
