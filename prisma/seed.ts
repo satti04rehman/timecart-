@@ -79,6 +79,412 @@ const PRODUCTS = [
   { slug: "garmin-vivoactive-5", sku: "TC-GARMIN-002", name: "Garmin Venu Sq 2", brand: "garmin", category: "smart", price: 115000, discount: 0, gender: "UNISEX", movement: "Smart", strapMaterial: "Silicone", caseMaterial: "Polymer", caseDiameter: "40 mm", waterResistance: "5 ATM", style: "sport", occasion: "Everyday", featuredImageUrl: "https://picsum.photos/seed/tc-venusq/1000/1000", stock: 6 },
 ];
 
+const IMG = (slug: string) =>
+  `https://bbvfadophecydxaqefuq.supabase.co/storage/v1/object/public/timecart/${slug}.jpg`;
+
+const PRODUCT_EXTRA: Record<
+  string,
+  {
+    imageUrl: string;
+    description: string;
+    displayType: string;
+    specifications: Record<string, string>;
+  }
+> = {
+  "casio-a168-classic-digital": {
+    imageUrl: IMG("casio-a168-classic-digital"),
+    displayType: "Digital",
+    description:
+      "The retro icon, reborn. The Casio A168 pairs a chrome-finished case and stainless steel link bracelet with a classic 8-digit LCD — EL backlight, stopwatch, daily alarm and auto calendar in a slim silhouette that has stayed in style for decades.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "36 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Digital LCD",
+      Backlight: "Electro-luminescent",
+      Functions: "Stopwatch, Alarm, Auto-calendar",
+      Battery: "CR2016 (~7 years)",
+      Warranty: "1 Year",
+    },
+  },
+  "casio-g-shock-ga-2100": {
+    imageUrl: IMG("casio-g-shock-ga-2100"),
+    displayType: "Analog-Digital",
+    description:
+      "The octagonal icon known as the 'CasiOak'. The GA-2100 packs Casio's legendary shock resistance into a slim, carbon-core case — 200 metre water resistance, world time, stopwatch and a super-illuminator LED.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Carbon & Resin (Carbon Core Guard)",
+      "Strap Material": "Resin",
+      "Case Diameter": "48.5 mm",
+      "Water Resistance": "20 ATM / 200 m",
+      Display: "Analog-Digital",
+      Backlight: "Super Illuminator LED",
+      Functions: "World Time, Stopwatch, Timer, Alarm",
+      Protection: "Shock Resistant",
+      Battery: "~3 years",
+      Warranty: "1 Year",
+    },
+  },
+  "casio-f91w-classic": {
+    imageUrl: IMG("casio-f91w-classic"),
+    displayType: "Digital",
+    description:
+      "The most famous digital watch ever made. The Casio F-91W is feather-light, utterly reliable and iconic — 8-digit LCD with electro-luminescent backlight, 1/100 sec stopwatch, daily alarm and auto calendar.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Resin",
+      "Strap Material": "Resin",
+      "Case Diameter": "38 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Digital LCD",
+      Backlight: "Electro-luminescent",
+      Functions: "Stopwatch, Alarm, Auto-calendar",
+      Battery: "CR2016 (~7 years)",
+      Warranty: "1 Year",
+    },
+  },
+  "casio-edifice-ecb-900": {
+    imageUrl: IMG("casio-edifice-ecb-900"),
+    displayType: "Analog",
+    description:
+      "Racing heritage, smart connectivity. The Edifice ECB-900 links to your phone over Bluetooth for precision time sync, with a sapphire crystal, stopwatch and 100 metre water resistance.",
+    specifications: {
+      Movement: "Quartz (Bluetooth Link)",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "43 mm",
+      "Water Resistance": "10 ATM / 100 m",
+      Display: "Analog Chronograph",
+      Crystal: "Sapphire",
+      Functions: "Bluetooth Sync, Stopwatch, Timer, World Time",
+      Warranty: "1 Year",
+    },
+  },
+  "casio-classic-illuminator-ca53w": {
+    imageUrl: IMG("casio-classic-illuminator-ca53w"),
+    displayType: "Digital",
+    description:
+      "An '80s time-travel piece worn by pop-culture icons. The CA-53W packs a working 8-digit calculator beside a sharp LCD clock — alarm, stopwatch, auto calendar and unmistakable retro charm.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Resin",
+      "Strap Material": "Resin",
+      "Case Diameter": "37 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Digital LCD with Calculator",
+      Functions: "Calculator, Alarm, Auto-calendar",
+      Battery: "CR2016",
+      Warranty: "1 Year",
+    },
+  },
+  "seiko-5-sports-automatic": {
+    imageUrl: IMG("seiko-5-sports-automatic"),
+    displayType: "Analog",
+    description:
+      "A modern classic from the longest-running mechanical watch family in history. The Seiko 5 Sports runs on the in-house Calibre 4R36 automatic with a day-date window beneath a Hardlex crystal.",
+    specifications: {
+      Movement: "Automatic Calibre 4R36",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "40 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Day & Date)",
+      "Power Reserve": "~41 hours",
+      Jewels: "24",
+      Crystal: "Hardlex",
+      Warranty: "1 Year",
+    },
+  },
+  "seiko-presage-cocktail": {
+    imageUrl: IMG("seiko-presage-cocktail"),
+    displayType: "Analog",
+    description:
+      "Inspired by mixology, finished like fine jewellery. The Presage Cocktail Time's sunray dial captures the shimmer of a perfectly poured drink — powered by the automatic Calibre 4R35 and framed by a box-shaped sapphire crystal.",
+    specifications: {
+      Movement: "Automatic Calibre 4R35",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Leather",
+      "Case Diameter": "40 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Date)",
+      "Power Reserve": "~41 hours",
+      Crystal: "Box-shaped Sapphire",
+      Warranty: "1 Year",
+    },
+  },
+  "seiko-sports-ladies-quartz": {
+    imageUrl: IMG("seiko-sports-ladies-quartz"),
+    displayType: "Analog",
+    description:
+      "Quietly refined. This ladies' Seiko pairs a slim stainless steel case with an accurate Japanese quartz movement and a clean, legible dial — an effortless companion from office to evening.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "35 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Date)",
+      Crystal: "Hardlex",
+      Warranty: "1 Year",
+    },
+  },
+  "seiko-snk809-automatic": {
+    imageUrl: IMG("seiko-snk809-automatic"),
+    displayType: "Analog",
+    description:
+      "The watch that started a thousand collection journeys. The SNK809 is an in-house automatic at an unbeatable price — military-field dial, day-date at 3 o'clock, exhibition caseback and a 21,600 vph movement.",
+    specifications: {
+      Movement: "Automatic Calibre 7S26",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Nylon",
+      "Case Diameter": "37 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Analog (Day & Date)",
+      "Power Reserve": "~40 hours",
+      Jewels: "21",
+      Crystal: "Hardlex",
+      Warranty: "1 Year",
+    },
+  },
+  "orient-bambino-v2": {
+    imageUrl: IMG("orient-bambino-v2"),
+    displayType: "Analog",
+    description:
+      "The people's Calatrava. The Bambino Version 2 is a mid-century dress classic built on Orient's in-house Calibre F6724 automatic — domed crystal, stepped crown, elegant numerals.",
+    specifications: {
+      Movement: "Automatic Calibre F6724",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Leather",
+      "Case Diameter": "40 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Analog (Date)",
+      "Power Reserve": "~40 hours",
+      Crystal: "Domed Mineral",
+      Warranty: "1 Year",
+    },
+  },
+  "orient-kamasu-diver": {
+    imageUrl: IMG("orient-kamasu-diver"),
+    displayType: "Analog",
+    description:
+      "A genuine dive watch with luxury specs on a budget. The Kamasu pairs Orient's Calibre F6922 automatic with sapphire crystal, a screw-down crown and 200 metres of water resistance.",
+    specifications: {
+      Movement: "Automatic Calibre F6922",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "41 mm",
+      "Water Resistance": "20 ATM / 200 m",
+      Display: "Analog (Date)",
+      "Power Reserve": "~40 hours",
+      Crystal: "Sapphire",
+      Crown: "Screw-Down",
+      Bezel: "Uni-directional Diver's",
+      Warranty: "1 Year",
+    },
+  },
+  "titan-regalia-automatic": {
+    imageUrl: IMG("titan-regalia-automatic"),
+    displayType: "Analog",
+    description:
+      "Indian luxury, distilled. The Titan Regalia is an automatic dress watch with a layered, sun-brushed dial and a slim stainless steel case — a stately presence for formal occasions.",
+    specifications: {
+      Movement: "Automatic",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "38 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Date)",
+      Crystal: "Sapphire-Coated",
+      Warranty: "1 Year",
+    },
+  },
+  "titan-edge-ladies": {
+    imageUrl: IMG("titan-edge-ladies"),
+    displayType: "Analog",
+    description:
+      "The world-famous Edge, in a ladies' silhouette. Featherlight and strikingly slim, this Titan combines an ultra-thin case with dependable quartz accuracy.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Stainless Steel (ultra-slim)",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "30 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Thickness: "~6 mm",
+      Display: "Analog",
+      Warranty: "1 Year",
+    },
+  },
+  "fossil-jr1437-chronograph": {
+    imageUrl: IMG("fossil-jr1437-chronograph"),
+    displayType: "Chronograph",
+    description:
+      "Vintage Americana with a mechanical heart. The JR1437 is a 44 mm chronograph with three subdials, tachymeter bezel and date window in a polished steel case with a rich brown leather strap.",
+    specifications: {
+      Movement: "Quartz Chronograph",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Leather",
+      "Case Diameter": "44 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Chronograph (3 Subdials, Date)",
+      Crystal: "Mineral",
+      Warranty: "1 Year",
+    },
+  },
+  "fossil-caroline-mini": {
+    imageUrl: IMG("fossil-caroline-mini"),
+    displayType: "Analog",
+    description:
+      "Delicate, demure, delightful. The Caroline Mini is a petite ladies' watch with a clean minimalist dial and a slim steel bracelet.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "32 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog",
+      Crystal: "Mineral",
+      Warranty: "1 Year",
+    },
+  },
+  "citizen-ecco-drive-promaster": {
+    imageUrl: IMG("citizen-ecco-drive-promaster"),
+    displayType: "Analog",
+    description:
+      "A professional diver powered by light. Citizen's Eco-Drive converts any light source into energy — no battery, ever. The Promaster adds a uni-directional bezel and 200 metres of water resistance.",
+    specifications: {
+      Movement: "Eco-Drive (Light-Powered)",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "42 mm",
+      "Water Resistance": "20 ATM / 200 m",
+      Display: "Analog (Date)",
+      "Power Reserve": "~6 months",
+      Crown: "Screw-Down",
+      Bezel: "Uni-directional Diver's",
+      Warranty: "1 Year",
+    },
+  },
+  "citizen-ecco-drive-ladies": {
+    imageUrl: IMG("citizen-ecco-drive-ladies"),
+    displayType: "Analog",
+    description:
+      "Never needs a battery — just light. This Citizen Eco-Drive ladies' watch pairs an accurate light-powered movement with a slim brushed-steel case and a refined dial.",
+    specifications: {
+      Movement: "Eco-Drive (Light-Powered)",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "33 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Date)",
+      "Power Reserve": "~6 months",
+      Warranty: "1 Year",
+    },
+  },
+  "timex-weekender-38": {
+    imageUrl: IMG("timex-weekender-38"),
+    displayType: "Analog",
+    description:
+      "The classic that started a trend. The Weekender's easy-going dial, canvas strap and famous Indiglo night-light make it endlessly versatile.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Brass",
+      "Strap Material": "Nylon",
+      "Case Diameter": "38 mm",
+      "Water Resistance": "3 ATM / 30 m",
+      Display: "Analog",
+      Backlight: "Indiglo",
+      Warranty: "1 Year",
+    },
+  },
+  "timex-expedition-field": {
+    imageUrl: IMG("timex-expedition-field"),
+    displayType: "Analog",
+    description:
+      "Rugged, legible and field-ready. The Expedition packs military-style numerals, a 24-hour track and Indiglo illumination into a tough brass case.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Brass",
+      "Strap Material": "Fabric",
+      "Case Diameter": "40 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog",
+      Backlight: "Indiglo",
+      Warranty: "1 Year",
+    },
+  },
+  "hush-puppies-refined": {
+    imageUrl: IMG("hush-puppies-refined"),
+    displayType: "Analog",
+    description:
+      "Comfort-first casual. The Hush Puppies Refined keeps it honest with a clean steel case, a legible dial and a soft leather strap.",
+    specifications: {
+      Movement: "Quartz",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Leather",
+      "Case Diameter": "41 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Analog (Date)",
+      Crystal: "Mineral",
+      Warranty: "1 Year",
+    },
+  },
+  "armani-exchange-chronograph": {
+    imageUrl: IMG("armani-exchange-chronograph"),
+    displayType: "Chronograph",
+    description:
+      "Bold, urban, unmistakably AX. This Armani Exchange chronograph pairs a large stainless steel case with a black-on-steel dial, three subdials and a date window.",
+    specifications: {
+      Movement: "Quartz Chronograph",
+      "Case Material": "Stainless Steel",
+      "Strap Material": "Stainless Steel",
+      "Case Diameter": "44 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "Chronograph (Subdials, Date)",
+      Crystal: "Mineral",
+      Warranty: "1 Year",
+    },
+  },
+  "garmin-forerunner-165": {
+    imageUrl: IMG("garmin-forerunner-165"),
+    displayType: "AMOLED Touch",
+    description:
+      "Train smarter, recover faster. The Forerunner 165 brings Garmin's proven running platform to a bright AMOLED touchscreen — wrist heart rate, GPS, recovery insights and Body Battery.",
+    specifications: {
+      Movement: "GPS Smart (Forerunner 165)",
+      "Case Material": "Fiber-reinforced Polymer",
+      "Strap Material": "Silicone",
+      "Case Diameter": "43 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "1.2\" AMOLED Touch",
+      Battery: "Up to 19 hrs GPS / 11 days watch",
+      Sensors: "GPS, Heart Rate, SpO2, Compass",
+      Features: "Body Battery, Recovery, Training Status",
+      Warranty: "1 Year",
+    },
+  },
+  "garmin-vivoactive-5": {
+    imageUrl: IMG("garmin-vivoactive-5"),
+    displayType: "AMOLED Touch",
+    description:
+      "Wellness on your wrist. The Venu Sq 2 brings a vivid AMOLED display, built-in GPS, health sensing and long battery life to a lightweight smartwatch.",
+    specifications: {
+      Movement: "GPS Smart (Venu Sq 2)",
+      "Case Material": "Aluminium-reinforced Polymer",
+      "Strap Material": "Silicone",
+      "Case Diameter": "40 mm",
+      "Water Resistance": "5 ATM / 50 m",
+      Display: "1.4\" AMOLED Touch",
+      Battery: "Up to 11 days",
+      Sensors: "GPS, Heart Rate, SpO2, Stress",
+      Features: "Body Battery, Sleep Score, Workouts",
+      Warranty: "1 Year",
+    },
+  },
+};
+
 async function main() {
   console.log("🌱 Seeding TimeCart…");
 
@@ -147,15 +553,24 @@ async function main() {
     const categoryId = catMap.get(p.category);
     if (!brandId || !categoryId) continue;
 
-    const sale = p.price * (1 - p.discount / 100);
+    const extra = PRODUCT_EXTRA[p.slug];
     const product = await prisma.product.upsert({
       where: { slug: p.slug },
-      update: {},
+      update: {
+        ...(extra
+          ? {
+              description: extra.description,
+              displayType: extra.displayType,
+              specifications: extra.specifications as never,
+              featuredImageUrl: extra.imageUrl,
+            }
+          : {}),
+      },
       create: {
         slug: p.slug,
         name: p.name,
         sku: p.sku,
-        description: `${p.name} — a premium timepiece from ${p.brand}.`,
+        description: extra?.description ?? `${p.name} — a premium timepiece from ${p.brand}.`,
         price: p.price,
         discount: p.discount,
         ratingAvg: Math.min(5, 3.5 + ((count * 7) % 15) / 10),
@@ -167,11 +582,12 @@ async function main() {
         caseDiameter: p.caseDiameter,
         waterResistance: p.waterResistance,
         warranty: "1 Year",
-        displayType: "Analog",
+        displayType: extra?.displayType ?? "Analog",
         occasion: p.occasion,
         style: p.style,
         colors: [p.caseMaterial === "Resin" ? "Black" : "Silver"],
-        featuredImageUrl: p.featuredImageUrl,
+        specifications: (extra?.specifications as never) ?? undefined,
+        featuredImageUrl: extra?.imageUrl ?? p.featuredImageUrl,
         isBestSeller: p.isBestSeller ?? false,
         isNewArrival: p.isNewArrival ?? false,
         brandId,
@@ -191,18 +607,16 @@ async function main() {
       },
     });
 
-    for (let i = 0; i < 4; i++) {
-      await prisma.productImage
-        .create({
-          data: {
-            url: `https://picsum.photos/seed/${p.slug}-${i + 1}/1000/1000`,
-            alt: `${p.name} image ${i + 1}`,
-            sortOrder: i,
-            productId: product.id,
-          },
-        })
-        .catch(() => {});
-    }
+    await prisma.productImage
+      .create({
+        data: {
+          url: extra?.imageUrl ?? p.featuredImageUrl,
+          alt: p.name,
+          sortOrder: 0,
+          productId: product.id,
+        },
+      })
+      .catch(() => {});
 
     count++;
   }
