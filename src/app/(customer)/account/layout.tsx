@@ -18,8 +18,8 @@ export default function AccountLayout({
             <AccountNav />
           </div>
           <div className="mt-3 rounded-xl bg-soft-gray/50 p-4 text-xs text-text-gray">
-            Connect Supabase to enable full accounts, order history synced
-            across devices and email notifications.
+            Sign in with Google to keep your orders, wishlist and profile synced
+            across devices. Sign out anytime from the menu.
           </div>
         </aside>
         <div className="min-w-0">{children}</div>

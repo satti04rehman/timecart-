@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useStore } from "@/providers/store-provider";
 import { SearchOverlay } from "@/components/search/search-overlay";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { AccountButton } from "@/components/auth/account-button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -108,17 +109,7 @@ export function Header() {
               >
                 <Search className="h-[18px] w-[18px]" />
               </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="icon"
-                className="hidden rounded-full sm:inline-flex"
-                aria-label="Account"
-              >
-                <Link href="/account">
-                  <User className="h-[18px] w-[18px]" />
-                </Link>
-              </Button>
+              <AccountButton />
               <Button
                 asChild
                 variant="ghost"
