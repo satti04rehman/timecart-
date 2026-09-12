@@ -22,12 +22,21 @@ import { PrismaClient } from "@/generated/prisma/client";
 function buildPool(): pg.Pool {
   const raw = process.env.DATABASE_URL!;
   const url = new URL(raw);
+  const isPooler = url.hostname.includes("pooler.supabase.com");
   url.search = "";
+  if (isPooler) {
+    // Use Supabase's transaction-mode pooler (port 6543) instead of the
+    // session-mode pooler (5432). Session mode is capped at ~15 clients and
+    // exhausts quickly on Vercel where each lambda opens its own pool.
+    url.port = "6543";
+  }
   const pool = new pg.Pool({
     connectionString: url.toString(),
-    ssl: url.hostname.includes("pooler.supabase.com")
-      ? { rejectUnauthorized: false }
-      : undefined,
+    ssl: isPooler ? { rejectUnauthorized: false } : undefined,
+    max: isPooler ? 8 : 10,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 20_000,
+    maxUses: 10_000,
   });
   return pool;
 }
