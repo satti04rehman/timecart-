@@ -59,5 +59,5 @@ insert into public.profiles
   (id, "userId", role, email, "firstName", "isActive")
 select gen_random_uuid(), u.id, 'ADMIN', u.email, 'Admin', true
 from public.users u
-where u.email = 'you@example.com'           -- <-- change to your Google email
+where u.email = 'satti04rehman@gmail.com'   -- admin Google email
 on conflict ("userId") do nothing;
