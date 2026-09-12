@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 
 interface GalleryImage {
   id: string;
@@ -30,7 +31,7 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
     <div>
       <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-soft-gray bg-white">
         <Image
-          src={current.url}
+          src={resolveProductImage(current.url)}
           alt={current.alt ?? "Watch image"}
           fill
           priority
@@ -53,7 +54,7 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
               aria-label={`View image ${i + 1}`}
             >
               <Image
-                src={img.url}
+                src={resolveProductImage(img.url)}
                 alt={img.alt ?? "Thumbnail"}
                 fill
                 className="object-cover"

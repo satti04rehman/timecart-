@@ -8,6 +8,7 @@ import { useStore } from "@/providers/store-provider";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 import type { ProductSummary } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -84,7 +85,7 @@ export function WishlistPage() {
               >
                 {p.imageUrl && (
                   <Image
-                    src={p.imageUrl}
+                    src={resolveProductImage(p.imageUrl)}
                     alt={p.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

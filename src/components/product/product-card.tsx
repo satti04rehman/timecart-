@@ -9,6 +9,7 @@ import { Rating } from "@/components/ui/rating";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/providers/store-provider";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 import type { ProductSummary } from "@/types";
 import { toast } from "sonner";
 
@@ -68,7 +69,7 @@ export function ProductCard({
         <div className="relative aspect-square overflow-hidden rounded-lg bg-white">
           {product.imageUrl ? (
             <Image
-              src={product.imageUrl}
+              src={resolveProductImage(product.imageUrl)}
               alt={product.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

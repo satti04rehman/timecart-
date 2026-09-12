@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Rating } from "@/components/ui/rating";
 import { useStore } from "@/providers/store-provider";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 import type { ProductSummary } from "@/types";
 import { toast } from "sonner";
 
@@ -31,7 +32,7 @@ export function QuickViewDialog({
             <DialogTitle className="sr-only">{product.name}</DialogTitle>
             {product.imageUrl && (
               <Image
-                src={product.imageUrl}
+                src={resolveProductImage(product.imageUrl)}
                 alt={product.name}
                 fill
                 sizes="(max-width: 640px) 100vw, 384px"

@@ -7,6 +7,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/providers/store-provider";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 
 export function CartDrawer() {
   const {
@@ -81,7 +82,7 @@ export function CartDrawer() {
                   >
                     {item.imageUrl && (
                       <Image
-                        src={item.imageUrl}
+                        src={resolveProductImage(item.imageUrl)}
                         alt={item.name}
                         fill
                         sizes="80px"

@@ -8,6 +8,7 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useStore } from "@/providers/store-provider";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 
 export function CartPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export function CartPage() {
               >
                 {item.imageUrl ? (
                   <Image
-                    src={item.imageUrl}
+                    src={resolveProductImage(item.imageUrl)}
                     alt={item.name}
                     fill
                     className="object-cover"

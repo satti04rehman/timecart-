@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn, formatPrice } from "@/lib/utils";
 import { saveStoredOrder, type StoredOrder } from "@/lib/orders";
+import { resolveProductImage } from "@/lib/product-images";
 
 const MAX_COD = 60000;
 const HIGH_ORDER_THRESHOLD = 60000;
@@ -398,7 +399,7 @@ export function CheckoutPage() {
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-soft-gray/50">
                       {item.imageUrl && (
                         <Image
-                          src={item.imageUrl}
+                          src={resolveProductImage(item.imageUrl)}
                           alt={item.name}
                           fill
                           className="object-cover"

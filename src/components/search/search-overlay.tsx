@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Search, Clock, TrendingUp, X } from "lucide-react";
 import { getPopularQueries } from "@/lib/search-data";
 import Image from "next/image";
+import { resolveProductImage } from "@/lib/product-images";
 
 interface SearchResult {
   id: string;
@@ -205,7 +206,7 @@ export function SearchOverlay({
                       <div className="relative h-11 w-11 overflow-hidden rounded-md bg-white">
                         {r.imageUrl && (
                           <Image
-                            src={r.imageUrl}
+                            src={resolveProductImage(r.imageUrl)}
                             alt={r.name}
                             fill
                             sizes="44px"

@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, RefreshCcw, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn, formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 import type { ProductSummary } from "@/types";
 
 type Value = string | null;
@@ -289,7 +290,7 @@ export function WatchFinder() {
                   >
                     {p.imageUrl && (
                       <Image
-                        src={p.imageUrl}
+                        src={resolveProductImage(p.imageUrl)}
                         alt={p.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

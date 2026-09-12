@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import {
   Heart,
@@ -14,8 +15,6 @@ import {
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/providers/store-provider";
-import { SearchOverlay } from "@/components/search/search-overlay";
-import { CartDrawer } from "@/components/cart/cart-drawer";
 import { AccountButton } from "@/components/auth/account-button";
 import { cn } from "@/lib/utils";
 
@@ -190,3 +189,13 @@ export function Header() {
     </>
   );
 }
+
+const SearchOverlay = dynamic(() =>
+  import("@/components/search/search-overlay").then((m) => m.SearchOverlay),
+  { ssr: false }
+);
+
+const CartDrawer = dynamic(() =>
+  import("@/components/cart/cart-drawer").then((m) => m.CartDrawer),
+  { ssr: false }
+);
