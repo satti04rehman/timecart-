@@ -9,8 +9,8 @@ import type { ProductSummary } from "@/types";
 const DESKTOP_SRC = "/videos/animatio-15fps.mp4?v4";
 const MOBILE_SRC = "/videos/animatio-mobile-15fps.mp4?v4";
 const HOLD_MS = 6000;
-const MASK_IN = 420;
-const MASK_OUT_DELAY = 520;
+const MASK_IN = 500;
+const SWAP_AT = 1200;
 
 /**
  * Full-bleed cinematic hero: the campaign video plays continuously while a
@@ -30,12 +30,12 @@ export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
   const len = slides.length;
 
   const fadeTo = React.useCallback((next: number) => {
-    setMaskMs(460);
+    setMaskMs(MASK_IN);
     setMasked(true);
     window.setTimeout(() => {
       setActive(next);
       setMasked(false);
-    }, MASK_IN + 120);
+    }, SWAP_AT);
   }, []);
 
   const reveal = () => {
@@ -88,7 +88,13 @@ export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
         aria-hidden="true"
       />
 
-      {/* Cinematic black mask */}
+      {/* Black tint masking over the footage (always visible, like Rolex) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,3,3,0.72)_0%,rgba(3,3,3,0.45)_45%,rgba(3,3,3,0.55)_70%,rgba(3,3,3,0.85)_100%)]"
+      />
+
+      {/* Cinematic black mask (periodic crossfade-through-black) */}
       <div
         aria-hidden="true"
         className={cn(
