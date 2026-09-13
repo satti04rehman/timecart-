@@ -96,7 +96,7 @@ export function CartPage() {
                       onClick={() =>
                         updateQuantity(item.key, item.quantity - 1)
                       }
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-obsidian hover:bg-soft-gray/50"
+                      className="flex h-10 w-10 items-center justify-center rounded-full text-obsidian hover:bg-soft-gray/50"
                       aria-label="Decrease"
                     >
                       <Minus className="h-3.5 w-3.5" />
@@ -108,7 +108,7 @@ export function CartPage() {
                       onClick={() =>
                         updateQuantity(item.key, item.quantity + 1)
                       }
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-obsidian hover:bg-soft-gray/50"
+                      className="flex h-10 w-10 items-center justify-center rounded-full text-obsidian hover:bg-soft-gray/50"
                       aria-label="Increase"
                     >
                       <Plus className="h-3.5 w-3.5" />

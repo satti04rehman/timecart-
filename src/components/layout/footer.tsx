@@ -43,21 +43,21 @@ export function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
               >
                 <InstagramIcon className="h-4 w-4" />
               </a>
               <a
                 href="#"
                 aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
               >
                 <FacebookIcon className="h-4 w-4" />
               </a>
               <a
                 href="#"
                 aria-label="WhatsApp"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
               >
                 <WhatsAppIcon className="h-4 w-4" />
               </a>

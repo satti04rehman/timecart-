@@ -111,7 +111,7 @@ export function CartDrawer() {
                       </div>
                       <button
                         onClick={() => removeFromCart(item.key)}
-                        className="p-1 text-text-gray transition-colors hover:text-red-600"
+                        className="p-2 text-text-gray transition-colors hover:text-red-600"
                         aria-label="Remove item"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -123,7 +123,7 @@ export function CartDrawer() {
                           onClick={() =>
                             updateQuantity(item.key, item.quantity - 1)
                           }
-                          className="p-1.5 text-text-gray hover:text-obsidian"
+                          className="p-2 text-text-gray hover:text-obsidian"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="h-3.5 w-3.5" />
@@ -135,7 +135,7 @@ export function CartDrawer() {
                           onClick={() =>
                             updateQuantity(item.key, item.quantity + 1)
                           }
-                          className="p-1.5 text-text-gray hover:text-obsidian"
+                          className="p-2 text-text-gray hover:text-obsidian"
                           aria-label="Increase quantity"
                         >
                           <Plus className="h-3.5 w-3.5" />

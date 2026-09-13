@@ -95,7 +95,7 @@ export function ProductCard({
             </div>
             <button
               onClick={handleWishlist}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-ivory/90 shadow-sm backdrop-blur transition-all hover:scale-110"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-ivory/90 shadow-sm backdrop-blur transition-all hover:scale-110"
               aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
             >
               <Heart

@@ -5,14 +5,21 @@ import { ArrowRight } from "lucide-react";
 
 export function ScrollVideoSection() {
   return (
-    <ScrollScrubVideo
-      src="/videos/animatio-30fps.mp4?v2"
-      mobileSrc="/videos/animatio-mobile.mp4?v2"
-      poster="/images/video-poster.jpg"
-      fps={30}
-      hint="Scroll to explore"
-      className="h-[200vh]"
-    >
+    <>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/video-poster.jpg"
+        fetchPriority="high"
+      />
+      <ScrollScrubVideo
+        src="/videos/animatio-30fps.mp4?v2"
+        mobileSrc="/videos/animatio-mobile.mp4?v2"
+        poster="/images/video-poster.jpg"
+        fps={30}
+        hint="Scroll to explore"
+        className="h-[200vh]"
+      >
       <div className="pointer-events-auto flex h-full w-full max-w-4xl items-center justify-center px-6 text-center text-ivory">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-champagne">
@@ -39,6 +46,7 @@ export function ScrollVideoSection() {
           </div>
         </div>
       </div>
-    </ScrollScrubVideo>
+      </ScrollScrubVideo>
+    </>
   );
 }

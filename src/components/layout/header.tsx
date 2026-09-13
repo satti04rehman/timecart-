@@ -68,7 +68,7 @@ export function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-md text-obsidian hover:bg-soft-gray/60 md:hidden"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-obsidian hover:bg-soft-gray/60 md:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
             >
