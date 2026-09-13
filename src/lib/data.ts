@@ -513,8 +513,6 @@ export async function getProductReviews(productId: string) {
   const ready = await isDbReady();
   if (!ready) {
     return DEMO_REVIEWS.filter((r) => r.productId === productId).map((r) => ({
-      ...r,
-      // strip productId so shape mirrors DB output
       id: r.id,
       author: r.author,
       rating: r.rating,
@@ -523,8 +521,34 @@ export async function getProductReviews(productId: string) {
       verified: r.verified,
     }));
   }
-  void ready;
-  return [];
+
+  const reviews = await prisma.review.findMany({
+    where: { productId, status: "APPROVED" },
+    include: {
+      profile: {
+        select: { firstName: true, lastName: true, email: true },
+      },
+      images: { select: { url: true } },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return reviews.map((r) => {
+    const name =
+      [r.profile.firstName, r.profile.lastName].filter(Boolean).join(" ") ||
+      r.profile.email?.split("@")[0] ||
+      "Customer";
+    return {
+      id: r.id,
+      author: name,
+      rating: r.rating,
+      title: r.title,
+      content: r.content,
+      date: r.createdAt,
+      verified: false,
+      images: r.images.map((i) => i.url),
+    };
+  });
 }
 
 export function getTestimonials() {

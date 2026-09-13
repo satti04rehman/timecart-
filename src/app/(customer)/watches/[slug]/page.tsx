@@ -192,6 +192,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
           reviews={reviewsData}
           ratingAvg={product.ratingAvg}
           ratingCount={product.ratingCount}
+          productId={product.id}
+          productName={product.name}
         />
       </div>
 

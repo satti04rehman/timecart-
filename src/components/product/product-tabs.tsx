@@ -1,17 +1,27 @@
 "use client";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useRouter } from "next/navigation";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/ui/tabs";
 import { Rating } from "@/components/ui/rating";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, ScrollText } from "lucide-react";
+import { ReviewForm } from "@/components/product/review-form";
+import { resolveProductImage } from "@/lib/product-images";
+import { ShieldCheck } from "lucide-react";
 
 export interface ProductReviewData {
   id: string;
   author: string;
   rating: number;
+  title?: string | null;
   content: string;
   date: string | Date;
   verified: boolean;
+  images?: string[];
 }
 
 interface ProductTabsProps {
@@ -21,6 +31,8 @@ interface ProductTabsProps {
   reviews: ProductReviewData[];
   ratingAvg: number;
   ratingCount: number;
+  productId: string;
+  productName?: string;
 }
 
 export function ProductTabs({
@@ -29,7 +41,10 @@ export function ProductTabs({
   reviews,
   ratingAvg,
   ratingCount,
+  productId,
+  productName,
 }: ProductTabsProps) {
+  const router = useRouter();
   const allSpecs = specRows.length > 0 ? specRows : fallbackSpecs;
 
   return (
@@ -91,6 +106,14 @@ export function ProductTabs({
           </div>
 
           <div className="space-y-6">
+            <div className="flex justify-end">
+              <ReviewForm
+                productId={productId}
+                productName={productName ?? "this watch"}
+                onSubmitted={() => router.refresh()}
+              />
+            </div>
+
             {reviews.length === 0 ? (
               <div className="rounded-xl border border-dashed border-soft-gray p-8 text-center text-sm text-text-gray">
                 No reviews yet — be the first to review this watch.
@@ -127,9 +150,27 @@ export function ProductTabs({
                       </div>
                     </div>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-text-gray">
+                  {r.title ? (
+                    <p className="mt-3 text-sm font-semibold text-obsidian">
+                      {r.title}
+                    </p>
+                  ) : null}
+                  <p className="mt-1 text-sm leading-relaxed text-text-gray">
                     {r.content}
                   </p>
+                  {r.images && r.images.length > 0 ? (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {r.images.map((url, i) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          key={i}
+                          src={resolveProductImage(url)}
+                          alt=""
+                          className="h-20 w-20 rounded-lg border border-soft-gray object-cover"
+                        />
+                      ))}
+                    </div>
+                  ) : null}
                 </article>
               ))
             )}
