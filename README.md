@@ -4,7 +4,7 @@
 
 ## Features
 
-- **Home** with scroll-scrubbed hero video (`/videos/animatio-30fps.mp4`, mobile variant + poster)
+- **Home** — Rolex-inspired black &amp; off-white editorial design with an autoplay 15fps hero video (`/videos/animatio-15fps.mp4`, mobile variant) and full-bleed bands
 - **Catalog** — `/watches` with URL-driven filters (category, brand, gender, price, rating, movement, style, availability), sorting, and pagination
 - **Product detail** — `/watches/[slug]` with gallery, add-to-cart / buy-now, tabs (description / specs / reviews), and related products
 - **Cart, Wishlist, Checkout** — client-persisted (localStorage) flows; COD up to Rs. 60,000, Bank Transfer (50% advance) above it; coupon validation API

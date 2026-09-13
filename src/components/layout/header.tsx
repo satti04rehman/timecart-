@@ -81,13 +81,13 @@ export function Header() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden items-center gap-7 lg:flex">
+            <nav className="hidden items-center gap-8 lg:flex">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium tracking-wide transition-colors hover:text-champagne",
+                    "text-[11px] font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
                     link.sale ? "text-champagne" : "text-obsidian",
                     pathname === link.href && "text-champagne"
                   )}

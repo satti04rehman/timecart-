@@ -168,16 +168,21 @@ export default async function WatchesPage({ searchParams }: WatchesPageProps) {
 
   return (
     <div className="container-tc py-10 lg:py-14">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-champagne">
-            TimeCart
-          </p>
-          <h1 className="mt-2 font-heading text-3xl lg:text-4xl">{title}</h1>
-          <p className="mt-2 text-sm text-text-gray">
-            {total} watch{total === 1 ? "" : "es"}
-          </p>
-        </div>
+      <div className="pt-10 text-center lg:pt-16">
+        <p className="text-xs font-light uppercase tracking-[0.45em] text-champagne">
+          Time Cart &mdash; The Collection
+        </p>
+        <h1 className="mt-6 font-heading text-4xl font-extralight uppercase tracking-[0.05em] lg:text-6xl">
+          {title}
+        </h1>
+        <p className="mx-auto mt-6 max-w-xl text-sm font-light leading-relaxed tracking-wide text-text-gray">
+          The Time Cart collection offers a wide range of timepieces &mdash;
+          from everyday classics to statement pieces &mdash; to suit any wrist.
+        </p>
+        <div className="mx-auto mt-12 h-px w-full max-w-2xl bg-soft-gray" />
+        <p className="mt-5 text-[11px] font-light uppercase tracking-[0.35em] text-text-gray">
+          {total} result{total === 1 ? "" : "s"}
+        </p>
       </div>
 
       {active.length > 0 && (

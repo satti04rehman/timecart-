@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Truck, RotateCcw, ShieldCheck, CreditCard, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Truck, RotateCcw, ShieldCheck, CreditCard, CheckCircle2, Info } from "lucide-react";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductActions } from "@/components/product/product-actions";
 import { ProductTabs } from "@/components/product/product-tabs";
@@ -83,6 +83,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
       ];
 
   const outOfStock = product.stock <= 0;
+  const lowStock = !outOfStock && product.stock <= 5;
+
+  const sidebarSpecs = specRows
+    .filter((s) =>
+      ["Movement", "Case Material", "Case Diameter", "Strap Material", "Water Resistance", "Warranty"].includes(
+        s.label
+      )
+    )
+    .slice(0, 6);
 
   return (
     <div className="container-tc py-8 lg:py-12">
@@ -99,86 +108,124 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <span className="text-obsidian">{product.name}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-14">
         {/* Gallery */}
         <ProductGallery images={product.images} />
 
-        {/* Info */}
-        <div>
-          <Link
-            href={`/watches?brand=${product.brand.slug}`}
-            className="text-sm font-medium uppercase tracking-[0.2em] text-champagne hover:underline"
-          >
-            {product.brand.name}
-          </Link>
-          <h1 className="mt-2 font-heading text-2xl text-obsidian lg:text-3xl">
-            {product.name}
-          </h1>
+        {/* Details & availability sidebar */}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="rounded-2xl border border-soft-gray bg-white p-7 shadow-sm shadow-obsidian/5">
+            <Link
+              href={`/watches?brand=${product.brand.slug}`}
+              className="text-xs font-medium uppercase tracking-[0.25em] text-champagne hover:underline"
+            >
+              {product.brand.name}
+            </Link>
+            <h1 className="mt-2 font-heading text-2xl font-light tracking-wide text-obsidian lg:text-[28px]">
+              {product.name}
+            </h1>
 
-          <div className="mt-2 flex items-center gap-3">
-            <Rating value={product.ratingAvg} showValue />
-            <span className="text-sm text-text-gray">
-              ({product.ratingCount} reviews)
-            </span>
-          </div>
-
-          <div className="mt-5 flex items-baseline gap-3">
-            <span className="font-heading text-3xl text-obsidian">
-              {formatPrice(product.salePrice)}
-            </span>
-            {product.discount > 0 && (
-              <>
-                <span className="text-lg text-text-gray line-through">
-                  {formatPrice(product.price)}
-                </span>
-                <Badge variant="sale">{Math.round(product.discount)}% OFF</Badge>
-              </>
-            )}
-          </div>
-
-          <p className="mt-1 text-xs text-text-gray">SKU: {product.sku}</p>
-
-          <div className="my-6 h-px bg-soft-gray" />
-
-          <ProductActions product={product} />
-
-          {outOfStock && (
-            <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-              This watch is currently out of stock. Check back soon or add it
-              to your wishlist to get notified.
+            <div className="mt-3 flex items-center gap-3">
+              <Rating value={product.ratingAvg} showValue />
+              <span className="text-sm text-text-gray">
+                ({product.ratingCount} reviews)
+              </span>
             </div>
-          )}
 
-          <div className="mt-6">
-            <p className="flex items-start gap-2 text-sm text-text-gray">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-champagne" />
-              Order before 4 PM for same-day dispatch.
-            </p>
-            <p className="mt-2 flex items-start gap-2 text-sm text-text-gray">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-champagne" />
-              Estimated delivery: 3–5 working days nationwide.
-            </p>
-          </div>
-
-          {/* Benefits */}
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-            {BENEFITS.map((b) => (
-              <div
-                key={b.label}
+            {/* Availability */}
+            <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-soft-gray bg-ivory px-4 py-3">
+              <span
                 className={cn(
-                  "rounded-xl border border-soft-gray bg-white p-3.5",
-                  "flex flex-col items-center gap-2 text-center"
+                  "inline-flex h-2 w-2 rounded-full",
+                  outOfStock ? "bg-red-500" : lowStock ? "bg-amber-500" : "bg-green-600"
                 )}
-              >
-                <b.icon className="h-5 w-5 text-champagne" />
-                <div>
-                  <p className="text-xs font-semibold text-obsidian">{b.label}</p>
-                  <p className="mt-0.5 text-[11px] leading-tight text-text-gray">
-                    {b.sub}
-                  </p>
-                </div>
+                aria-hidden="true"
+              />
+              <p className="text-sm">
+                {outOfStock ? (
+                  <span className="font-medium text-obsidian">Out of stock</span>
+                ) : lowStock ? (
+                  <span className="font-medium text-obsidian">
+                    Low stock — {product.stock} remaining
+                  </span>
+                ) : (
+                  <span className="font-medium text-obsidian">
+                    In stock — {product.stock} available
+                  </span>
+                )}
+              </p>
+            </div>
+
+            <div className="mt-6 flex items-baseline gap-3">
+              <span className="font-heading text-3xl font-light text-obsidian">
+                {formatPrice(product.salePrice)}
+              </span>
+              {product.discount > 0 && (
+                <>
+                  <span className="text-lg text-text-gray line-through">
+                    {formatPrice(product.price)}
+                  </span>
+                  <Badge variant="sale">{Math.round(product.discount)}% OFF</Badge>
+                </>
+              )}
+            </div>
+
+            <p className="mt-1 text-xs text-text-gray">SKU: {product.sku}</p>
+
+            <div className="my-6 h-px bg-soft-gray" />
+
+            <ProductActions product={product} />
+
+            {outOfStock && (
+              <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                This watch is currently out of stock. Check back soon or add it
+                to your wishlist to get notified.
               </div>
-            ))}
+            )}
+
+            <div className="mt-6 space-y-2">
+              <p className="flex items-start gap-2 text-sm text-text-gray">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-champagne" />
+                Order before 4 PM for same-day dispatch.
+              </p>
+              <p className="flex items-start gap-2 text-sm text-text-gray">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-champagne" />
+                Estimated delivery: 3–5 working days nationwide.
+              </p>
+            </div>
+
+            {/* Sidebar details rail */}
+            {sidebarSpecs.length > 0 && (
+              <div className="mt-7 border-t border-soft-gray pt-6">
+                <p className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.25em] text-text-gray">
+                  <Info className="h-3.5 w-3.5 text-champagne" />
+                  Key Details
+                </p>
+                <dl className="mt-4 space-y-3">
+                  {sidebarSpecs.map((s) => (
+                    <div key={s.label} className="flex items-baseline justify-between gap-4">
+                      <dt className="text-xs font-light uppercase tracking-wider text-text-gray">
+                        {s.label}
+                      </dt>
+                      <dd className="text-right text-[13px] font-medium text-obsidian">
+                        {s.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
+            {/* Benefits */}
+            <div className="mt-7 grid grid-cols-2 gap-3 border-t border-soft-gray pt-6">
+              {BENEFITS.map((b) => (
+                <div key={b.label} className="flex flex-col items-center gap-1.5 text-center">
+                  <b.icon className="h-5 w-5 text-champagne" strokeWidth={1.5} />
+                  <p className="text-xs font-semibold text-obsidian">{b.label}</p>
+                  <p className="text-[11px] leading-tight text-text-gray">{b.sub}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

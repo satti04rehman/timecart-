@@ -1,75 +1,68 @@
-import { ScrollVideoSection } from "@/components/home/scroll-video-section";
-import { Benefits } from "@/components/home/benefits";
-import { ShopByBrands } from "@/components/home/shop-by-brands";
-import { FeaturedCategories } from "@/components/home/categories";
-import { CollectionCards } from "@/components/home/collection-cards";
-import { WatchFinderCTA } from "@/components/home/watch-finder-cta";
-import { PromoBanner } from "@/components/home/promo-banner";
-import { InspireStrip } from "@/components/home/inspire-strip";
-import { Testimonials } from "@/components/home/testimonials";
-import { NewsletterBanner } from "@/components/home/newsletter-banner";
-import { SectionHeader } from "@/components/home/section-header";
+import { HeroVideo } from "@/components/home/hero-video";
 import { Marquee } from "@/components/home/marquee";
-import { ProductRail } from "@/components/product/product-rail";
+import { WatchFamily } from "@/components/home/watch-family";
+import { HouseDetails } from "@/components/home/house-details";
+import { NewWatchesBand } from "@/components/home/new-watches-band";
+import { WatchmakingBand } from "@/components/home/watchmaking-band";
+import { FeaturedCategories } from "@/components/home/categories";
+import { Testimonials } from "@/components/home/testimonials";
+import { Benefits } from "@/components/home/benefits";
+import { WatchFinderCTA } from "@/components/home/watch-finder-cta";
+import { NewsletterBanner } from "@/components/home/newsletter-banner";
 import { Reveal } from "@/components/ui/reveal";
-import { getBrandCounts, getHomeProducts } from "@/lib/data";
+import { SectionHeader } from "@/components/home/section-header";
+import { getHomeProducts } from "@/lib/data";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const { newArrivals, bestSellers, categories, brands } =
-    await getHomeProducts();
-  const brandCounts = await getBrandCounts();
+  const { newArrivals, bestSellers, categories } = await getHomeProducts();
 
   return (
     <>
-      <ScrollVideoSection />
+      <HeroVideo />
 
       <Marquee />
 
-      <Benefits />
+      <WatchFamily products={bestSellers.slice(0, 4)} />
 
-      <ShopByBrands brands={brands} counts={brandCounts} />
+      <HouseDetails />
 
-      <section className="bg-white">
-        <div className="container-tc py-16 lg:py-24">
-          <SectionHeader
-            eyebrow="Customer Favourites"
-            title="Best Sellers"
-            subtitle="The watches everyone can't stop talking about."
-            href="/watches?sort=bestselling"
-          />
-          <Reveal className="mt-10">
-            <ProductRail products={bestSellers.slice(0, 8)} columns={4} />
-          </Reveal>
-        </div>
-      </section>
+      <NewWatchesBand products={newArrivals} />
+
+      <WatchmakingBand />
 
       <FeaturedCategories categories={categories} />
 
-      <CollectionCards categories={categories} />
-
-      <section className="border-t border-soft-gray">
+      <section className="border-t border-soft-gray bg-white">
         <div className="container-tc py-16 lg:py-24">
           <SectionHeader
-            eyebrow="Fresh In"
-            title="New Arrivals"
-            subtitle="Just landed on the TimeCart watch desk."
-            href="/watches?sort=newest"
+            eyebrow="Step into the world of Time Cart"
+            title="Partners in Time"
+            subtitle="From everyday classics to statement pieces, every watch is chosen with care."
           />
           <Reveal className="mt-10">
-            <ProductRail products={newArrivals.slice(0, 8)} columns={4} />
+            <div className="grid gap-px overflow-hidden bg-soft-gray sm:grid-cols-2 lg:grid-cols-4">
+              {categories.slice(0, 4).map((c) => (
+                <div key={c.id} className="bg-white p-8 text-center">
+                  <p className="text-xs font-light uppercase tracking-[0.3em] text-champagne">
+                    {c.productCount} models
+                  </p>
+                  <p className="mt-3 font-heading text-xl font-light uppercase tracking-wide text-obsidian">
+                    {c.name}
+                  </p>
+                </div>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <PromoBanner />
-
-      <WatchFinderCTA />
-
       <Testimonials />
 
-      <InspireStrip />
+      <Benefits />
+
+      <WatchFinderCTA />
 
       <NewsletterBanner />
     </>

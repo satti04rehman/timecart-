@@ -30,13 +30,13 @@ export function SectionHeader({
     >
       <div>
         {eyebrow && (
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-champagne">
+          <p className="text-xs font-light uppercase tracking-[0.35em] text-champagne">
             {eyebrow}
           </p>
         )}
         <h2
           className={cn(
-            "mt-3 font-heading text-3xl lg:text-[40px] lg:leading-tight",
+            "mt-3 font-heading font-light tracking-wide text-3xl lg:text-[40px] lg:leading-tight",
             dark ? "text-ivory" : "text-obsidian"
           )}
         >
