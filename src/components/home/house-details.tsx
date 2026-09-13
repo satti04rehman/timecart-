@@ -1,5 +1,6 @@
 import { Watch, Gem, Truck, Users, ShieldCheck, HeadphonesIcon } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { CountUp } from "@/components/ui/count-up";
 
 const STATS = [
   { icon: Gem, value: "10+", label: "Premium Brands" },
@@ -39,7 +40,7 @@ export function HouseDetails() {
                 strokeWidth={1.5}
               />
               <p className="mt-5 font-heading text-3xl font-light tracking-wide text-obsidian lg:text-4xl">
-                {s.value}
+                <CountUp value={s.value} />
               </p>
               <p className="mt-2 text-xs font-medium uppercase tracking-[0.2em] text-text-gray">
                 {s.label}

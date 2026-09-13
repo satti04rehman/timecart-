@@ -4,19 +4,39 @@ import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ArrowRight, ArrowDown } from "lucide-react";
+import type { ProductSummary } from "@/types";
 
 const DESKTOP_SRC = "/videos/animatio-15fps.mp4?v4";
 const MOBILE_SRC = "/videos/animatio-mobile-15fps.mp4?v4";
+const HOLD_MS = 6000;
+const MASK_IN = 420;
+const MASK_OUT_DELAY = 520;
 
 /**
- * Full-bleed hero that simply plays the campaign video (no scroll scrubbing).
- * The footage fades in from black once it can play; the overlay copy fades in
- * with it.
+ * Full-bleed cinematic hero: the campaign video plays continuously while a
+ * black mask periodically fades in, the on-screen caption crossfades through
+ * black to the next featured watch, then the mask fades out (Rolex-style
+ * crossfade-through-black rhythm).
  */
-export function HeroVideo() {
+export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
   const [src, setSrc] = React.useState(DESKTOP_SRC);
   const [ready, setReady] = React.useState(false);
   const [masked, setMasked] = React.useState(true);
+  const [maskMs, setMaskMs] = React.useState(1500);
+  const [active, setActive] = React.useState(0);
+  const [reduced, setReduced] = React.useState(false);
+
+  const slides: (null | ProductSummary)[] = [null, ...products];
+  const len = slides.length;
+
+  const fadeTo = React.useCallback((next: number) => {
+    setMaskMs(460);
+    setMasked(true);
+    window.setTimeout(() => {
+      setActive(next);
+      setMasked(false);
+    }, MASK_IN + 120);
+  }, []);
 
   const reveal = () => {
     setReady(true);
@@ -32,10 +52,21 @@ export function HeroVideo() {
   }, []);
 
   React.useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setMasked(false);
-    }
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(rm.matches);
+    if (rm.matches) setMasked(false);
   }, []);
+
+  React.useEffect(() => {
+    if (reduced || len <= 1) return;
+    const id = window.setInterval(() => {
+      fadeTo((active + 1) % len);
+    }, HOLD_MS);
+    return () => window.clearInterval(id);
+  }, [active, len, reduced, fadeTo]);
+
+  const activeProduct = slides[active];
+  const isTagline = activeProduct === null;
 
   return (
     <section
@@ -57,50 +88,92 @@ export function HeroVideo() {
         aria-hidden="true"
       />
 
-      {/* Black fade-in mask */}
+      {/* Cinematic black mask */}
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-0 bg-obsidian transition-opacity duration-[1500ms] ease-out",
+          "pointer-events-none absolute inset-0 bg-obsidian transition-opacity ease-out",
           masked ? "opacity-100" : "opacity-0"
         )}
+        style={{ transitionDuration: `${maskMs}ms` }}
       />
 
+      {/* Caption layer */}
       <div
         className={cn(
-          "relative z-10 px-6 text-center text-ivory transition-opacity duration-700",
-          ready ? "opacity-100" : "opacity-0"
+          "relative z-10 px-6 text-center text-ivory transition-opacity ease-out",
+          ready && !masked ? "opacity-100" : "opacity-0"
         )}
+        style={{ transitionDuration: "400ms" }}
+        key={active}
       >
-        <p className="text-xs font-light uppercase tracking-[0.5em] text-ivory/70">
-          Time Cart &mdash; Where Time Meets Style
-        </p>
-        <h1 className="mx-auto mt-8 max-w-5xl font-heading text-5xl font-extralight uppercase leading-[1.08] tracking-[0.05em] sm:text-7xl lg:text-8xl">
-          Where Time
-          <br />
-          <span className="text-champagne">Meets Style</span>
-        </h1>
-        <p className="mx-auto mt-8 max-w-xl text-sm font-light leading-relaxed tracking-wide text-ivory/75 sm:text-base">
-          Discover authentic watches from trusted brands, designed for every
-          moment &mdash; delivered to your doorstep.
-        </p>
-        <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-14">
-          <Link
-            href="/watches"
-            className="group inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
-          >
-            Shop the Collection
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <Link
-            href="#collection"
-            className="group inline-flex items-center gap-3 border-b border-ivory/30 pb-1 text-xs font-light uppercase tracking-[0.35em] text-ivory/80 transition-colors hover:border-ivory hover:text-ivory"
-          >
-            New Arrivals
-            <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />
-          </Link>
-        </div>
+        {isTagline ? (
+          <>
+            <p className="text-xs font-light uppercase tracking-[0.5em] text-ivory/70">
+              Time Cart &mdash; Where Time Meets Style
+            </p>
+            <h1 className="mx-auto mt-8 max-w-5xl font-heading text-5xl font-extralight uppercase leading-[1.08] tracking-[0.05em] sm:text-7xl lg:text-8xl">
+              Where Time
+              <br />
+              <span className="text-champagne">Meets Style</span>
+            </h1>
+            <p className="mx-auto mt-8 max-w-xl text-sm font-light leading-relaxed tracking-wide text-ivory/75 sm:text-base">
+              Discover authentic watches from trusted brands, designed for every
+              moment &mdash; delivered to your doorstep.
+            </p>
+            <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-14">
+              <Link
+                href="/watches"
+                className="group inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
+              >
+                Shop the Collection
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="#collection"
+                className="group inline-flex items-center gap-3 border-b border-ivory/30 pb-1 text-xs font-light uppercase tracking-[0.35em] text-ivory/80 transition-colors hover:border-ivory hover:text-ivory"
+              >
+                New Arrivals
+                <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />
+              </Link>
+            </div>
+          </>
+        ) : (
+          <div>
+            <p className="text-xs font-light uppercase tracking-[0.45em] text-champagne">
+              {activeProduct.brand.name}
+            </p>
+            <h1 className="mx-auto mt-7 max-w-4xl font-heading text-4xl font-extralight uppercase leading-[1.05] tracking-[0.05em] sm:text-6xl lg:text-7xl">
+              {activeProduct.name}
+            </h1>
+            <Link
+              href={`/watches/${activeProduct.slug}`}
+              className="group mt-10 inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
+            >
+              Discover more
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        )}
       </div>
+
+      {/* Slide indicators */}
+      {len > 1 && (
+        <div className="absolute bottom-9 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => fadeTo(i)}
+              className={cn(
+                "h-px w-8 transition-all duration-300",
+                i === active ? "bg-champagne" : "bg-ivory/35 hover:bg-ivory/70"
+              )}
+              aria-label={`Show slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

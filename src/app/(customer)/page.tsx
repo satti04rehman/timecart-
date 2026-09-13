@@ -21,7 +21,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroVideo />
+      <HeroVideo products={bestSellers.slice(0, 3)} />
 
       <Marquee />
 

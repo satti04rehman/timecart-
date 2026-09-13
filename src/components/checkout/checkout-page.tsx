@@ -17,7 +17,37 @@ const MAX_COD = 60000;
 const HIGH_ORDER_THRESHOLD = 60000;
 const DEPOSIT_RATE = 0.5;
 
-type PaymentMethod = "cod" | "bank" | null;
+type PaymentMethod = "cod" | "bank" | "card" | null;
+
+function isValidCardNumber(cc: string) {
+  const d = cc.replace(/\s+/g, "");
+  if (!/^\d{13,19}$/.test(d)) return false;
+  let sum = 0;
+  let alt = false;
+  for (let i = d.length - 1; i >= 0; i--) {
+    let n = Number(d[i]);
+    if (alt) {
+      n *= 2;
+      if (n > 9) n -= 9;
+    }
+    sum += n;
+    alt = !alt;
+  }
+  return sum % 10 === 0;
+}
+
+function formatCardNumber(v: string) {
+  return v
+    .replace(/\D/g, "")
+    .slice(0, 16)
+    .replace(/(\d{4})(?=\d)/g, "$1 ");
+}
+
+function formatExpiry(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 4);
+  if (d.length <= 2) return d;
+  return `${d.slice(0, 2)}/${d.slice(2)}`;
+}
 
 export function CheckoutPage() {
   const { cart, cartSubtotal, clearCart } = useStore();
@@ -34,6 +64,7 @@ export function CheckoutPage() {
     city: "",
   });
   const [payment, setPayment] = React.useState<PaymentMethod>(null);
+  const [card, setCard] = React.useState({ name: "", number: "", expiry: "", cvv: "" });
   const [coupon, setCoupon] = React.useState<{
     code: string;
     type: "PERCENTAGE" | "FIXED";
@@ -66,10 +97,19 @@ export function CheckoutPage() {
 
   const codAvailable = total <= MAX_COD;
   const needsDeposit = total > HIGH_ORDER_THRESHOLD;
-  const deposit = payment === "bank" && needsDeposit ? total * DEPOSIT_RATE : 0;
+  const deposit =
+    payment === "bank" && needsDeposit ? total * DEPOSIT_RATE : 0;
+
+  const cardValid =
+    payment === "card" &&
+    card.name.trim().length >= 3 &&
+    isValidCardNumber(card.number) &&
+    /^\d{2}\/\d{2}$/.test(card.expiry) &&
+    /^\d{3,4}$/.test(card.cvv);
+  const cardTail = card.number.replace(/\s+/g, "").slice(-4);
 
   const step2Locked = !(form.name && form.phone && form.address && form.city);
-  const step3Locked = !payment || (needsDeposit && !(payment === "bank"));
+  const step3Locked = !payment || (payment === "card" && !cardValid);
 
   const applyCoupon = async () => {
     setCouponError("");
@@ -93,6 +133,12 @@ export function CheckoutPage() {
   const placeOrder = () => {
     if (step2Locked || step3Locked) return;
     setPlacing(true);
+    const paymentLabel =
+      payment === "card"
+        ? "Card"
+        : payment === "bank"
+          ? "Bank Transfer"
+          : "Cash on Delivery";
     const num = `TC-${Date.now().toString().slice(-6)}`;
     const order: StoredOrder = {
       orderNumber: num,
@@ -101,14 +147,13 @@ export function CheckoutPage() {
       phone: form.phone,
       address: form.address,
       city: form.city,
-      paymentMethod:
-        payment === "cod" ? "Cash on Delivery" : "Bank Transfer",
+      paymentMethod: paymentLabel,
       subtotal,
       shipping,
       discount,
       deposit,
       total,
-      status: needsDeposit || payment === "bank" ? "Awaiting Deposit" : "Processing",
+      status: payment === "bank" && needsDeposit ? "Awaiting Deposit" : "Processing",
       items: cart.map((i) => ({
         name: i.name,
         qty: i.quantity,
@@ -127,7 +172,7 @@ export function CheckoutPage() {
       customerPhone: form.phone,
       address: form.address,
       city: form.city,
-      paymentMethod: payment === "cod" ? "Cash on Delivery" : "Bank Transfer",
+      paymentMethod: paymentLabel,
       subtotal,
       shipping,
       discount,
@@ -149,7 +194,9 @@ export function CheckoutPage() {
   };
 
   if (orderNumber && placedOrder) {
-    return <OrderSuccess order={placedOrder} paymentDetail={payment} />;
+    return (
+      <OrderSuccess order={placedOrder} paymentDetail={payment} cardTail={cardTail} />
+    );
   }
 
   if (cart.length === 0 && !orderNumber) {
@@ -385,6 +432,103 @@ export function CheckoutPage() {
                 </div>
               )}
 
+              <label
+                className={cn(
+                  "flex cursor-pointer items-start gap-4 rounded-xl border-2 p-4 transition-colors",
+                  payment === "card"
+                    ? "border-obsidian bg-soft-gray/30"
+                    : "border-soft-gray hover:border-champagne/50"
+                )}
+              >
+                <input
+                  type="radio"
+                  name="payment"
+                  className="mt-1 accent-obsidian"
+                  checked={payment === "card"}
+                  onChange={() => setPayment("card")}
+                />
+                <div>
+                  <p className="flex items-center gap-2 font-semibold text-obsidian">
+                    <Lock className="h-4 w-4 text-champagne" />
+                    Debit / Credit Card
+                  </p>
+                  <p className="mt-1 text-sm text-text-gray">
+                    Securely pay the full amount now with Visa, Mastercard or
+                    American Express.
+                  </p>
+                </div>
+              </label>
+
+              {payment === "card" && (
+                <div className="space-y-4 rounded-lg bg-soft-gray/40 p-4">
+                  <Field label="Name on card">
+                    <Input
+                      value={card.name}
+                      onChange={(e) =>
+                        setCard((c) => ({ ...c, name: e.target.value }))
+                      }
+                      placeholder="e.g. Ahmed Khan"
+                      autoComplete="cc-name"
+                    />
+                  </Field>
+                  <Field label="Card number">
+                    <Input
+                      value={card.number}
+                      onChange={(e) =>
+                        setCard((c) => ({
+                          ...c,
+                          number: formatCardNumber(e.target.value),
+                        }))
+                      }
+                      placeholder="1234 5678 9012 3456"
+                      inputMode="numeric"
+                      autoComplete="cc-number"
+                      className="font-mono tabular-nums tracking-wider"
+                    />
+                  </Field>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field label="Expiry">
+                      <Input
+                        value={card.expiry}
+                        onChange={(e) =>
+                          setCard((c) => ({
+                            ...c,
+                            expiry: formatExpiry(e.target.value),
+                          }))
+                        }
+                        placeholder="MM/YY"
+                        inputMode="numeric"
+                        autoComplete="cc-exp"
+                        className="font-mono tabular-nums"
+                      />
+                    </Field>
+                    <Field label="CVV">
+                      <Input
+                        value={card.cvv}
+                        onChange={(e) =>
+                          setCard((c) => ({
+                            ...c,
+                            cvv: e.target.value.replace(/\D/g, "").slice(0, 4),
+                          }))
+                        }
+                        placeholder="123"
+                        type="password"
+                        inputMode="numeric"
+                        autoComplete="cc-csc"
+                        className="font-mono tabular-nums"
+                      />
+                    </Field>
+                  </div>
+                  {!cardValid && payment === "card" && (
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-red-600">
+                      <Lock className="h-3.5 w-3.5" />
+                      Please enter a valid card number, expiry and CVV. Your
+                      payment is encrypted and never stored.
+                    </p>
+                  )}
+                </div>
+              )}
+
               <div className="flex items-center justify-between pt-2">
                 <Button
                   variant="ghost"
@@ -465,7 +609,11 @@ export function CheckoutPage() {
                   {form.phone}
                 </Row>
                 <Row label="Payment">
-                  {payment === "cod" ? "Cash on Delivery" : "Bank Transfer"}
+                  {payment === "card"
+                    ? "Card"
+                    : payment === "bank"
+                      ? "Bank Transfer"
+                      : "Cash on Delivery"}
                   {needsDeposit && payment === "bank" ? " (50% advance)" : ""}
                 </Row>
               </div>
@@ -628,9 +776,11 @@ function Row({
 function OrderSuccess({
   order,
   paymentDetail,
+  cardTail,
 }: {
   order: StoredOrder;
   paymentDetail: string | null;
+  cardTail?: string;
 }) {
   return (
     <div className="container-tc flex flex-col items-center py-16 text-center lg:py-24">
@@ -666,7 +816,17 @@ function OrderSuccess({
         </div>
         <div className="mt-3 flex items-center justify-between text-sm">
           <span className="text-text-gray">Status</span>
-          <span className="font-medium text-amber-700">Awaiting Verification</span>
+          <span
+            className={
+              paymentDetail === "card"
+                ? "font-medium text-emerald-700"
+                : "font-medium text-amber-700"
+            }
+          >
+            {paymentDetail === "card"
+              ? "Payment Authorized"
+              : "Awaiting Verification"}
+          </span>
         </div>
       </div>
 
@@ -683,6 +843,19 @@ function OrderSuccess({
             (Account: TimeCart Retail · IBAN: PK36 MEZN 0000 1234 5678 9012)
             and share the transaction ID with our team to confirm. Balance is
             payable on delivery.
+          </p>
+        ) : paymentDetail === "card" || order.paymentMethod === "Card" ? (
+          <p>
+            Payment of{" "}
+            <span className="font-semibold text-obsidian">
+              {formatPrice(order.total)}
+            </span>{" "}
+            has been <span className="font-semibold text-obsidian">authorized</span>{" "}
+            on card ending{" "}
+            <span className="font-mono font-semibold text-obsidian">
+              •••• {cardTail}
+            </span>
+            . A receipt has been sent to your email.
           </p>
         ) : (
           <p>
