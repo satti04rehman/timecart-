@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
       </div>
       <div className="relative ml-auto hidden flex-1 lg:block">
         <video
-          src="/videos/animatio-15fps.mp4?v3"
+          src="/videos/animatio-15fps.mp4?v4"
           autoPlay
           muted
           loop

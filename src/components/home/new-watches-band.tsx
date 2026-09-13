@@ -35,7 +35,7 @@ export function NewWatchesBand({ products }: { products: ProductSummary[] }) {
         </Reveal>
 
         <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-          {products.slice(0, 4).map((product, i) => (
+          {products.slice(0, 8).map((product, i) => (
             <Reveal key={product.id} delay={i * 100}>
               <Link href={`/watches/${product.slug}`} className="group block">
                 <div className="aspect-square overflow-hidden bg-ivory/5">

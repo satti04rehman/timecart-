@@ -9,8 +9,9 @@ import { Testimonials } from "@/components/home/testimonials";
 import { Benefits } from "@/components/home/benefits";
 import { WatchFinderCTA } from "@/components/home/watch-finder-cta";
 import { NewsletterBanner } from "@/components/home/newsletter-banner";
-import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/home/section-header";
+import { ProductRail } from "@/components/product/product-rail";
+import { Reveal } from "@/components/ui/reveal";
 import { getHomeProducts } from "@/lib/data";
 
 export const revalidate = 300;
@@ -25,6 +26,20 @@ export default async function HomePage() {
       <Marquee />
 
       <WatchFamily products={bestSellers.slice(0, 4)} />
+
+      <section className="bg-white">
+        <div className="container-tc py-16 lg:py-24">
+          <SectionHeader
+            eyebrow="Customer Favourites"
+            title="Best Sellers"
+            subtitle="The watches everyone can't stop talking about."
+            href="/watches?sort=bestselling"
+          />
+          <Reveal className="mt-10">
+            <ProductRail products={bestSellers.slice(0, 8)} columns={4} />
+          </Reveal>
+        </div>
+      </section>
 
       <HouseDetails />
 
