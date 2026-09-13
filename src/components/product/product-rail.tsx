@@ -9,10 +9,12 @@ export function ProductRail({
   products,
   columns = 4,
   priorityFirst = false,
+  variant = "card",
 }: {
   products: ProductSummary[];
   columns?: 2 | 3 | 4;
   priorityFirst?: boolean;
+  variant?: "card" | "minimal";
 }) {
   const [quickView, setQuickView] = React.useState<ProductSummary | null>(null);
 
@@ -22,9 +24,12 @@ export function ProductRail({
         products={products}
         columns={columns}
         priorityFirst={priorityFirst}
-        onQuickView={setQuickView}
+        onQuickView={variant === "card" ? setQuickView : undefined}
+        variant={variant}
       />
-      <QuickViewDialog product={quickView} onClose={() => setQuickView(null)} />
+      {variant === "card" && (
+        <QuickViewDialog product={quickView} onClose={() => setQuickView(null)} />
+      )}
     </>
   );
 }

@@ -10,6 +10,7 @@ interface ProductGridProps {
   columns?: 2 | 3 | 4;
   priorityFirst?: boolean;
   onQuickView?: (product: ProductSummary) => void;
+  variant?: "card" | "minimal";
 }
 
 export function ProductGrid({
@@ -17,11 +18,12 @@ export function ProductGrid({
   columns = 4,
   priorityFirst = false,
   onQuickView,
+  variant = "card",
 }: ProductGridProps) {
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6",
+        "grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6",
         columns >= 3 && "md:grid-cols-3",
         columns >= 4 && "lg:grid-cols-4"
       )}
@@ -32,6 +34,7 @@ export function ProductGrid({
           product={product}
           onQuickView={onQuickView}
           priority={priorityFirst && index === 0}
+          variant={variant}
         />
       ))}
     </div>
