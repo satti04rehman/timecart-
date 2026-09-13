@@ -160,18 +160,18 @@ export default async function AdminDashboardPage() {
   const stats = await buildStats();
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="space-y-8">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Dashboard</h1>
-          <p className="mt-1 text-sm text-ivory/50">
-            Overview of your store performance.
-          </p>
+          <p className="admin-eyebrow">Store Overview</p>
+          <h1 className="admin-title mt-2 text-3xl text-obsidian lg:text-4xl">
+            Dashboard
+          </h1>
         </div>
         {stats.pendingReviews > 0 && (
           <a
             href="/admin/reviews"
-            className="flex items-center gap-2 rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-700 transition-colors hover:bg-amber-200"
+            className="flex items-center gap-2 border-b border-champagne pb-0.5 text-[11px] font-light uppercase tracking-[0.3em] text-champagne transition-colors hover:text-obsidian"
           >
             {stats.pendingReviews} review{stats.pendingReviews > 1 ? "s" : ""} pending approval
           </a>
@@ -191,22 +191,22 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Recent orders */}
-      <div className="rounded-xl bg-ivory p-5">
-        <div className="flex items-center justify-between">
+      <div className="admin-card">
+        <div className="flex items-center justify-between border-b border-obsidian/10 px-6 py-5">
           <div>
-            <p className="text-sm text-text-gray">Latest activity</p>
-            <p className="font-heading text-xl text-obsidian">Recent Orders</p>
+            <p className="admin-eyebrow">Latest activity</p>
+            <p className="admin-title mt-1 text-xl text-obsidian">Recent Orders</p>
           </div>
         </div>
-        <div className="mt-4 overflow-x-auto">
+        <div className="overflow-x-auto px-6 py-4">
           <table className="w-full min-w-[560px] text-sm">
             <thead>
-              <tr className="border-b border-soft-gray text-left text-xs uppercase tracking-wider text-text-gray">
-                <th className="py-2.5 pr-4 font-medium">Order</th>
-                <th className="py-2.5 pr-4 font-medium">Customer</th>
-                <th className="py-2.5 pr-4 font-medium">Total</th>
-                <th className="py-2.5 pr-4 font-medium">Status</th>
-                <th className="py-2.5 font-medium">Date</th>
+              <tr className="border-b border-obsidian/10 text-left">
+                <th className="admin-th py-2.5 pr-4 font-medium">Order</th>
+                <th className="admin-th py-2.5 pr-4 font-medium">Customer</th>
+                <th className="admin-th py-2.5 pr-4 font-medium">Total</th>
+                <th className="admin-th py-2.5 pr-4 font-medium">Status</th>
+                <th className="admin-th py-2.5 font-medium">Date</th>
               </tr>
             </thead>
             <tbody>
@@ -218,12 +218,12 @@ export default async function AdminDashboardPage() {
                 </tr>
               ) : (
                 stats.recentOrders.map((o) => (
-                  <tr key={o.number} className="border-b border-soft-gray/60 last:border-0">
-                    <td className="py-3 pr-4 font-semibold text-obsidian">{o.number}</td>
+                  <tr key={o.number} className="border-b border-obsidian/8 last:border-0">
+                    <td className="py-3 pr-4 font-medium text-obsidian">{o.number}</td>
                     <td className="py-3 pr-4 text-text-gray">{o.customer}</td>
                     <td className="py-3 pr-4 font-medium text-obsidian">{formatPrice(o.total)}</td>
                     <td className="py-3 pr-4">
-                      <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusColor[o.status] ?? "bg-soft-gray text-text-gray"}`}>
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] ${statusColor[o.status] ?? "bg-soft-gray text-text-gray"}`}>
                         {o.status}
                       </span>
                     </td>

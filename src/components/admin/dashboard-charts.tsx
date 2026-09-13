@@ -28,14 +28,14 @@ export interface AdminStats {
 
 export function RevenueChart({ data }: { data: AdminStats["revenueSeries"] }) {
   return (
-    <div className="rounded-xl bg-ivory p-5">
+    <div className="admin-card px-6 py-5">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-text-gray">Revenue</p>
-          <p className="font-heading text-2xl text-obsidian">Last 6 months</p>
+          <p className="admin-eyebrow">Revenue</p>
+          <p className="admin-title mt-1 text-xl text-obsidian">Last 6 months</p>
         </div>
       </div>
-      <div className="mt-4 h-72">
+      <div className="mt-6 h-72">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
             <defs>
@@ -50,12 +50,12 @@ export function RevenueChart({ data }: { data: AdminStats["revenueSeries"] }) {
             <Tooltip
               contentStyle={{
                 background: "#111111",
-                border: "none",
-                borderRadius: 12,
+                border: "1px solid rgba(247,245,240,0.15)",
+                borderRadius: 2,
                 color: "#F7F5F0",
                 fontSize: 13,
               }}
-              labelStyle={{ color: "#C6A15B", fontWeight: 600 }}
+              labelStyle={{ color: "#C6A15B", fontWeight: 500 }}
             />
             <Area
               type="monotone"
@@ -77,10 +77,10 @@ export function CategoryChart({
   data: AdminStats["topCategories"];
 }) {
   return (
-    <div className="rounded-xl bg-ivory p-5">
-      <p className="text-sm text-text-gray">Inventory by Category</p>
-      <p className="font-heading text-2xl text-obsidian">SKU Breakdown</p>
-      <div className="mt-4 h-72">
+    <div className="admin-card px-6 py-5">
+      <p className="admin-eyebrow">Inventory</p>
+      <p className="admin-title mt-1 text-xl text-obsidian">By Category</p>
+      <div className="mt-6 h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <CartesianGrid stroke="#E7E5E0" strokeDasharray="4 4" vertical={false} />
@@ -89,14 +89,14 @@ export function CategoryChart({
             <Tooltip
               contentStyle={{
                 background: "#111111",
-                border: "none",
-                borderRadius: 12,
+                border: "1px solid rgba(247,245,240,0.15)",
+                borderRadius: 2,
                 color: "#F7F5F0",
                 fontSize: 13,
               }}
               cursor={{ fill: "#E7E5E0", opacity: 0.4 }}
             />
-            <Bar dataKey="count" name="Products" fill="#C6A15B" radius={[6, 6, 0, 0]} />
+            <Bar dataKey="count" name="Products" fill="#C6A15B" radius={[1, 1, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -119,16 +119,16 @@ export function StatCard({
     <div
       className={
         accent
-          ? "rounded-xl bg-champagne p-5 text-obsidian"
-          : "rounded-xl bg-ivory p-5 text-obsidian"
+          ? "admin-card border-champagne/50 bg-champagne/10 px-6 py-5 text-obsidian"
+          : "admin-card px-6 py-5 text-obsidian"
       }
     >
-      <p className={accent ? "text-xs font-semibold uppercase tracking-wider text-obsidian/60" : "text-xs font-semibold uppercase tracking-wider text-text-gray"}>
+      <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-obsidian/55">
         {label}
       </p>
-      <p className="mt-2 font-heading text-3xl">{value}</p>
+      <p className="admin-title mt-2 text-3xl text-obsidian">{value}</p>
       {sub && (
-        <p className={accent ? "mt-1 text-xs text-obsidian/70" : "mt-1 text-xs text-text-gray"}>
+        <p className="mt-1 text-xs text-text-gray">
           {sub}
         </p>
       )}

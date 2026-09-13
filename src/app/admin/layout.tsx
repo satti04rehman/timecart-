@@ -16,28 +16,26 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-obsidian text-ivory">
-      {/* Sidebar */}
-      <aside className="hidden w-60 shrink-0 flex-col border-r border-ivory/10 lg:flex">
+    <div className="flex min-h-screen bg-ivory text-obsidian">
+      {/* Sidebar — black editorial band */}
+      <aside className="hidden w-60 shrink-0 flex-col bg-obsidian text-ivory lg:flex">
         <div className="flex h-16 items-center border-b border-ivory/10 px-5">
           <Link href="/admin">
             <Logo variant="light" className="h-6" />
           </Link>
         </div>
         <AdminNav />
-        <div className="border-t border-ivory/10 p-4 text-[11px] text-ivory/40">
+        <div className="border-t border-ivory/10 p-5 text-[10px] font-light uppercase tracking-[0.3em] text-ivory/35">
           TimeCart Admin
           <br />
-          v1.0
+          <span className="text-ivory/25">v1.0</span>
         </div>
       </aside>
 
       {/* Main */}
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminTopBar username={session.username} />
-        <main className="overflow-x-hidden bg-obsidian px-6 py-8">
-          {children}
-        </main>
+        <main className="overflow-x-hidden bg-ivory px-6 py-10">{children}</main>
       </div>
     </div>
   );

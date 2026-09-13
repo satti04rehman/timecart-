@@ -35,12 +35,12 @@ export function AdminTable({
   };
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-ivory">
+    <div className="overflow-x-auto border border-obsidian/10 bg-white">
       <table className="w-full min-w-[640px] text-sm">
         <thead>
-          <tr className="border-b border-soft-gray text-left text-xs uppercase tracking-wider text-text-gray">
+          <tr className="border-b border-obsidian/10 text-left">
             {columns.map((c) => (
-              <th key={c} className="py-3 pl-4 pr-4 font-medium">
+              <th key={c} className="admin-th py-3 pl-5 pr-4 font-medium">
                 {c}
               </th>
             ))}
@@ -48,9 +48,9 @@ export function AdminTable({
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} className="border-b border-soft-gray/60 last:border-0">
+            <tr key={i} className="border-b border-obsidian/8 last:border-0 hover:bg-obsidian/[0.02]">
               {r.map((cell, j) => (
-                <td key={j} className="py-3 pl-4 pr-4">
+                <td key={j} className="py-3 pl-5 pr-4">
                   {renderCell(cell)}
                 </td>
               ))}

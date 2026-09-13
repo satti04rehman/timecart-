@@ -67,6 +67,36 @@
     }
   }
 
+  /* Admin panel — customer storefront editorial style */
+  .admin-eyebrow {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--champagne);
+  }
+
+  .admin-title {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .admin-card {
+    border-radius: 2px;
+    border: 1px solid rgb(17 17 17 / 0.12);
+    background-color: var(--white);
+  }
+
+  .admin-th {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgb(17 17 17 / 0.5);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
