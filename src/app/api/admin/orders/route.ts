@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/require-admin";
+import { prisma } from "@/lib/prisma";
+import { isDbReady } from "@/lib/data";
+import {
+  ORDER_STATUS_LABELS,
+  ORDER_LABEL_TO_STATUS,
+  PAYMENT_METHOD_LABELS,
+} from "@/lib/order-status";
 
 const DEMO_ORDERS = [
   { number: "TC-220191", customer: "Ahmed R.", phone: "0300-1234567", items: 2, total: 28750, payment: "Cash on Delivery", status: "Processing", date: "2026-09-10", city: "Karachi" },
@@ -15,7 +22,33 @@ const DEMO_ORDERS = [
 export async function GET() {
   const { response } = await requireAdmin();
   if (response) return response;
-  return NextResponse.json({ orders: DEMO_ORDERS });
+
+  const ready = await isDbReady();
+  if (!ready) return NextResponse.json({ orders: DEMO_ORDERS });
+
+  const rows = await prisma.order.findMany({
+    include: { items: { select: { id: true } } },
+    orderBy: { createdAt: "desc" },
+    take: 200,
+  });
+
+  const orders = rows.map((o) => {
+    const shipping = (o.shippingAddress ?? {}) as { city?: string; address?: string };
+    return {
+      id: o.id,
+      number: o.orderNumber,
+      customer: o.customerName,
+      phone: o.customerPhone,
+      items: o.items.length,
+      total: Number(o.total),
+      payment: PAYMENT_METHOD_LABELS[o.paymentMethod] ?? o.paymentMethod,
+      status: ORDER_STATUS_LABELS[o.status] ?? o.status,
+      date: o.createdAt.toISOString(),
+      city: shipping.city ?? shipping.address ?? "",
+    };
+  });
+
+  return NextResponse.json({ orders });
 }
 
 export async function PUT(req: Request) {
@@ -23,9 +56,35 @@ export async function PUT(req: Request) {
   if (response) return response;
 
   const body = await req.json();
-  const { number, status } = body;
-  if (!number || !status)
-    return NextResponse.json({ ok: false, error: "Order number and status required" }, { status: 400 });
-  // Demo mode — no persistence. When Supabase is wired, this updates the Order row.
-  return NextResponse.json({ ok: true, demo: true });
+  const { number, id, status } = body;
+  if (!number && !id)
+    return NextResponse.json(
+      { ok: false, error: "Order number required" },
+      { status: 400 }
+    );
+  const enumStatus = ORDER_LABEL_TO_STATUS[status] ?? ORDER_LABEL_TO_STATUS[status] ?? status;
+  if (!enumStatus)
+    return NextResponse.json(
+      { ok: false, error: "Invalid status" },
+      { status: 400 }
+    );
+
+  const ready = await isDbReady();
+  if (!ready) return NextResponse.json({ ok: true, demo: true });
+
+  try {
+    await prisma.order.update({
+      where: id ? { id } : { orderNumber: number },
+      data: {
+        status: enumStatus as never,
+        deliveredAt: enumStatus === "DELIVERED" ? new Date() : null,
+      },
+    });
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "Order could not be updated." },
+      { status: 400 }
+    );
+  }
 }

@@ -5,8 +5,10 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
+import { ORDER_STATUS_OPTIONS } from "@/lib/order-status";
 
 interface AdminOrder {
+  id?: string;
   number: string;
   customer: string;
   phone: string;
@@ -18,14 +20,18 @@ interface AdminOrder {
   city: string;
 }
 
-const STATUSES = ["Processing", "Awaiting Deposit", "Dispatched", "Delivered", "Cancelled"];
+const STATUSES = ORDER_STATUS_OPTIONS;
 
 const STATUS_BADGE: Record<string, string> = {
   Processing: "bg-amber-100 text-amber-700",
-  "Awaiting Deposit": "bg-blue-100 text-blue-700",
-  Dispatched: "bg-violet-100 text-violet-700",
+  Confirmed: "bg-blue-100 text-blue-700",
+  Packed: "bg-violet-100 text-violet-700",
+  Shipped: "bg-fuchsia-100 text-fuchsia-700",
+  "Out for Delivery": "bg-indigo-100 text-indigo-700",
   Delivered: "bg-emerald-100 text-emerald-700",
   Cancelled: "bg-red-100 text-red-700",
+  Returned: "bg-orange-100 text-orange-700",
+  Refunded: "bg-slate-200 text-slate-700",
 };
 
 export function OrdersManager() {
@@ -39,15 +45,15 @@ export function OrdersManager() {
       .then((d) => setOrders(d.orders));
   }, []);
 
-  const changeStatus = async (number: string, status: string) => {
+  const changeStatus = async (number: string, id: string | undefined, status: string) => {
     const res = await fetch("/api/admin/orders", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ number, status }),
+      body: JSON.stringify({ number, id, status }),
     });
     const data = await res.json();
     if (data.ok) {
-      toast.success(data.demo ? `Status updated (demo mode): ${status}` : "Order updated");
+      toast.success(data.demo ? "Status updated (demo mode)" : "Order updated");
       setOrders((prev) =>
         prev
           ? prev.map((o) => (o.number === number ? { ...o, status } : o))
@@ -140,7 +146,7 @@ export function OrdersManager() {
                   <td className="py-3 pr-4">
                     <select
                       value={o.status}
-                      onChange={(e) => changeStatus(o.number, e.target.value)}
+                      onChange={(e) => changeStatus(o.number, o.id, e.target.value)}
                       className={`rounded-lg border-0 px-2.5 py-1.5 text-xs font-semibold outline-none ${STATUS_BADGE[o.status] ?? ""}`}
                     >
                       {STATUSES.map((s) => (

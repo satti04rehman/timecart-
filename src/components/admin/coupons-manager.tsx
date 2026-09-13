@@ -8,20 +8,17 @@ import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
 
 interface Coupon {
+  id: string;
   code: string;
   type: "PERCENTAGE" | "FIXED";
   value: number;
   minOrder: number;
   maxDiscount: number | null;
   expiryDate: string | null;
+  usageLimit: number | null;
+  usedCount: number;
   isActive: boolean;
 }
-
-const SEED: Coupon[] = [
-  { code: "WELCOME10", type: "PERCENTAGE", value: 10, minOrder: 5000, maxDiscount: 1500, expiryDate: "2026-12-31", isActive: true },
-  { code: "SALE20", type: "PERCENTAGE", value: 20, minOrder: 15000, maxDiscount: 5000, expiryDate: "2026-11-30", isActive: true },
-  { code: "FLAT500", type: "FIXED", value: 500, minOrder: 3000, maxDiscount: null, expiryDate: "2026-10-31", isActive: true },
-];
 
 async function send(body: unknown) {
   const res = await fetch("/api/admin/coupons", {
@@ -32,8 +29,15 @@ async function send(body: unknown) {
   return res.json();
 }
 
+async function removeCoupon(code: string) {
+  const res = await fetch(`/api/admin/coupons?code=${encodeURIComponent(code)}`, {
+    method: "DELETE",
+  });
+  return res.json();
+}
+
 export function CouponsManager() {
-  const [coupons, setCoupons] = React.useState<Coupon[]>(SEED);
+  const [coupons, setCoupons] = React.useState<Coupon[] | null>(null);
   const [adding, setAdding] = React.useState(false);
   const [form, setForm] = React.useState({
     code: "",
@@ -41,48 +45,65 @@ export function CouponsManager() {
     value: "",
     minOrder: "0",
     maxDiscount: "",
+    usageLimit: "",
+    expiryDate: "",
   });
 
+  const load = React.useCallback(() => {
+    fetch("/api/admin/coupons")
+      .then((r) => r.json())
+      .then((d) => setCoupons(d.coupons));
+  }, []);
+
+  React.useEffect(() => {
+    load();
+  }, [load]);
+
   const create = async () => {
-    if (!form.code.trim()) return;
+    if (!form.code.trim()) {
+      toast.error("Code is required");
+      return;
+    }
     const res = await send({
       code: form.code.toUpperCase(),
       type: form.type,
       value: Number(form.value) || 0,
       minOrder: Number(form.minOrder) || 0,
       maxDiscount: form.maxDiscount ? Number(form.maxDiscount) : null,
+      usageLimit: form.usageLimit ? Number(form.usageLimit) : null,
+      expiryDate: form.expiryDate || undefined,
     });
     if (res.ok) {
-      toast.success(res.demo ? "Coupon added (demo mode)" : "Coupon created");
-      setCoupons((prev) => [
-        {
-          code: form.code.toUpperCase(),
-          type: form.type as Coupon["type"],
-          value: Number(form.value) || 0,
-          minOrder: Number(form.minOrder) || 0,
-          maxDiscount: form.maxDiscount ? Number(form.maxDiscount) : null,
-          expiryDate: "2026-12-31",
-          isActive: true,
-        },
-        ...prev,
-      ]);
+      toast.success(res.demo ? "Coupon saved (demo mode)" : "Coupon created");
       setAdding(false);
-      setForm({ code: "", type: "PERCENTAGE", value: "", minOrder: "0", maxDiscount: "" });
+      setForm({ code: "", type: "PERCENTAGE", value: "", minOrder: "0", maxDiscount: "", usageLimit: "", expiryDate: "" });
+      load();
     } else {
       toast.error(res.error ?? "Failed to create coupon");
     }
   };
 
-  const toggle = async (code: string) => {
-    await send({ code, isActive: !coupons.find((c) => c.code === code)?.isActive });
-    setCoupons((prev) =>
-      prev.map((c) => (c.code === code ? { ...c, isActive: !c.isActive } : c))
-    );
+  const toggle = async (c: Coupon) => {
+    const res = await send({ code: c.code, isActive: !c.isActive });
+    if (res.ok) {
+      setCoupons((prev) =>
+        prev
+          ? prev.map((x) => (x.code === c.code ? { ...x, isActive: !c.isActive } : x))
+          : prev
+      );
+    } else {
+      toast.error(res.error ?? "Update failed");
+    }
   };
 
-  const remove = async (code: string) => {
-    await send({ code, delete: true });
-    setCoupons((prev) => prev.filter((c) => c.code !== code));
+  const remove = async (c: Coupon) => {
+    const res = await removeCoupon(c.code);
+    if (res.ok) {
+      toast.success("Coupon deleted");
+      load();
+    } else {
+      toast.error(res.error ?? "Delete failed");
+    }
   };
 
   return (
@@ -141,6 +162,21 @@ export function CouponsManager() {
                 onChange={(e) => setForm({ ...form, maxDiscount: e.target.value })}
               />
             </Field>
+            <Field label="Usage limit (optional)">
+              <Input
+                type="number"
+                value={form.usageLimit}
+                onChange={(e) => setForm({ ...form, usageLimit: e.target.value })}
+                placeholder="Unlimited"
+              />
+            </Field>
+            <Field label="Expiry date (optional)">
+              <Input
+                type="date"
+                value={form.expiryDate}
+                onChange={(e) => setForm({ ...form, expiryDate: e.target.value })}
+              />
+            </Field>
           </div>
           <div className="mt-5 flex gap-2">
             <Button onClick={create}>Create Coupon</Button>
@@ -151,44 +187,72 @@ export function CouponsManager() {
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {coupons.map((c) => (
-          <div key={c.code} className="rounded-xl bg-ivory p-5">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="font-heading text-xl tracking-wider text-obsidian">{c.code}</p>
-                <p className="mt-0.5 text-xs text-text-gray">
-                  {c.type === "PERCENTAGE" ? `${c.value}% off` : `${formatPrice(c.value)} off`} · min {formatPrice(c.minOrder)}
+      {coupons === null ? (
+        <div className="space-y-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="h-32 animate-pulse rounded-xl bg-ivory/5" />
+          ))}
+        </div>
+      ) : coupons.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-ivory/20 p-14 text-center text-ivory/50">
+          No coupons yet. Create your first promo code.
+        </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {coupons.map((c) => {
+            const expired =
+              c.expiryDate && new Date(c.expiryDate).getTime() < Date.now();
+            const fullyUsed =
+              c.usageLimit != null && c.usedCount >= c.usageLimit;
+            return (
+              <div key={c.id} className="rounded-xl bg-ivory p-5">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="font-heading text-xl tracking-wider text-obsidian">{c.code}</p>
+                    <p className="mt-0.5 text-xs text-text-gray">
+                      {c.type === "PERCENTAGE" ? `${c.value}% off` : `${formatPrice(c.value)} off`} · min {formatPrice(c.minOrder)}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => remove(c)}
+                    className="text-text-gray transition-colors hover:text-red-600"
+                    aria-label="Delete coupon"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+                {c.maxDiscount != null && (
+                  <p className="mt-2 text-xs text-text-gray">Cap: {formatPrice(c.maxDiscount)}</p>
+                )}
+                <p className="mt-1 text-xs text-text-gray">
+                  {c.usageLimit != null
+                    ? `${c.usedCount}/${c.usageLimit} used`
+                    : `${c.usedCount} used`}
+                  {c.expiryDate &&
+                    ` · Expires ${new Date(c.expiryDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}
+                  {(expired || fullyUsed) && (
+                    <span className="ml-1 font-semibold text-red-500">(unavailable)</span>
+                  )}
                 </p>
+                <div className="mt-4 flex items-center justify-between">
+                  <button
+                    onClick={() => toggle(c)}
+                    className={`relative h-6 w-11 rounded-full transition-colors ${c.isActive ? "bg-champagne" : "bg-soft-gray"}`}
+                    aria-label="Toggle coupon"
+                  >
+                    <span
+                      className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${c.isActive ? "translate-x-5" : "translate-x-0.5"}`}
+                    />
+                  </button>
+                  <span className={`text-xs font-medium ${c.isActive ? "text-emerald-600" : "text-text-gray"}`}>
+                    {c.isActive ? "Active" : "Disabled"}
+                  </span>
+                </div>
               </div>
-              <button
-                onClick={() => remove(c.code)}
-                className="text-text-gray transition-colors hover:text-red-600"
-                aria-label="Delete coupon"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </div>
-            {c.maxDiscount != null && (
-              <p className="mt-2 text-xs text-text-gray">Cap: {formatPrice(c.maxDiscount)}</p>
-            )}
-            <div className="mt-4 flex items-center justify-between">
-              <button
-                onClick={() => toggle(c.code)}
-                className={`relative h-6 w-11 rounded-full transition-colors ${c.isActive ? "bg-champagne" : "bg-soft-gray"}`}
-                aria-label="Toggle coupon"
-              >
-                <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${c.isActive ? "translate-x-5" : "translate-x-0.5"}`}
-                />
-              </button>
-              <span className={`text-xs font-medium ${c.isActive ? "text-emerald-600" : "text-text-gray"}`}>
-                {c.isActive ? "Active" : "Disabled"}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

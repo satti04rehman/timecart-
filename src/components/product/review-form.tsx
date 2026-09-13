@@ -66,7 +66,11 @@ export function ReviewForm({
         }
         return;
       }
-      toast.success("Thanks! Your review has been published.");
+      toast.success(
+        data.pending
+          ? "Thanks! Your review is pending approval and will appear shortly."
+          : "Thanks! Your review has been published."
+      );
       setOpen(false);
       setRating(0);
       setTitle("");

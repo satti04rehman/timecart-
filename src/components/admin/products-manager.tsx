@@ -21,6 +21,7 @@ export interface AdminProductFormData {
   category: string;
   imageUrl: string;
   movement: string;
+  isActive: boolean;
 }
 
 const EMPTY: AdminProductFormData = {
@@ -34,6 +35,7 @@ const EMPTY: AdminProductFormData = {
   category: "Casual",
   imageUrl: "",
   movement: "quartz",
+  isActive: true,
 };
 
 async function mutate(method: "POST" | "PUT" | "DELETE", body?: unknown, id?: string) {
@@ -73,14 +75,15 @@ export function ProductsManager() {
       price: Number(editing.price) || 0,
       discount: Number(editing.discount) || 0,
       stock: Number(editing.stock) || 0,
-      imageUrl: editing.imageUrl || "https://picsum.photos/seed/tc-default/640/640",
+      imageUrl: editing.imageUrl,
       movement: editing.movement,
+      isActive: editing.isActive,
     };
     const res = await mutate(editing.id ? "PUT" : "POST", payload);
     if (res.ok) {
       toast.success(
         res.demo
-          ? "Saved (demo mode — connect Supabase to persist)"
+          ? "Saved (demo mode — DB unavailable)"
           : "Product saved"
       );
       setEditing(null);
@@ -186,7 +189,9 @@ export function ProductsManager() {
                     <StockBadge stock={p.stock} />
                   </td>
                   <td className="py-3 pr-4">
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700">Active</span>
+                    <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${p.isActive ? "bg-emerald-100 text-emerald-700" : "bg-soft-gray text-text-gray"}`}>
+                      {p.isActive ? "Active" : "Hidden"}
+                    </span>
                   </td>
                   <td className="py-3 pr-4">
                     <div className="flex justify-end gap-1.5">
@@ -204,6 +209,7 @@ export function ProductsManager() {
                             category: p.category,
                             imageUrl: p.imageUrl ?? "",
                             movement: p.movement ?? "quartz",
+                            isActive: p.isActive !== false,
                           })
                         }
                         className="rounded-lg p-2 text-text-gray transition-colors hover:bg-soft-gray hover:text-obsidian"
@@ -235,6 +241,9 @@ export function ProductsManager() {
               {editing.id ? "Edit Product" : "Add Product"}
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <Field label="Slug" className="sm:col-span-2">
+                <Input value={editing.slug} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} placeholder="Auto-generated from name" />
+              </Field>
               <Field label="Name" className="sm:col-span-2">
                 <Input value={editing.name} onChange={(e) => setEditing({ ...editing, name: e.target.value })} />
               </Field>
@@ -260,12 +269,21 @@ export function ProductsManager() {
                 <Input value={editing.category} onChange={(e) => setEditing({ ...editing, category: e.target.value })} />
               </Field>
               <Field label="Image URL" className="sm:col-span-2">
-                <Input value={editing.imageUrl} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} />
+                <Input value={editing.imageUrl} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} placeholder="Leave empty for default image" />
               </Field>
+              <label className="flex cursor-pointer items-center gap-2.5 sm:col-span-2">
+                <input
+                  type="checkbox"
+                  checked={editing.isActive}
+                  onChange={(e) => setEditing({ ...editing, isActive: e.target.checked })}
+                  className="h-4 w-4 accent-obsidian"
+                />
+                <span className="text-sm font-medium text-obsidian">Product is active (visible on storefront)</span>
+              </label>
             </div>
             <div className="mt-6 flex items-center justify-between gap-3">
               <p className="flex items-center gap-1.5 text-xs text-text-gray">
-                <Info className="h-3.5 w-3.5" /> Demo mode = no persistence.
+                <Info className="h-3.5 w-3.5" /> New brands/categories are created automatically.
               </p>
               <div className="flex gap-2">
                 <Button variant="ghost" onClick={() => setEditing(null)}>Cancel</Button>

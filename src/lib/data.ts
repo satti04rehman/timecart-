@@ -567,6 +567,8 @@ export async function getCoupon(code: string): Promise<CouponSummary | null> {
     where: { code: code.toUpperCase() },
   });
   if (!coupon || !coupon.isActive) return null;
+  if (coupon.expiryDate && coupon.expiryDate.getTime() < Date.now()) return null;
+  if (coupon.usageLimit != null && coupon.usedCount >= coupon.usageLimit) return null;
   return {
     code: coupon.code,
     type: coupon.type,

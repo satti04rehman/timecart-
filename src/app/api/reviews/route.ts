@@ -62,7 +62,11 @@ export async function POST(req: Request) {
     }
 
     const existing = await prisma.review.findFirst({
-      where: { productId, profileId: profile.id, status: "APPROVED" },
+      where: {
+        productId,
+        profileId: profile.id,
+        status: { in: ["APPROVED", "PENDING"] },
+      },
       select: { id: true },
     });
     if (existing) {
@@ -78,7 +82,7 @@ export async function POST(req: Request) {
           rating,
           title: title || null,
           content,
-          status: "APPROVED",
+          status: "PENDING",
           productId,
           profileId: profile.id,
         },
@@ -104,7 +108,7 @@ export async function POST(req: Request) {
     revalidatePath("/watches");
     revalidatePath(`/watches/${product.slug}`);
 
-    return NextResponse.json({ ok: true, review: result });
+    return NextResponse.json({ ok: true, review: result, pending: true });
   } catch {
     return NextResponse.json(
       { error: "We couldn't save your review. Please try again." },

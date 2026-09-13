@@ -28,7 +28,7 @@ export default async function AdminLayout({
         <div className="border-t border-ivory/10 p-4 text-[11px] text-ivory/40">
           TimeCart Admin
           <br />
-          v1.0 · Demo build
+          v1.0
         </div>
       </aside>
 

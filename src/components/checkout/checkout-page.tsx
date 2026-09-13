@@ -120,6 +120,32 @@ export function CheckoutPage() {
     setPlacedOrder(order);
     clearCart();
     setPlacing(false);
+    persistOrder({
+      orderNumber: num,
+      customerName: form.name,
+      customerEmail: form.email,
+      customerPhone: form.phone,
+      address: form.address,
+      city: form.city,
+      paymentMethod: payment === "cod" ? "Cash on Delivery" : "Bank Transfer",
+      subtotal,
+      shipping,
+      discount,
+      deposit,
+      total,
+      couponCode: coupon?.code,
+      couponDiscount: discount,
+      items: cart.map((i) => ({
+        name: i.name,
+        productId: i.productId,
+        productSlug: i.productSlug,
+        variantId: i.variantId ?? null,
+        variantName: i.variantName ?? null,
+        imageUrl: i.imageUrl,
+        unitPrice: i.unitPrice,
+        quantity: i.quantity,
+      })),
+    });
   };
 
   if (orderNumber && placedOrder) {
@@ -555,6 +581,16 @@ export function CheckoutPage() {
       </div>
     </div>
   );
+}
+
+function persistOrder(payload: Record<string, unknown>) {
+  fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  }).catch(() => {
+    // Local backup keeps the order visible; DB sync may be retried by support.
+  });
 }
 
 function Field({

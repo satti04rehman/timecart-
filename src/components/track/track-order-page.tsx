@@ -66,8 +66,21 @@ export function TrackOrderPage() {
     const found = all.find(
       (o) => o.orderNumber.toLowerCase() === num.trim().toLowerCase()
     );
-    setOrder(found ?? null);
-    setNotFound(!found);
+    if (found) {
+      setOrder(found);
+      setNotFound(false);
+      return;
+    }
+    fetch(`/api/track-order?number=${encodeURIComponent(num.trim())}`)
+      .then((r) => r.json())
+      .then((d) => {
+        setOrder(d.order ?? null);
+        setNotFound(!d.order);
+      })
+      .catch(() => {
+        setOrder(null);
+        setNotFound(true);
+      });
   }, []);
 
   React.useEffect(() => {

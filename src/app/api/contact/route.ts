@@ -16,12 +16,18 @@ export async function POST(req: Request) {
 
     const ready = await isDbReady();
     if (ready) {
+      const orderSubject = orderNumber
+        ? `Order ${String(orderNumber).toUpperCase()} — ${subject || "General Inquiry"}`
+        : subject || "General Inquiry";
+      const enrichedMessage = phone
+        ? `${message}\n\nContact phone: ${phone}`
+        : message;
       await prisma.contactSubmission.create({
         data: {
           name,
           email,
-          subject: subject || "General Inquiry",
-          message,
+          subject: orderSubject,
+          message: enrichedMessage,
         },
       });
     }
