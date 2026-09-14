@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isDbReady } from "@/lib/data";
+import { unstable_cache } from "next/cache";
 import {
   StatCard,
   RevenueChart,
@@ -144,6 +145,10 @@ async function buildStats(): Promise<DashboardStats> {
   };
 }
 
+const buildStatsCached = unstable_cache(buildStats, ["admin-dashboard"], {
+  revalidate: 60,
+});
+
 const statusColor: Record<string, string> = {
   Processing: "bg-amber-100 text-amber-700",
   Confirmed: "bg-blue-100 text-blue-700",
@@ -157,7 +162,7 @@ const statusColor: Record<string, string> = {
 };
 
 export default async function AdminDashboardPage() {
-  const stats = await buildStats();
+  const stats = await buildStatsCached();
 
   return (
     <div className="space-y-8">

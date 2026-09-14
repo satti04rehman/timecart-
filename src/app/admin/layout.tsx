@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { AdminNav, AdminTopBar } from "@/components/admin/admin-nav";
+import { AdminPrefetcher } from "@/components/admin/admin-prefetcher";
 import { getAdminSession } from "@/lib/admin-actions";
 
 export default async function AdminLayout({
@@ -17,6 +18,7 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-screen bg-ivory text-obsidian">
+      <AdminPrefetcher />
       {/* Sidebar — black editorial band */}
       <aside className="hidden w-60 shrink-0 flex-col bg-obsidian text-ivory lg:flex">
         <div className="flex h-16 items-center border-b border-ivory/10 px-5">
