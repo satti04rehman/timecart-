@@ -236,6 +236,8 @@ export function ReviewsManager() {
 
       {detail && (
         <div
+          role="dialog"
+          aria-modal="true"
           className="fixed inset-0 z-[80] flex items-end justify-center bg-obsidian/60 backdrop-blur-sm sm:items-center sm:p-6"
           onClick={() => setDetail(null)}
         >

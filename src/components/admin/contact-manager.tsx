@@ -57,8 +57,9 @@ export function ContactManager() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Inquiries</h1>
-          <p className="mt-1 text-sm text-ivory/50">
+          <p className="admin-eyebrow">Support</p>
+          <h1 className="admin-title mt-1 text-3xl text-obsidian">Inquiries</h1>
+          <p className="mt-2 text-sm text-text-gray">
             Messages from the contact form.
           </p>
         </div>
@@ -77,7 +78,7 @@ export function ContactManager() {
             className={`h-9 rounded-full px-4 text-sm font-medium transition-colors ${
               filter === f
                 ? "bg-champagne text-obsidian"
-                : "border border-ivory/15 text-ivory/60 hover:text-ivory"
+                : "border border-obsidian/15 text-text-gray hover:text-obsidian"
             }`}
           >
             {f === "ALL" ? "All" : "Unread only"}
@@ -88,7 +89,7 @@ export function ContactManager() {
       {rows === null ? (
         <div className="space-y-3">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-20 animate-pulse rounded-xl bg-ivory/5" />
+            <div key={i} className="h-20 animate-pulse rounded-xl bg-obsidian/5" />
           ))}
         </div>
       ) : rows.length === 0 ? (

@@ -35,7 +35,7 @@ export default async function AdminLayout({
       {/* Main */}
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminTopBar username={session.username} />
-        <main className="overflow-x-hidden bg-ivory px-6 py-10">{children}</main>
+        <main className="overflow-x-hidden bg-ivory px-4 py-6 sm:px-6 lg:py-10">{children}</main>
       </div>
     </div>
   );

@@ -110,8 +110,9 @@ export function CouponsManager() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Coupons</h1>
-          <p className="mt-1 text-sm text-ivory/50">
+          <p className="admin-eyebrow">Promotions</p>
+          <h1 className="admin-title mt-1 text-3xl text-obsidian">Coupons</h1>
+          <p className="mt-2 text-sm text-text-gray">
             Promo codes customers can apply at checkout.
           </p>
         </div>
@@ -121,7 +122,7 @@ export function CouponsManager() {
       </div>
 
       {adding && (
-        <div className="rounded-xl bg-ivory p-5">
+        <div className="rounded-xl border border-obsidian/10 bg-white p-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Field label="Code">
               <Input
@@ -190,11 +191,11 @@ export function CouponsManager() {
       {coupons === null ? (
         <div className="space-y-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-xl bg-ivory/5" />
+            <div key={i} className="h-32 animate-pulse rounded-xl bg-obsidian/5" />
           ))}
         </div>
       ) : coupons.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-ivory/20 p-14 text-center text-ivory/50">
+        <div className="rounded-xl border border-dashed border-obsidian/15 p-14 text-center text-text-gray">
           No coupons yet. Create your first promo code.
         </div>
       ) : (
@@ -205,7 +206,7 @@ export function CouponsManager() {
             const fullyUsed =
               c.usageLimit != null && c.usedCount >= c.usageLimit;
             return (
-              <div key={c.id} className="rounded-xl bg-ivory p-5">
+              <div key={c.id} className="rounded-xl border border-obsidian/10 bg-white p-5">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="font-heading text-xl tracking-wider text-obsidian">{c.code}</p>

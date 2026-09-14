@@ -164,6 +164,8 @@ export function CustomersManager() {
 
       {confirmDelete && (
         <div
+          role="alertdialog"
+          aria-modal="true"
           className="fixed inset-0 z-[80] flex items-center justify-center bg-obsidian/60 p-4 backdrop-blur-sm"
           onClick={() => setConfirmDelete(null)}
         >

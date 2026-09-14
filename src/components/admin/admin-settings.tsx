@@ -41,13 +41,14 @@ export function AdminSettings() {
   return (
     <form onSubmit={save} className="space-y-6">
       <div>
-        <h1 className="font-heading text-2xl text-ivory">Settings</h1>
-        <p className="mt-1 text-sm text-ivory/50">
+        <p className="admin-eyebrow">Store</p>
+        <h1 className="admin-title mt-1 text-3xl text-obsidian">Settings</h1>
+        <p className="mt-2 text-sm text-text-gray">
           Store configuration used across the storefront.
         </p>
       </div>
 
-      <div className="max-w-2xl rounded-xl bg-ivory p-6">
+      <div className="max-w-2xl rounded-xl border border-obsidian/10 bg-white p-6">
         <h2 className="font-heading text-lg text-obsidian">Store Details</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <Field label="Store Name">
@@ -77,7 +78,7 @@ export function AdminSettings() {
         </div>
       </div>
 
-      <div className="max-w-2xl rounded-xl bg-ivory p-6">
+      <div className="max-w-2xl rounded-xl border border-obsidian/10 bg-white p-6">
         <h2 className="font-heading text-lg text-obsidian">Pricing & Delivery</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           <Field label="Free Shipping Above (PKR)">

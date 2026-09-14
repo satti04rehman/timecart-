@@ -96,8 +96,9 @@ export function BrandsManager() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Brands</h1>
-          <p className="mt-1 text-sm text-ivory/50">
+          <p className="admin-eyebrow">Catalog</p>
+          <h1 className="admin-title mt-1 text-3xl text-obsidian">Brands</h1>
+          <p className="mt-2 text-sm text-text-gray">
             Manage the watch brands you sell.
           </p>
         </div>
@@ -110,33 +111,33 @@ export function BrandsManager() {
       </div>
 
       <div className="relative max-w-sm">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ivory/40" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-gray" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search brands…"
-          className="border-ivory/10 bg-ivory text-obsidian placeholder:text-text-gray"
+          className="border-obsidian/10 bg-white text-obsidian placeholder:text-text-gray"
         />
       </div>
 
       {visible === null ? (
         <div className="space-y-3">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-14 animate-pulse rounded-xl bg-ivory/5" />
+            <div key={i} className="h-14 animate-pulse rounded-xl bg-obsidian/5" />
           ))}
         </div>
       ) : visible.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-ivory/20 p-14 text-center text-ivory/50">
+        <div className="rounded-xl border border-dashed border-obsidian/15 p-14 text-center text-text-gray">
           No brands found.
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl bg-ivory">
+        <div className="overflow-x-auto rounded-xl border border-obsidian/10 bg-white">
           <table className="w-full min-w-[640px] text-sm">
             <thead>
-              <tr className="border-b border-soft-gray text-left text-xs uppercase tracking-wider text-text-gray">
-                <th className="py-3 pl-4 pr-4 font-medium">Brand</th>
-                <th className="py-3 pr-4 font-medium">Slug</th>
-                <th className="py-3 pr-4 font-medium">Country</th>
+              <tr className="border-b border-obsidian/10 text-left text-xs uppercase tracking-wider text-text-gray">
+                <th className="admin-th py-3 pl-4 pr-4 font-medium">Brand</th>
+                <th className="admin-th py-3 pr-4 font-medium">Slug</th>
+                <th className="admin-th py-3 pr-4 font-medium">Country</th>
                 <th className="py-3 pr-4 font-medium">Products</th>
                 <th className="py-3 pr-4 font-medium">Status</th>
                 <th className="py-3 pr-4 text-right font-medium">Actions</th>
@@ -144,7 +145,7 @@ export function BrandsManager() {
             </thead>
             <tbody>
               {visible.map((b) => (
-                <tr key={b.id} className="border-b border-soft-gray/60 last:border-0">
+                <tr key={b.id} className="border-b border-obsidian/5 last:border-0">
                   <td className="py-3 pl-4 pr-4 font-medium text-obsidian">{b.name}</td>
                   <td className="py-3 pr-4 text-text-gray">/{b.slug}</td>
                   <td className="py-3 pr-4 text-text-gray">{b.country ?? "—"}</td>
@@ -190,8 +191,8 @@ export function BrandsManager() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setEditing(null)} />
-          <div className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-ivory p-6">
+          <div className="absolute inset-0 bg-obsidian/60 backdrop-blur-sm" onClick={() => setEditing(null)} />
+          <div className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6">
             <h2 className="font-heading text-xl text-obsidian">
               {editing.id ? "Edit Brand" : "Add Brand"}
             </h2>
