@@ -182,6 +182,7 @@ model Product {
   colors   Json?
   specifications Json?
   featuredImageUrl String?
+  videoUrl String?
 
   status  String @default("ACTIVE")
   isActive Boolean @default(true)
@@ -388,6 +389,14 @@ model ReviewImage {
   review   Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 
   @@map("review_images")
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  dataUrl   String
+  createdAt DateTime @default(now())
+
+  @@map("media")
 }
 
 model Coupon {

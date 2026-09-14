@@ -2,9 +2,12 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Search, Check, EyeOff, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { Search, Check, EyeOff, Trash2, X, MessageSquareQuote } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { Rating } from "@/components/ui/rating";
+import { resolveProductImage } from "@/lib/product-images";
 
 interface ReviewRow {
   id: string;
@@ -17,6 +20,7 @@ interface ReviewRow {
   status: "PENDING" | "APPROVED" | "HIDDEN";
   createdAt: string;
   imageCount: number;
+  images: string[];
 }
 
 const STATUS_PILL: Record<string, string> = {
@@ -25,11 +29,18 @@ const STATUS_PILL: Record<string, string> = {
   HIDDEN: "bg-red-100 text-red-700",
 };
 
+const STATUS_LABEL: Record<string, string> = {
+  PENDING: "Pending approval",
+  APPROVED: "Published",
+  HIDDEN: "Hidden",
+};
+
 export function ReviewsManager() {
   const [reviews, setReviews] = React.useState<ReviewRow[] | null>(null);
   const [pendingCount, setPendingCount] = React.useState(0);
   const [statusFilter, setStatusFilter] = React.useState("ALL");
   const [query, setQuery] = React.useState("");
+  const [detail, setDetail] = React.useState<ReviewRow | null>(null);
 
   const load = React.useCallback((status = statusFilter, q = query) => {
     fetch(`/api/admin/reviews?status=${status}&q=${encodeURIComponent(q)}`)
@@ -64,6 +75,7 @@ export function ReviewsManager() {
     const data = await res.json();
     if (data.ok) {
       toast.success("Review deleted");
+      setDetail(null);
       load();
     } else {
       toast.error(data.error ?? "Delete failed");
@@ -74,9 +86,10 @@ export function ReviewsManager() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Reviews</h1>
-          <p className="mt-1 text-sm text-ivory/50">
-            Moderate customer reviews before they go live.
+          <p className="admin-eyebrow">Community</p>
+          <h1 className="admin-title mt-1 text-3xl text-obsidian">Reviews</h1>
+          <p className="mt-2 text-sm text-text-gray">
+            Moderate customer reviews before they go live — click any review to read it in full.
           </p>
         </div>
         {pendingCount > 0 && (
@@ -88,7 +101,7 @@ export function ReviewsManager() {
 
       <div className="flex flex-wrap items-center gap-3">
         <div className="relative w-full max-w-sm">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ivory/40" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-gray" />
           <Input
             value={query}
             onChange={(e) => {
@@ -96,7 +109,7 @@ export function ReviewsManager() {
               load(statusFilter, e.target.value);
             }}
             placeholder="Search reviews…"
-            className="border-ivory/10 bg-ivory text-obsidian placeholder:text-text-gray"
+            className="border-obsidian/10 bg-white text-obsidian placeholder:text-text-gray"
           />
         </div>
         <select
@@ -105,7 +118,7 @@ export function ReviewsManager() {
             setStatusFilter(e.target.value);
             load(e.target.value, query);
           }}
-          className="h-10 rounded-lg border border-ivory/10 bg-ivory px-3 text-sm text-obsidian outline-none"
+          className="h-10 rounded-lg border border-obsidian/10 bg-white px-3 text-sm text-obsidian outline-none"
         >
           <option value="ALL">All statuses</option>
           <option value="PENDING">Pending</option>
@@ -117,28 +130,32 @@ export function ReviewsManager() {
       {reviews === null ? (
         <div className="space-y-3">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-20 animate-pulse rounded-xl bg-ivory/5" />
+            <div key={i} className="h-20 animate-pulse rounded-xl bg-obsidian/5" />
           ))}
         </div>
       ) : reviews.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-ivory/20 p-14 text-center text-ivory/50">
+        <div className="rounded-xl border border-dashed border-obsidian/15 p-14 text-center text-text-gray">
           No reviews match.
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl bg-ivory">
-          <table className="w-full min-w-[820px] text-sm">
+        <div className="overflow-x-auto rounded-xl border border-obsidian/10 bg-white">
+          <table className="w-full min-w-[860px] text-sm">
             <thead>
-              <tr className="border-b border-soft-gray text-left text-xs uppercase tracking-wider text-text-gray">
-                <th className="py-3 pl-4 pr-4 font-medium">Review</th>
-                <th className="py-3 pr-4 font-medium">Product</th>
-                <th className="py-3 pr-4 font-medium">Status</th>
-                <th className="py-3 pr-4 font-medium">Date</th>
-                <th className="py-3 pr-4 font-medium">Moderate</th>
+              <tr className="border-b border-obsidian/10 text-left text-xs uppercase tracking-wider text-text-gray">
+                <th className="admin-th pl-4">Review</th>
+                <th className="admin-th">Product</th>
+                <th className="admin-th">Status</th>
+                <th className="admin-th">Date</th>
+                <th className="admin-th pr-4">Moderate</th>
               </tr>
             </thead>
             <tbody>
               {reviews.map((r) => (
-                <tr key={r.id} className="border-b border-soft-gray/60 last:border-0">
+                <tr
+                  key={r.id}
+                  onClick={() => setDetail(r)}
+                  className="cursor-pointer border-b border-obsidian/5 transition-colors last:border-0 hover:bg-obsidian/[0.03]"
+                >
                   <td className="py-3 pl-4 pr-4">
                     <div className="flex max-w-md items-start gap-3">
                       <span className="mt-0.5 shrink-0 rounded-lg bg-champagne/15 px-2 py-1 text-xs font-bold text-champagne">
@@ -159,6 +176,7 @@ export function ReviewsManager() {
                   <td className="py-3 pr-4">
                     <Link
                       href={`/watches/${r.productSlug}`}
+                      onClick={(e) => e.stopPropagation()}
                       className="text-champagne hover:underline"
                     >
                       {r.productName}
@@ -172,7 +190,7 @@ export function ReviewsManager() {
                   <td className="py-3 pr-4 text-text-gray">
                     {new Date(r.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </td>
-                  <td className="py-3 pr-4">
+                  <td className="py-3 pr-4" onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center gap-1.5">
                       {r.status !== "APPROVED" && (
                         <button
@@ -213,6 +231,118 @@ export function ReviewsManager() {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {detail && (
+        <div
+          className="fixed inset-0 z-[80] flex items-end justify-center bg-obsidian/60 backdrop-blur-sm sm:items-center sm:p-6"
+          onClick={() => setDetail(null)}
+        >
+          <div
+            className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl bg-ivory sm:rounded-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-obsidian/10 bg-ivory px-6 py-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-obsidian text-champagne">
+                  <MessageSquareQuote className="h-4 w-4" />
+                </span>
+                <div>
+                  <h2 className="font-heading text-lg text-obsidian">Review detail</h2>
+                  <p className="text-xs text-text-gray">
+                    {detail.author} · {new Date(detail.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setDetail(null)}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-obsidian/15 text-obsidian transition-colors hover:bg-obsidian hover:text-ivory"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="space-y-6 px-6 py-6">
+              <section className="rounded-xl border border-obsidian/10 bg-white p-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <Rating value={detail.rating} />
+                    <Link
+                      href={`/watches/${detail.productSlug}`}
+                      className="mt-2 inline-block text-sm font-medium text-champagne hover:underline"
+                    >
+                      {detail.productName}
+                    </Link>
+                  </div>
+                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${STATUS_PILL[detail.status]}`}>
+                    {STATUS_LABEL[detail.status] ?? detail.status}
+                  </span>
+                </div>
+                {detail.title && (
+                  <h3 className="mt-4 font-heading text-lg text-obsidian">{detail.title}</h3>
+                )}
+                <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-text-gray">
+                  {detail.content}
+                </p>
+              </section>
+
+              {detail.images.length > 0 && (
+                <section className="rounded-xl border border-obsidian/10 bg-white p-5">
+                  <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-text-gray">
+                    Customer photos · {detail.images.length}
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {detail.images.map((url, i) => (
+                      <div
+                        key={i}
+                        className="relative aspect-square overflow-hidden rounded-lg border border-obsidian/10 bg-soft-gray"
+                      >
+                        <Image
+                          src={resolveProductImage(url)}
+                          alt={`Review photo ${i + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 50vw, 200px"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <section className="rounded-xl border border-obsidian/10 bg-white p-5">
+                <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-text-gray">
+                  Moderation
+                </h3>
+                <div className="flex flex-wrap items-center gap-2">
+                  {detail.status !== "APPROVED" && (
+                    <button
+                      onClick={() => setStatus(detail.id, "APPROVED")}
+                      className="flex items-center gap-1.5 rounded-lg bg-obsidian px-4 py-2 text-xs font-semibold text-ivory transition-colors hover:bg-obsidian/85"
+                    >
+                      <Check className="h-3.5 w-3.5 text-champagne" /> Approve & publish
+                    </button>
+                  )}
+                  {detail.status !== "HIDDEN" && (
+                    <button
+                      onClick={() => setStatus(detail.id, "HIDDEN")}
+                      className="flex items-center gap-1.5 rounded-lg border border-obsidian/15 px-4 py-2 text-xs font-semibold text-obsidian transition-colors hover:bg-obsidian hover:text-ivory"
+                    >
+                      <EyeOff className="h-3.5 w-3.5" /> Hide
+                    </button>
+                  )}
+                  <button
+                    onClick={() => remove(detail.id)}
+                    className="flex items-center gap-1.5 rounded-lg border border-red-200 px-4 py-2 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" /> Delete permanently
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
       )}
     </div>

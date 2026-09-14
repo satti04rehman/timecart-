@@ -48,6 +48,7 @@ export interface ProductDetail extends ProductSummary {
   occasion: string | null;
   style: string | null;
   specifications: Record<string, string> | null;
+  videoUrl?: string | null;
   images: { id: string; url: string; alt: string | null; sortOrder: number }[];
   variants: {
     id: string;

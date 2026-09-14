@@ -44,3 +44,66 @@ export async function GET(req: Request) {
 
   return NextResponse.json({ customers: filtered });
 }
+
+export async function PATCH(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
+  let body: { id?: string; active?: boolean };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
+  }
+  const { id, active } = body ?? {};
+  if (!id || typeof active !== "boolean") {
+    return NextResponse.json(
+      { ok: false, error: "Customer id and active state required." },
+      { status: 400 }
+    );
+  }
+
+  const ready = await isDbReady();
+  if (!ready) return NextResponse.json({ ok: true, demo: true });
+
+  try {
+    const updated = await prisma.profile.update({
+      where: { id },
+      data: { isActive: active },
+      select: { id: true, isActive: true },
+    });
+    return NextResponse.json({ ok: true, customer: updated });
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "Customer could not be updated." },
+      { status: 400 }
+    );
+  }
+}
+
+export async function DELETE(req: Request) {
+  const { response } = await requireAdmin();
+  if (response) return response;
+
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+  if (!id) {
+    return NextResponse.json(
+      { ok: false, error: "Customer id required." },
+      { status: 400 }
+    );
+  }
+
+  const ready = await isDbReady();
+  if (!ready) return NextResponse.json({ ok: true, demo: true });
+
+  try {
+    await prisma.profile.delete({ where: { id } });
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "Customer could not be deleted." },
+      { status: 400 }
+    );
+  }
+}

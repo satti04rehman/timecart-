@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-14">
         {/* Gallery */}
-        <ProductGallery images={product.images} />
+        <ProductGallery images={product.images} videoUrl={product.videoUrl} />
 
         {/* Details & availability sidebar */}
         <div className="lg:sticky lg:top-24 lg:self-start">

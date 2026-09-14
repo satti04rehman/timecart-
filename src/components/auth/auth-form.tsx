@@ -95,6 +95,14 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           password,
         });
         if (error) throw error;
+        const res = await fetch("/api/profile");
+        const profile = await res.json().catch(() => null);
+        if (profile?.blocked) {
+          await supabase.auth.signOut();
+          setError("This account has been blocked by TimeCart.");
+          setPending(false);
+          return;
+        }
         router.push("/account");
         router.refresh();
       }

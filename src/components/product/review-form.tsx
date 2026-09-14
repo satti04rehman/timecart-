@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Star, LogIn } from "lucide-react";
+import Image from "next/image";
+import { Star, LogIn, Camera, ImagePlus, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -16,6 +17,42 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RatingInput } from "@/components/ui/rating-input";
+
+const MAX_IMAGES = 4;
+
+function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("read"));
+    reader.readAsDataURL(file);
+  });
+}
+
+function downscale(dataUrl: string, max = 1400): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.onload = () => {
+      const scale = Math.min(1, max / Math.max(img.width, img.height));
+      if (scale === 1) {
+        resolve(dataUrl);
+        return;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        resolve(dataUrl);
+        return;
+      }
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
+}
 
 interface ReviewFormProps {
   productId: string;
@@ -34,6 +71,45 @@ export function ReviewForm({
   const [content, setContent] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
   const [needsSignIn, setNeedsSignIn] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
+  const [images, setImages] = React.useState<string[]>([]);
+  const deviceInputRef = React.useRef<HTMLInputElement>(null);
+  const cameraInputRef = React.useRef<HTMLInputElement>(null);
+
+  const addFiles = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const remaining = MAX_IMAGES - images.length;
+    const selected = Array.from(files).slice(0, remaining);
+    if (selected.length < files.length) {
+      toast.error(`You can attach up to ${MAX_IMAGES} photos.`);
+    }
+    setUploading(true);
+    try {
+      const prepared: string[] = [];
+      for (const file of selected) {
+        const raw = await fileToDataUrl(file);
+        const dataUrl = await downscale(raw);
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ dataUrl }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          toast.error(data.error ?? "One image couldn't be uploaded.");
+          continue;
+        }
+        prepared.push(data.url);
+      }
+      if (prepared.length > 0) {
+        setImages((prev) => [...prev, ...prepared]);
+      }
+    } catch {
+      toast.error("Image upload failed. Please try again.");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +131,7 @@ export function ReviewForm({
           rating,
           title: title.trim() || undefined,
           content: content.trim(),
+          images: images.length > 0 ? images : undefined,
         }),
       });
       const data = await res.json();
@@ -75,6 +152,7 @@ export function ReviewForm({
       setRating(0);
       setTitle("");
       setContent("");
+      setImages([]);
       setNeedsSignIn(false);
       onSubmitted?.();
     } catch {
@@ -156,6 +234,97 @@ export function ReviewForm({
                 placeholder="What did you like or dislike about this watch?"
                 required
               />
+            </div>
+
+            <div>
+              <Label>Photos</Label>
+              {images.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2.5">
+                  {images.map((url, i) => (
+                    <div
+                      key={url}
+                      className="group relative h-20 w-20 overflow-hidden rounded-lg border border-soft-gray"
+                    >
+                      <Image
+                        src={url}
+                        alt={`Review photo ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setImages((prev) =>
+                            prev.filter((u) => u !== url)
+                          )
+                        }
+                        className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-obsidian/70 text-ivory opacity-0 transition-opacity hover:bg-obsidian group-hover:opacity-100"
+                        aria-label="Remove photo"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className="mt-2 flex flex-wrap gap-2">
+                <input
+                  ref={deviceInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => {
+                    addFiles(e.target.files).then(() => {
+                      if (deviceInputRef.current) {
+                        deviceInputRef.current.value = "";
+                      }
+                    });
+                  }}
+                />
+                <input
+                  ref={cameraInputRef}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  className="hidden"
+                  onChange={(e) => {
+                    addFiles(e.target.files).then(() => {
+                      if (cameraInputRef.current) {
+                        cameraInputRef.current.value = "";
+                      }
+                    });
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => deviceInputRef.current?.click()}
+                  disabled={uploading || images.length >= MAX_IMAGES}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-obsidian/15 px-3 py-2 text-xs font-medium text-obsidian transition-colors hover:border-obsidian disabled:opacity-40"
+                >
+                  <ImagePlus className="h-4 w-4" />
+                  From device
+                </button>
+                <button
+                  type="button"
+                  onClick={() => cameraInputRef.current?.click()}
+                  disabled={uploading || images.length >= MAX_IMAGES}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-obsidian/15 px-3 py-2 text-xs font-medium text-obsidian transition-colors hover:border-obsidian disabled:opacity-40"
+                >
+                  <Camera className="h-4 w-4" />
+                  Camera
+                </button>
+                {uploading && (
+                  <span className="inline-flex items-center gap-1.5 px-2 text-xs text-text-gray">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    Uploading…
+                  </span>
+                )}
+              </div>
+              <p className="mt-1.5 text-xs text-text-gray">
+                Up to {MAX_IMAGES} photos (max 4 MB each).
+              </p>
             </div>
 
             <Button type="submit" disabled={submitting} className="w-full">

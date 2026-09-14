@@ -9,6 +9,7 @@ const reviewSchema = z.object({
   rating: z.number().int().min(1).max(5),
   title: z.string().trim().max(120).optional(),
   content: z.string().trim().min(5).max(2000),
+  images: z.array(z.string().trim().min(1).max(2000)).max(4).optional(),
 });
 
 export async function POST(req: Request) {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
-  const { productId, rating, title, content } = parsed.data;
+  const { productId, rating, title, content, images } = parsed.data;
 
   const client = getPrismaClient();
   if (!client) {
@@ -87,6 +88,12 @@ export async function POST(req: Request) {
           profileId: profile.id,
         },
       });
+
+      if (images && images.length > 0) {
+        await tx.reviewImage.createMany({
+          data: images.map((url) => ({ url, reviewId: review.id })),
+        });
+      }
 
       const agg = await tx.review.aggregate({
         where: { productId, status: "APPROVED" },

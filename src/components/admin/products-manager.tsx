@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Plus, Pencil, Trash2, Search, Info } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, Info, Upload, Loader2, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { formatPrice } from "@/lib/utils";
+import { resolveProductImage } from "@/lib/product-images";
 
 export interface AdminProductFormData {
   id?: string;
@@ -20,6 +20,7 @@ export interface AdminProductFormData {
   brand: string;
   category: string;
   imageUrl: string;
+  videoUrl: string;
   movement: string;
   isActive: boolean;
 }
@@ -34,6 +35,7 @@ const EMPTY: AdminProductFormData = {
   brand: "Casio",
   category: "Casual",
   imageUrl: "",
+  videoUrl: "",
   movement: "quartz",
   isActive: true,
 };
@@ -54,6 +56,8 @@ export function ProductsManager() {
   const [rows, setRows] = React.useState<unknown[] | null>(null);
   const [query, setQuery] = React.useState("");
   const [editing, setEditing] = React.useState<AdminProductFormData | null>(null);
+  const [uploading, setUploading] = React.useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const load = React.useCallback((q = "") => {
     fetch(`/api/admin/products?q=${encodeURIComponent(q)}`)
@@ -76,6 +80,7 @@ export function ProductsManager() {
       discount: Number(editing.discount) || 0,
       stock: Number(editing.stock) || 0,
       imageUrl: editing.imageUrl,
+      videoUrl: editing.videoUrl,
       movement: editing.movement,
       isActive: editing.isActive,
     };
@@ -103,13 +108,49 @@ export function ProductsManager() {
     }
   };
 
+  const uploadImage = async (files: FileList | null) => {
+    const file = files?.[0];
+    if (!file || !editing) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please choose an image file.");
+      return;
+    }
+    setUploading(true);
+    try {
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error("read"));
+        reader.readAsDataURL(file);
+      });
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dataUrl }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error ?? "Upload failed.");
+        return;
+      }
+      toast.success(data.demo ? "Image working (demo mode)" : "Image uploaded");
+      setEditing({ ...editing, imageUrl: data.url });
+    } catch {
+      toast.error("Could not upload image.");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-heading text-2xl text-ivory">Products</h1>
-          <p className="mt-1 text-sm text-ivory/50">
-            Manage your catalog, pricing and stock.
+          <p className="admin-eyebrow">Catalog</p>
+          <h1 className="admin-title mt-1 text-3xl text-obsidian">Products</h1>
+          <p className="mt-2 text-sm text-text-gray">
+            Manage your catalog, pricing and stock — add product images from your device or a URL, plus a product film video.
           </p>
         </div>
         <Button
@@ -122,7 +163,7 @@ export function ProductsManager() {
 
       <div className="flex max-w-sm items-center gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ivory/40" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-gray" />
           <Input
             value={query}
             onChange={(e) => {
@@ -130,7 +171,7 @@ export function ProductsManager() {
               load(e.target.value);
             }}
             placeholder="Search products…"
-            className="border-ivory/10 bg-ivory text-obsidian placeholder:text-text-gray"
+            className="border-obsidian/10 bg-white text-obsidian placeholder:text-text-gray"
           />
         </div>
       </div>
@@ -138,35 +179,40 @@ export function ProductsManager() {
       {rows === null ? (
         <div className="space-y-3">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-16 animate-pulse rounded-xl bg-ivory/5" />
+            <div key={i} className="h-16 animate-pulse rounded-xl bg-obsidian/5" />
           ))}
         </div>
       ) : rows.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-ivory/20 p-14 text-center text-ivory/50">
+        <div className="rounded-xl border border-dashed border-obsidian/15 p-14 text-center text-text-gray">
           No products found.
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl bg-ivory">
-          <table className="w-full min-w-[760px] text-sm">
+        <div className="overflow-x-auto rounded-xl border border-obsidian/10 bg-white">
+          <table className="w-full min-w-[780px] text-sm">
             <thead>
-              <tr className="border-b border-soft-gray text-left text-xs uppercase tracking-wider text-text-gray">
-                <th className="py-3 pl-4 pr-4 font-medium">Product</th>
-                <th className="py-3 pr-4 font-medium">Brand</th>
-                <th className="py-3 pr-4 font-medium">Price</th>
-                <th className="py-3 pr-4 font-medium">Rating</th>
-                <th className="py-3 pr-4 font-medium">Stock</th>
-                <th className="py-3 pr-4 font-medium">Status</th>
-                <th className="py-3 pr-4 text-right font-medium">Actions</th>
+              <tr className="border-b border-obsidian/10 text-left text-xs uppercase tracking-wider text-text-gray">
+                <th className="admin-th pl-4">Product</th>
+                <th className="admin-th">Brand</th>
+                <th className="admin-th">Price</th>
+                <th className="admin-th">Rating</th>
+                <th className="admin-th">Stock</th>
+                <th className="admin-th">Status</th>
+                <th className="admin-th pr-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((p: any) => (
-                <tr key={p.id} className="border-b border-soft-gray/60 last:border-0">
+                <tr key={p.id} className="border-b border-obsidian/5 last:border-0">
                   <td className="py-3 pl-4 pr-4">
                     <div className="flex items-center gap-3">
                       <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-soft-gray/50">
                         {p.imageUrl && (
-                          <Image src={p.imageUrl} alt={p.name} fill className="object-cover" sizes="44px" />
+                          <Image src={resolveProductImage(p.imageUrl)} alt={p.name} fill className="object-cover" sizes="44px" />
+                        )}
+                        {p.videoUrl && (
+                          <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center bg-obsidian">
+                            <Video className="h-2.5 w-2.5 text-champagne" />
+                          </span>
                         )}
                       </div>
                       <div>
@@ -208,6 +254,7 @@ export function ProductsManager() {
                             brand: p.brand,
                             category: p.category,
                             imageUrl: p.imageUrl ?? "",
+                            videoUrl: p.videoUrl ?? "",
                             movement: p.movement ?? "quartz",
                             isActive: p.isActive !== false,
                           })
@@ -235,8 +282,8 @@ export function ProductsManager() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setEditing(null)} />
-          <div className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-ivory p-6">
+          <div className="absolute inset-0 bg-obsidian/60 backdrop-blur-sm" onClick={() => setEditing(null)} />
+          <div className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6">
             <h2 className="font-heading text-xl text-obsidian">
               {editing.id ? "Edit Product" : "Add Product"}
             </h2>
@@ -268,9 +315,63 @@ export function ProductsManager() {
               <Field label="Category" className="sm:col-span-2">
                 <Input value={editing.category} onChange={(e) => setEditing({ ...editing, category: e.target.value })} />
               </Field>
-              <Field label="Image URL" className="sm:col-span-2">
-                <Input value={editing.imageUrl} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} placeholder="Leave empty for default image" />
+
+              <Field label="Product image" className="sm:col-span-2">
+                <div className="flex items-start gap-3">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-obsidian/10 bg-soft-gray/50">
+                    {editing.imageUrl && (
+                      <Image
+                        src={resolveProductImage(editing.imageUrl)}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <Input
+                      value={editing.imageUrl}
+                      onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })}
+                      placeholder="Paste an image URL"
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => uploadImage(e.target.files)}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={uploading}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-obsidian/15 px-3 py-2 text-xs font-semibold text-obsidian transition-colors hover:border-obsidian disabled:opacity-40"
+                      >
+                        {uploading ? (
+                          <>
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Uploading…
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="h-3.5 w-3.5" /> From device
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </Field>
+
+              <Field label="Product film video URL" className="sm:col-span-2">
+                <Input
+                  value={editing.videoUrl}
+                  onChange={(e) => setEditing({ ...editing, videoUrl: e.target.value })}
+                  placeholder="https://…/watch.mp4 (shown to customers on the product page)"
+                />
+              </Field>
+
               <label className="flex cursor-pointer items-center gap-2.5 sm:col-span-2">
                 <input
                   type="checkbox"

@@ -66,6 +66,7 @@ export async function GET(req: Request) {
     status: r.status,
     createdAt: r.createdAt.toISOString(),
     imageCount: r.images.length,
+    images: r.images.map((i) => i.url),
   }));
 
   const filtered = q

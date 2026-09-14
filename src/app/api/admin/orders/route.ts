@@ -19,12 +19,68 @@ const DEMO_ORDERS = [
   { number: "TC-220198", customer: "Sana K.", phone: "0346-7766554", items: 1, total: 6400, payment: "Cash on Delivery", status: "Delivered", date: "2026-09-04", city: "Hyderabad" },
 ];
 
-export async function GET() {
+export async function GET(req: Request) {
   const { response } = await requireAdmin();
   if (response) return response;
 
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+
   const ready = await isDbReady();
   if (!ready) return NextResponse.json({ orders: DEMO_ORDERS });
+
+  if (id) {
+    const detail = await prisma.order.findUnique({
+      where: { id },
+      include: {
+        items: {
+          orderBy: { id: "asc" },
+        },
+      },
+    });
+    if (!detail) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+    const shipping = (detail.shippingAddress ?? {}) as Record<string, unknown>;
+    return NextResponse.json({
+      order: {
+        id: detail.id,
+        number: detail.orderNumber,
+        customerName: detail.customerName,
+        customerEmail: detail.customerEmail,
+        customerPhone: detail.customerPhone,
+        status: detail.status,
+        statusLabel: ORDER_STATUS_LABELS[detail.status] ?? detail.status,
+        paymentMethod: detail.paymentMethod,
+        paymentMethodLabel:
+          PAYMENT_METHOD_LABELS[detail.paymentMethod] ?? detail.paymentMethod,
+        paymentStatus: detail.paymentStatus,
+        shippingMethod: detail.shippingMethod,
+        subtotal: Number(detail.subtotal),
+        discount: Number(detail.discount),
+        shipping: Number(detail.shipping),
+        tax: Number(detail.tax),
+        couponCode: detail.couponCode,
+        couponDiscount: Number(detail.couponDiscount),
+        total: Number(detail.total),
+        shippingAddress: shipping,
+        estimatedDelivery: detail.estimatedDelivery?.toISOString() ?? null,
+        deliveredAt: detail.deliveredAt?.toISOString() ?? null,
+        notes: detail.notes,
+        createdAt: detail.createdAt.toISOString(),
+        items: detail.items.map((i) => ({
+          id: i.id,
+          productName: i.productName,
+          sku: i.sku,
+          imageUrl: i.imageUrl,
+          variantName: i.variantName,
+          unitPrice: Number(i.unitPrice),
+          quantity: i.quantity,
+          total: Number(i.total),
+        })),
+      },
+    });
+  }
 
   const rows = await prisma.order.findMany({
     include: { items: { select: { id: true } } },

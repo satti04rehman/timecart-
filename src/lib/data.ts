@@ -460,6 +460,7 @@ export async function getProductBySlug(
     occasion: p.occasion,
     style: p.style,
     specifications: (p.specifications as Record<string, string>) ?? null,
+    videoUrl: p.videoUrl ?? null,
     images: p.images.map((i) => ({
       id: i.id,
       url: i.url,

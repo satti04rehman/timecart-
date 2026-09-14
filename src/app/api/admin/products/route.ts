@@ -64,6 +64,7 @@ async function buildProductData(body: Record<string, unknown>) {
     discount: body.discount ?? 0,
     featuredImageUrl:
       String(body.featuredImageUrl ?? body.imageUrl ?? "") || null,
+    videoUrl: String(body.videoUrl ?? "").trim() || null,
     movement: body.movement ?? null,
     isActive: body.isActive !== false,
   };
@@ -135,6 +136,7 @@ export async function GET(req: Request) {
       ratingAvg: Number(p.ratingAvg),
       ratingCount: p.ratingCount,
       imageUrl: p.featuredImageUrl,
+      videoUrl: p.videoUrl,
       colors: (p.colors as string[]) ?? [],
       movement: p.movement,
       isActive: p.isActive,
