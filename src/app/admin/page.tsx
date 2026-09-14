@@ -1,11 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { isDbReady } from "@/lib/data";
 import { unstable_cache } from "next/cache";
-import {
-  StatCard,
-  RevenueChart,
-  CategoryChart,
-} from "@/components/admin/dashboard-charts";
+import { StatCard } from "@/components/admin/admin-stat-card";
+import { DashboardCharts } from "@/components/admin/dashboard-chart-grid";
 import { formatPrice } from "@/lib/utils";
 import { ORDER_STATUS_LABELS } from "@/lib/order-status";
 
@@ -190,10 +187,10 @@ export default async function AdminDashboardPage() {
         <StatCard label="Reviews" value={String(stats.reviews)} sub={`${stats.categories} categories · ${stats.brands} brands`} />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <RevenueChart data={stats.revenueSeries} />
-        <CategoryChart data={stats.topCategories} />
-      </div>
+      <DashboardCharts
+        revenueSeries={stats.revenueSeries}
+        topCategories={stats.topCategories}
+      />
 
       {/* Recent orders */}
       <div className="admin-card">

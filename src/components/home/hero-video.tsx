@@ -19,12 +19,13 @@ const SWAP_AT = 1200;
  * crossfade-through-black rhythm).
  */
 export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
-  const [src, setSrc] = React.useState(DESKTOP_SRC);
+  const [src, setSrc] = React.useState("");
   const [ready, setReady] = React.useState(false);
   const [masked, setMasked] = React.useState(true);
   const [maskMs, setMaskMs] = React.useState(1500);
   const [active, setActive] = React.useState(0);
   const [reduced, setReduced] = React.useState(false);
+  const srcRef = React.useRef(false);
 
   const slides: (null | ProductSummary)[] = [null, ...products];
   const len = slides.length;
@@ -45,7 +46,14 @@ export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
 
   React.useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    const update = () => setSrc(mq.matches ? MOBILE_SRC : DESKTOP_SRC);
+    const update = () => {
+      setSrc(mq.matches ? MOBILE_SRC : DESKTOP_SRC);
+      if (!srcRef.current) {
+        // Show the caption over the poster while the chosen video warms up.
+        srcRef.current = true;
+        reveal();
+      }
+    };
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
