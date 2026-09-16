@@ -33,7 +33,7 @@ export function MobileNav() {
                 router.push("/watches");
               }
             }}
-            className="flex flex-col items-center gap-1 py-2.5 text-[10px] font-medium text-text-gray transition-colors hover:text-obsidian"
+            className="flex flex-col items-center gap-1 py-2.5 text-xs font-medium text-text-gray transition-colors hover:text-obsidian"
           >
             <item.icon className="h-5 w-5" />
             {item.label}
@@ -42,7 +42,7 @@ export function MobileNav() {
         <button
           type="button"
           onClick={openCartDrawer}
-          className="relative flex flex-col items-center gap-1 py-2.5 text-[10px] font-medium text-text-gray transition-colors hover:text-obsidian"
+          className="relative flex flex-col items-center gap-1 py-2.5 text-xs font-medium text-text-gray transition-colors hover:text-obsidian"
         >
           <span className="relative">
             <ShoppingBag className="h-5 w-5" />

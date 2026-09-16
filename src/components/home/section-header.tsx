@@ -57,7 +57,7 @@ export function SectionHeader({
         <Link
           href={href}
           className={cn(
-            "inline-flex shrink-0 items-center gap-2 text-sm font-semibold uppercase tracking-wider transition-colors",
+            "inline-flex min-h-11 shrink-0 items-center gap-2 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
             dark
               ? "text-champagne hover:text-ivory"
               : "text-obsidian hover:text-champagne"

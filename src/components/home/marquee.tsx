@@ -15,7 +15,7 @@ export function Marquee({ className }: { className?: string }) {
       {ITEMS.map(({ icon: Icon, label }) => (
         <span
           key={label}
-          className="flex items-center gap-3 whitespace-nowrap px-6 text-[11px] font-medium uppercase tracking-[0.22em] text-ivory/80 md:px-8"
+          className="flex items-center gap-3 whitespace-nowrap px-6 text-xs font-medium uppercase tracking-[0.22em] text-ivory/80 md:px-8"
         >
           <Icon className="h-3.5 w-3.5 text-champagne" strokeWidth={1.75} />
           {label}

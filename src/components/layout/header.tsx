@@ -76,7 +76,7 @@ export function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="shrink-0" aria-label="TimeCart home">
+            <Link href="/" className="shrink-0 py-1" aria-label="TimeCart home">
               <Logo />
             </Link>
 
@@ -87,7 +87,7 @@ export function Header() {
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    "text-[11px] font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
+                    "text-xs font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
                     link.sale ? "text-champagne" : "text-obsidian",
                     pathname === link.href && "text-champagne"
                   )}
@@ -162,19 +162,19 @@ export function Header() {
               >
                 {link.label}
                 {link.sale && (
-                  <span className="rounded-full bg-champagne/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-champagne">
+                  <span className="rounded-full bg-champagne/15 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-champagne">
                     Sale
                   </span>
                 )}
               </Link>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-soft-gray pt-4">
-              <Button asChild variant="outline" size="sm">
+              <Button asChild variant="outline">
                 <Link href="/account">
                   <User className="h-4 w-4" /> My Account
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="sm">
+              <Button asChild variant="outline">
                 <Link href="/wishlist">
                   <Heart className="h-4 w-4" /> Wishlist
                 </Link>

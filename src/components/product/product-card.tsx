@@ -83,13 +83,13 @@ export function ProductCard({
           )}
           {soldOut && (
             <div className="absolute inset-0 flex items-center justify-center bg-ivory/70 backdrop-blur-sm">
-              <span className="border border-obsidian/20 bg-ivory px-4 py-1.5 text-[11px] font-light uppercase tracking-[0.25em] text-obsidian">
+              <span className="border border-obsidian/20 bg-ivory px-4 py-1.5 text-xs font-light uppercase tracking-[0.25em] text-obsidian">
                 Sold Out
               </span>
             </div>
           )}
         </div>
-        <p className="mt-5 text-[11px] font-light uppercase tracking-[0.3em] text-text-gray">
+        <p className="mt-5 text-xs font-light uppercase tracking-[0.3em] text-text-gray">
           {product.brand.name}
         </p>
         <h3 className="mt-1.5 font-heading text-lg font-light uppercase tracking-[0.04em] text-obsidian transition-colors group-hover:text-champagne">
@@ -105,7 +105,7 @@ export function ProductCard({
             </span>
           )}
         </div>
-        <span className="mt-5 inline-flex items-center gap-2 border-b border-obsidian/40 pb-0.5 text-[11px] font-medium uppercase tracking-[0.3em] text-obsidian transition-colors group-hover:border-champagne group-hover:text-champagne">
+        <span className="mt-5 inline-flex min-h-11 items-center gap-2 border-b border-obsidian/40 pb-1 pt-2 text-xs font-medium uppercase tracking-[0.3em] text-obsidian transition-colors group-hover:border-champagne group-hover:text-champagne">
           Discover more
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </span>
@@ -165,7 +165,7 @@ export function ProductCard({
             <div className="absolute inset-x-0 bottom-0 translate-y-full p-3 transition-transform duration-300 group-hover:translate-y-0">
               <Button
                 variant="light"
-                size="sm"
+                size="default"
                 className="w-full"
                 onClick={(e) => {
                   e.preventDefault();
@@ -189,7 +189,7 @@ export function ProductCard({
 
         {/* Info */}
         <div className="mt-3 px-0.5 text-center">
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-text-gray">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-text-gray">
             {product.brand.name}
           </p>
           <h3 className="mt-1 truncate text-[15px] font-medium text-obsidian">

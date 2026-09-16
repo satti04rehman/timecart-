@@ -69,7 +69,7 @@ export function WatchFamily({ products }: { products: ProductSummary[] }) {
                     </p>
                     <Link
                       href={`/watches/${product.slug}`}
-                      className="group mt-7 inline-flex items-center gap-3 text-xs font-medium uppercase tracking-[0.35em] text-obsidian transition-colors hover:text-champagne"
+                      className="group mt-7 inline-flex min-h-11 items-center gap-3 py-2 text-xs font-medium uppercase tracking-[0.35em] text-obsidian transition-colors hover:text-champagne"
                     >
                       Discover more
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />

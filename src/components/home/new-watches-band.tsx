@@ -49,7 +49,7 @@ export function NewWatchesBand({ products }: { products: ProductSummary[] }) {
                     />
                   )}
                 </div>
-                <p className="mt-4 text-[11px] font-light uppercase tracking-[0.3em] text-ivory/50">
+                <p className="mt-4 text-xs font-light uppercase tracking-[0.3em] text-ivory/50">
                   {product.brand.name}
                 </p>
                 <h3 className="mt-1.5 font-heading text-base font-light uppercase tracking-[0.04em] text-ivory transition-colors group-hover:text-champagne">

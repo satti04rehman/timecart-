@@ -75,7 +75,7 @@ export function CollectionCards({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-obsidian/15 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-champagne">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-champagne">
                   The Season
                 </p>
                 <h3 className="mt-2 font-heading text-3xl text-ivory">
