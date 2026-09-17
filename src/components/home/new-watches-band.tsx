@@ -26,7 +26,7 @@ export function NewWatchesBand({ products }: { products: ProductSummary[] }) {
             </div>
             <Link
               href="/watches?sort=newest"
-              className="group inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
+              className="group inline-flex items-center gap-3 border-b border-ivory/50 pt-4 pb-2 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
             >
               The Time Cart collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />

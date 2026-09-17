@@ -74,7 +74,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ivory/60 transition-colors hover:text-ivory"
+                    className="inline-flex min-h-11 items-center text-sm text-ivory/60 transition-colors hover:text-ivory"
                   >
                     {link.label}
                   </Link>
@@ -93,7 +93,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ivory/60 transition-colors hover:text-ivory"
+                    className="inline-flex min-h-11 items-center text-sm text-ivory/60 transition-colors hover:text-ivory"
                   >
                     {link.label}
                   </Link>
@@ -112,7 +112,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ivory/60 transition-colors hover:text-ivory"
+                    className="inline-flex min-h-11 items-center text-sm text-ivory/60 transition-colors hover:text-ivory"
                   >
                     {link.label}
                   </Link>
