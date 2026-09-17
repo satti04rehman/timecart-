@@ -1,0 +1,38 @@
+{
+  "policy": {
+    "source_evidence": "docs/_analysis/knowledge.json",
+    "docs_files": ["docs/markdown/overview.md", "docs/reports/report.manifest.json", "docs/reports/report.docx"],
+    "docs_dirs": ["docs"]
+  },
+  "facts": [
+    {"kind": "tech", "value": "postgresql"},
+    {"kind": "tech", "value": "next"},
+    {"kind": "tech", "value": "mysql"},
+    {"kind": "dep", "value": "next"},
+    {"kind": "table", "value": "orders"},
+    {"kind": "table", "value": "fabricated_table_xyz"},
+    {"kind": "route", "value": "/api/orders"},
+    {"kind": "route", "value": "/login"},
+    {"kind": "role", "value": "admin"},
+    {"kind": "actor", "value": "customer"},
+    {"kind": "file", "value": "prisma/schema.prisma"},
+    {"kind": "screen", "value": "checkout"}
+  ],
+  "diagrams": [
+    {"source": "docs/diagrams/erd/erd.mmd", "entities": ["orders.amazon", "Order", "CouponUsage", "Payment", "Wishlist"]},
+    {"source": "docs/diagrams/architecture/architecture.mmd", "entities": ["Product", "Supabase", "Next.js"]}
+  ],
+  "outputs": [
+    "docs/reports/report.docx",
+    "docs/reports/report.pdf",
+    "docs/presentations/presentation.pptx",
+    "docs/diagrams/erd/erd.svg",
+    "docs/diagrams/erd/erd.png",
+    "docs/diagrams/architecture/architecture.svg",
+    "docs/diagrams/uml/use-case.svg",
+    "docs/diagrams/uml/use-case.png",
+    "docs/diagrams/workflows/sequence-login.svg",
+    "docs/markdown/overview.md"
+  ],
+  "manifests": ["docs/reports/report.manifest.json", "docs/presentations/presentation.manifest.json"]
+}

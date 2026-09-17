@@ -1,0 +1,20 @@
+sequenceDiagram
+    autonumber
+    actor C as Customer
+    participant F as Next.js Frontend
+    participant A as API Route
+    participant AU as Supabase Auth
+    participant DB as Supabase Postgres
+
+    C->>F: Submit login credentials
+    F->>A: POST /auth/callback (OAuth or credentials)
+    A->>AU: Sign in with Supabase Auth
+    AU-->>A: Session token
+    A-->>F: Cookies / session
+    F-->>C: Redirect to dashboard
+    C->>F: Request cart or orders
+    F->>A: GET /api/orders
+    A->>DB: Query orders for user
+    DB-->>A: Order rows
+    A-->>F: JSON response
+    F-->>C: Render UI

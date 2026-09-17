@@ -1,0 +1,186 @@
+{
+  "overall": "# Documentation Audit\n\n## consistency: PASS  (PASS 10 / WARN 0 / UNKNOWN 0 / NA 0 / FAIL 0)\n\n## diagram: PASS  (PASS 2 / WARN 0 / UNKNOWN 0 / NA 0 / FAIL 0)\n\n## security: PASS  (PASS 1 / WARN 0 / UNKNOWN 0 / NA 0 / FAIL 0)\n\n## integrity: PASS  (PASS 16 / WARN 0 / UNKNOWN 0 / NA 0 / FAIL 0)\n\n## Overall\nOverall: **PASS**\n\n- consistency: PASS\n- diagram: PASS\n- security: PASS\n- integrity: PASS",
+  "summary": {
+    "consistency": "PASS",
+    "diagram": "PASS",
+    "security": "PASS",
+    "integrity": "PASS"
+  },
+  "results": [
+    {
+      "check": "consistency",
+      "item": "tech:postgresql",
+      "status": "PASS",
+      "detail": "'postgresql' detected"
+    },
+    {
+      "check": "consistency",
+      "item": "tech:next",
+      "status": "PASS",
+      "detail": "'next' detected"
+    },
+    {
+      "check": "consistency",
+      "item": "dep:next",
+      "status": "PASS",
+      "detail": "dependency present"
+    },
+    {
+      "check": "consistency",
+      "item": "table:orders",
+      "status": "PASS",
+      "detail": "table present in schema"
+    },
+    {
+      "check": "consistency",
+      "item": "route:/api/orders",
+      "status": "PASS",
+      "detail": "route detected"
+    },
+    {
+      "check": "consistency",
+      "item": "route:/login",
+      "status": "PASS",
+      "detail": "route detected"
+    },
+    {
+      "check": "consistency",
+      "item": "role:admin",
+      "status": "PASS",
+      "detail": "literal present in source"
+    },
+    {
+      "check": "consistency",
+      "item": "actor:customer",
+      "status": "PASS",
+      "detail": "literal present in source"
+    },
+    {
+      "check": "consistency",
+      "item": "file:prisma/schema.prisma",
+      "status": "PASS",
+      "detail": "file exists"
+    },
+    {
+      "check": "consistency",
+      "item": "screen:checkout",
+      "status": "PASS",
+      "detail": "screen present"
+    },
+    {
+      "check": "diagram",
+      "item": "docs/diagrams/erd/erd.mmd",
+      "status": "PASS",
+      "detail": "source exists"
+    },
+    {
+      "check": "diagram",
+      "item": "docs/diagrams/architecture/architecture.mmd",
+      "status": "PASS",
+      "detail": "source exists"
+    },
+    {
+      "check": "security",
+      "item": "secret-scan",
+      "status": "PASS",
+      "detail": "no secret values found in outputs"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/reports/report.docx",
+      "status": "PASS",
+      "detail": "277,807 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/reports/report.pdf",
+      "status": "PASS",
+      "detail": "318,187 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.pptx",
+      "status": "PASS",
+      "detail": "312,071 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/erd/erd.svg",
+      "status": "PASS",
+      "detail": "41,630 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/erd/erd.png",
+      "status": "PASS",
+      "detail": "65,312 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/architecture/architecture.svg",
+      "status": "PASS",
+      "detail": "24,186 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/uml/use-case.svg",
+      "status": "PASS",
+      "detail": "14,687 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/uml/use-case.png",
+      "status": "PASS",
+      "detail": "29,622 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/diagrams/workflows/sequence-login.svg",
+      "status": "PASS",
+      "detail": "32,416 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/markdown/overview.md",
+      "status": "PASS",
+      "detail": "1,000 bytes"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/reports/report.manifest.json",
+      "status": "PASS",
+      "detail": "valid JSON"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.manifest.json",
+      "status": "PASS",
+      "detail": "valid JSON"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.manifest.json → docs/diagrams/architecture/architecture.png",
+      "status": "PASS",
+      "detail": "referenced image exists"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.manifest.json → docs/diagrams/uml/use-case.png",
+      "status": "PASS",
+      "detail": "referenced image exists"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.manifest.json → docs/diagrams/erd/erd.png",
+      "status": "PASS",
+      "detail": "referenced image exists"
+    },
+    {
+      "check": "integrity",
+      "item": "docs/presentations/presentation.manifest.json → docs/diagrams/workflows/sequence-login.png",
+      "status": "PASS",
+      "detail": "referenced image exists"
+    }
+  ],
+  "generated_at": "now"
+}

@@ -1,0 +1,40 @@
+{
+  "title": "TimeCart",
+  "subtitle": "Premium Watch E-Commerce Platform",
+  "author": "Documentation Team",
+  "date": "2026-09-14",
+  "out": "docs/presentations/presentation.pptx",
+  "slides": [
+    {"layout": "title", "title": "TimeCart", "subtitle": "Premium watch e-commerce platform — Next.js 16, Supabase, Prisma 7", "author": "Documentation Team", "date": "September 2026"},
+    {"layout": "toc", "title": "Agenda", "bullets": ["What it is", "System architecture", "Key features", "Database design", "Workflows", "API surface", "Testing & next steps"]},
+    {"layout": "section", "title": "What it is"},
+    {"layout": "content", "title": "Product", "bullets": [
+      {"text": "Premium watch storefront: browse, search, cart, checkout, tracking, reviews"},
+      {"text": "Customer and admin experiences in one Next.js app"},
+      {"text": "Auth via Supabase, relational data in Postgres"},
+      {"text": "Email notifications via Resend"}
+    ]},
+    {"layout": "section", "title": "Architecture"},
+    {"layout": "figure", "title": "System Architecture", "figure": "docs/diagrams/architecture/architecture.png", "caption": "Client → Next.js app → Supabase (Postgres / Auth / Storage) + Resend"},
+    {"layout": "twocol", "title": "Key Features", "bullets": [
+      {"text": "Wishlist & cart"},
+      {"text": "Orders with full status lifecycle"},
+      {"text": "Product reviews with images"},
+      {"text": "Coupon system + usage tracking"},
+      {"text": "Admin: products, coupons, orders, customers"}
+    ], "figure": "docs/diagrams/uml/use-case.png", "caption": "Use case overview"},
+    {"layout": "section", "title": "Database"},
+    {"layout": "figure", "title": "Entity Relationship Diagram", "figure": "docs/diagrams/erd/erd.png", "caption": "23 tables, 10 enums (Prisma schema)"},
+    {"layout": "table", "title": "Core Tables", "header": ["Table", "Purpose"], "rows": [
+      ["User / Profile", "accounts, roles, contact"],
+      ["Product / Variant", "catalog + stock"],
+      ["Order / OrderItem", "purchases"],
+      ["Payment", "order settlement"],
+      ["Review", "product feedback"],
+      ["Coupon / CouponUsage", "discounts"]
+    ]},
+    {"layout": "section", "title": "Workflows"},
+    {"layout": "figure", "title": "Authentication & Session", "figure": "docs/diagrams/workflows/sequence-login.png", "caption": "Login → Supabase Auth → session → data access"},
+    {"layout": "closing", "title": "Thank You", "subtitle": "TimeCart — Where Time Meets Style"}
+  ]
+}

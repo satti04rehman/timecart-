@@ -68,7 +68,7 @@ export function Header() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-obsidian hover:bg-soft-gray/60 md:hidden"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-obsidian hover:bg-soft-gray/60 xl:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
             >
@@ -81,13 +81,13 @@ export function Header() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden items-center gap-8 lg:flex">
+            <nav className="hidden items-center gap-8 xl:flex">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    "text-xs font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
+                    "py-3 text-xs font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
                     link.sale ? "text-champagne" : "text-obsidian",
                     pathname === link.href && "text-champagne"
                   )}
@@ -146,7 +146,7 @@ export function Header() {
         {/* Mobile navigation */}
         <div
           className={cn(
-            "lg:hidden overflow-hidden transition-[max-height] duration-300",
+            "xl:hidden overflow-hidden transition-[max-height] duration-300",
             mobileOpen ? "max-h-[70vh]" : "max-h-0"
           )}
         >

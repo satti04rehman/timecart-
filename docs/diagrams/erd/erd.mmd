@@ -1,0 +1,26 @@
+---
+title: TimeCart ERD
+---
+erDiagram
+    User ||--o| Profile : "has"
+    Profile ||--o{ Address : "owns"
+    User ||--o{ Order : "places"
+    User ||--o{ Review : "writes"
+    User ||--o{ Wishlist : "keeps"
+    User ||--o{ Notification : "receives"
+    User ||--o{ CouponUsage : "redeems"
+    Category ||--o{ Category : "is parent of"
+    Brand ||--o{ Product : "manufactures"
+    Category ||--o{ Product : "groups"
+    Product ||--o{ ProductVariant : "has"
+    Product ||--o{ ProductImage : "has"
+    Product ||--o{ OrderItem : "captured in"
+    Product ||--o{ Review : "is reviewed"
+    Product ||--o{ Wishlist : "appears in"
+    Product ||--o{ InventoryLog : "tracks"
+    Order ||--o{ OrderItem : "contains"
+    Order ||--|o Payment : "settled by"
+    Order ||--o| Address : "ships to"
+    Order ||--o{ CouponUsage : "uses"
+    Review ||--o{ ReviewImage : "includes"
+    Coupon ||--o{ CouponUsage : "applied in"

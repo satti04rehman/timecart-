@@ -1,0 +1,15 @@
+---
+title: TimeCart System Architecture
+---
+flowchart TB
+    U[User] --> F[Next.js 16 Frontend]
+    U --> A[Next.js API Routes]
+    F --> A
+    A --> SD[Supabase Postgres DB]
+    A --> AU[Supabase Auth]
+    A --> ST[Supabase Storage]
+    A --> SM[(Resend Email)]
+    A --> AD[Admin API]
+    AD --> SD
+    AU --> SD
+    ST --> SD

@@ -1,0 +1,4902 @@
+{
+  "meta": {
+    "project_path": "/home/abdulrehman/timecart",
+    "project_name": "timecart",
+    "git": {
+      "detected": true,
+      "branch": "main",
+      "last_commit": "7ed36f9f1f10cec53cd8a3589f42d4d80efa3688 Cut mobile home weight 2.5x, lazy-load dashboard charts, keep nav fast",
+      "remote": "https://***@github.com/satti04rehman/timecart-.git"
+    }
+  },
+  "tree": [
+    [
+      "docs",
+      true
+    ],
+    [
+      "prisma",
+      true
+    ],
+    [
+      "public",
+      true
+    ],
+    [
+      "scripts",
+      true
+    ],
+    [
+      "src",
+      true
+    ],
+    [
+      "supabase",
+      true
+    ],
+    [
+      ".env",
+      false
+    ],
+    [
+      ".env.example",
+      false
+    ],
+    [
+      ".env.local",
+      false
+    ],
+    [
+      ".gitignore",
+      false
+    ],
+    [
+      "README.md",
+      false
+    ],
+    [
+      "eslint.config.mjs",
+      false
+    ],
+    [
+      "next-env.d.ts",
+      false
+    ],
+    [
+      "next.config.ts",
+      false
+    ],
+    [
+      "package-lock.json",
+      false
+    ],
+    [
+      "package.json",
+      false
+    ],
+    [
+      "pnpm-workspace.yaml",
+      false
+    ],
+    [
+      "postcss.config.mjs",
+      false
+    ],
+    [
+      "prisma.config.ts",
+      false
+    ],
+    [
+      "tsconfig.json",
+      false
+    ],
+    [
+      "tsconfig.tsbuildinfo",
+      false
+    ],
+    [
+      "src/app",
+      true
+    ],
+    [
+      "src/components",
+      true
+    ],
+    [
+      "src/generated",
+      true
+    ],
+    [
+      "src/hooks",
+      true
+    ],
+    [
+      "src/images",
+      true
+    ],
+    [
+      "src/lib",
+      true
+    ],
+    [
+      "src/providers",
+      true
+    ],
+    [
+      "src/types",
+      true
+    ],
+    [
+      "src/middleware.ts",
+      false
+    ],
+    [
+      "src/images/products",
+      true
+    ],
+    [
+      "src/images/products/armani-exchange-chronograph.jpg",
+      false
+    ],
+    [
+      "src/images/products/casio-a168-classic-digital.jpg",
+      false
+    ],
+    [
+      "src/images/products/casio-classic-illuminator-ca53w.jpg",
+      false
+    ],
+    [
+      "src/images/products/casio-edifice-ecb-900.jpg",
+      false
+    ],
+    [
+      "src/images/products/casio-f91w-classic.jpg",
+      false
+    ],
+    [
+      "src/images/products/casio-g-shock-ga-2100.jpg",
+      false
+    ],
+    [
+      "src/images/products/citizen-ecco-drive-ladies.jpg",
+      false
+    ],
+    [
+      "src/images/products/citizen-ecco-drive-promaster.jpg",
+      false
+    ],
+    [
+      "src/images/products/fossil-caroline-mini.jpg",
+      false
+    ],
+    [
+      "src/images/products/fossil-jr1437-chronograph.jpg",
+      false
+    ],
+    [
+      "src/images/products/garmin-forerunner-165.jpg",
+      false
+    ],
+    [
+      "src/images/products/garmin-vivoactive-5.jpg",
+      false
+    ],
+    [
+      "src/images/products/hush-puppies-refined.jpg",
+      false
+    ],
+    [
+      "src/images/products/orient-bambino-v2.jpg",
+      false
+    ],
+    [
+      "src/images/products/orient-kamasu-diver.jpg",
+      false
+    ],
+    [
+      "src/images/products/seiko-5-sports-automatic.jpg",
+      false
+    ],
+    [
+      "src/images/products/seiko-presage-cocktail.jpg",
+      false
+    ],
+    [
+      "src/images/products/seiko-snk809-automatic.jpg",
+      false
+    ],
+    [
+      "src/images/products/seiko-sports-ladies-quartz.jpg",
+      false
+    ],
+    [
+      "src/images/products/timex-expedition-field.jpg",
+      false
+    ],
+    [
+      "src/images/products/timex-weekender-38.jpg",
+      false
+    ],
+    [
+      "src/images/products/titan-edge-ladies.jpg",
+      false
+    ],
+    [
+      "src/images/products/titan-regalia-automatic.jpg",
+      false
+    ],
+    [
+      "src/providers/store-provider.tsx",
+      false
+    ],
+    [
+      "src/generated/prisma",
+      true
+    ],
+    [
+      "src/generated/prisma/internal",
+      true
+    ],
+    [
+      "src/generated/prisma/models",
+      true
+    ],
+    [
+      "src/generated/prisma/browser.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/client.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/commonInputTypes.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/enums.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/internal/class.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/internal/prismaNamespace.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/internal/prismaNamespaceBrowser.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Address.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/AdminLog.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Brand.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Category.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/ContactSubmission.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Coupon.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/CouponUsage.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/InventoryLog.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Media.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/NewsletterSubscriber.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Notification.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Order.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/OrderItem.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Page.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Payment.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Product.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/ProductImage.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/ProductVariant.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Profile.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Review.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/ReviewImage.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/User.ts",
+      false
+    ],
+    [
+      "src/generated/prisma/models/Wishlist.ts",
+      false
+    ],
+    [
+      "src/types/index.ts",
+      false
+    ],
+    [
+      "src/lib/supabase",
+      true
+    ],
+    [
+      "src/lib/admin-actions.ts",
+      false
+    ],
+    [
+      "src/lib/admin-auth.ts",
+      false
+    ],
+    [
+      "src/lib/admin-token.ts",
+      false
+    ],
+    [
+      "src/lib/data.ts",
+      false
+    ],
+    [
+      "src/lib/demo-admin.ts",
+      false
+    ],
+    [
+      "src/lib/demo-data.ts",
+      false
+    ],
+    [
+      "src/lib/order-status.ts",
+      false
+    ],
+    [
+      "src/lib/orders.ts",
+      false
+    ],
+    [
+      "src/lib/prisma.ts",
+      false
+    ],
+    [
+      "src/lib/product-images.ts",
+      false
+    ],
+    [
+      "src/lib/rate-limit.ts",
+      false
+    ],
+    [
+      "src/lib/require-admin.ts",
+      false
+    ],
+    [
+      "src/lib/search-data.ts",
+      false
+    ],
+    [
+      "src/lib/session.ts",
+      false
+    ],
+    [
+      "src/lib/utils.ts",
+      false
+    ],
+    [
+      "src/lib/supabase/client.ts",
+      false
+    ],
+    [
+      "src/lib/supabase/server.ts",
+      false
+    ],
+    [
+      "src/app/(auth)",
+      true
+    ],
+    [
+      "src/app/(customer)",
+      true
+    ],
+    [
+      "src/app/admin",
+      true
+    ],
+    [
+      "src/app/api",
+      true
+    ],
+    [
+      "src/app/auth",
+      true
+    ],
+    [
+      "src/app/favicon.ico",
+      false
+    ],
+    [
+      "src/app/globals.css",
+      false
+    ],
+    [
+      "src/app/layout.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/about-us",
+      true
+    ],
+    [
+      "src/app/(customer)/account",
+      true
+    ],
+    [
+      "src/app/(customer)/cart",
+      true
+    ],
+    [
+      "src/app/(customer)/checkout",
+      true
+    ],
+    [
+      "src/app/(customer)/contact",
+      true
+    ],
+    [
+      "src/app/(customer)/faq",
+      true
+    ],
+    [
+      "src/app/(customer)/find-watch",
+      true
+    ],
+    [
+      "src/app/(customer)/privacy-policy",
+      true
+    ],
+    [
+      "src/app/(customer)/returns-policy",
+      true
+    ],
+    [
+      "src/app/(customer)/shipping-and-delivery",
+      true
+    ],
+    [
+      "src/app/(customer)/terms",
+      true
+    ],
+    [
+      "src/app/(customer)/track-order",
+      true
+    ],
+    [
+      "src/app/(customer)/warranty-policy",
+      true
+    ],
+    [
+      "src/app/(customer)/watches",
+      true
+    ],
+    [
+      "src/app/(customer)/wishlist",
+      true
+    ],
+    [
+      "src/app/(customer)/layout.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/find-watch/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/returns-policy/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/watches/[slug]",
+      true
+    ],
+    [
+      "src/app/(customer)/watches/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/watches/[slug]/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/about-us/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/terms/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/checkout/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/track-order/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/privacy-policy/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/addresses",
+      true
+    ],
+    [
+      "src/app/(customer)/account/orders",
+      true
+    ],
+    [
+      "src/app/(customer)/account/settings",
+      true
+    ],
+    [
+      "src/app/(customer)/account/layout.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/settings/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/addresses/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/orders/[number]",
+      true
+    ],
+    [
+      "src/app/(customer)/account/orders/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/account/orders/[number]/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/shipping-and-delivery/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/faq/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/wishlist/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/cart/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/warranty-policy/page.tsx",
+      false
+    ],
+    [
+      "src/app/(customer)/contact/page.tsx",
+      false
+    ],
+    [
+      "src/app/api/account",
+      true
+    ],
+    [
+      "src/app/api/admin",
+      true
+    ],
+    [
+      "src/app/api/config",
+      true
+    ],
+    [
+      "src/app/api/contact",
+      true
+    ],
+    [
+      "src/app/api/coupons",
+      true
+    ],
+    [
+      "src/app/api/media",
+      true
+    ],
+    [
+      "src/app/api/newsletter",
+      true
+    ],
+    [
+      "src/app/api/orders",
+      true
+    ],
+    [
+      "src/app/api/products",
+      true
+    ],
+    [
+      "src/app/api/profile",
+      true
+    ],
+    [
+      "src/app/api/reviews",
+      true
+    ],
+    [
+      "src/app/api/search",
+      true
+    ],
+    [
+      "src/app/api/track-order",
+      true
+    ],
+    [
+      "src/app/api/upload",
+      true
+    ],
+    [
+      "src/app/api/newsletter/route.ts",
+      false
+    ],
+    [
+      "src/app/api/coupons/validate",
+      true
+    ],
+    [
+      "src/app/api/coupons/validate/route.ts",
+      false
+    ],
+    [
+      "src/app/api/products/route.ts",
+      false
+    ],
+    [
+      "src/app/api/reviews/route.ts",
+      false
+    ],
+    [
+      "src/app/api/search/route.ts",
+      false
+    ],
+    [
+      "src/app/api/track-order/route.ts",
+      false
+    ],
+    [
+      "src/app/api/upload/route.ts",
+      false
+    ],
+    [
+      "src/app/api/profile/route.ts",
+      false
+    ],
+    [
+      "src/app/api/config/route.ts",
+      false
+    ],
+    [
+      "src/app/api/account/delete",
+      true
+    ],
+    [
+      "src/app/api/account/delete/route.ts",
+      false
+    ],
+    [
+      "src/app/api/media/[id]",
+      true
+    ],
+    [
+      "src/app/api/media/[id]/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/brands",
+      true
+    ],
+    [
+      "src/app/api/admin/categories",
+      true
+    ],
+    [
+      "src/app/api/admin/contact",
+      true
+    ],
+    [
+      "src/app/api/admin/coupons",
+      true
+    ],
+    [
+      "src/app/api/admin/customers",
+      true
+    ],
+    [
+      "src/app/api/admin/orders",
+      true
+    ],
+    [
+      "src/app/api/admin/products",
+      true
+    ],
+    [
+      "src/app/api/admin/reviews",
+      true
+    ],
+    [
+      "src/app/api/admin/customers/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/coupons/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/products/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/reviews/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/brands/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/contact/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/categories/route.ts",
+      false
+    ],
+    [
+      "src/app/api/admin/orders/route.ts",
+      false
+    ],
+    [
+      "src/app/api/contact/route.ts",
+      false
+    ],
+    [
+      "src/app/api/orders/route.ts",
+      false
+    ],
+    [
+      "src/app/auth/callback",
+      true
+    ],
+    [
+      "src/app/auth/callback/route.ts",
+      false
+    ],
+    [
+      "src/app/(auth)/login",
+      true
+    ],
+    [
+      "src/app/(auth)/register",
+      true
+    ],
+    [
+      "src/app/(auth)/layout.tsx",
+      false
+    ],
+    [
+      "src/app/(auth)/register/page.tsx",
+      false
+    ],
+    [
+      "src/app/(auth)/login/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/brands",
+      true
+    ],
+    [
+      "src/app/admin/categories",
+      true
+    ],
+    [
+      "src/app/admin/contact-submissions",
+      true
+    ],
+    [
+      "src/app/admin/coupons",
+      true
+    ],
+    [
+      "src/app/admin/customers",
+      true
+    ],
+    [
+      "src/app/admin/inventory",
+      true
+    ],
+    [
+      "src/app/admin/login",
+      true
+    ],
+    [
+      "src/app/admin/orders",
+      true
+    ],
+    [
+      "src/app/admin/pages",
+      true
+    ],
+    [
+      "src/app/admin/products",
+      true
+    ],
+    [
+      "src/app/admin/reviews",
+      true
+    ],
+    [
+      "src/app/admin/settings",
+      true
+    ],
+    [
+      "src/app/admin/layout.tsx",
+      false
+    ],
+    [
+      "src/app/admin/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/customers/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/settings/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/pages/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/coupons/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/products/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/reviews/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/login/actions.ts",
+      false
+    ],
+    [
+      "src/app/admin/login/login-form.tsx",
+      false
+    ],
+    [
+      "src/app/admin/login/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/brands/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/inventory/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/contact-submissions/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/categories/page.tsx",
+      false
+    ],
+    [
+      "src/app/admin/orders/page.tsx",
+      false
+    ],
+    [
+      "src/components/account",
+      true
+    ],
+    [
+      "src/components/admin",
+      true
+    ],
+    [
+      "src/components/auth",
+      true
+    ],
+    [
+      "src/components/brand",
+      true
+    ],
+    [
+      "src/components/cart",
+      true
+    ],
+    [
+      "src/components/checkout",
+      true
+    ],
+    [
+      "src/components/contact",
+      true
+    ],
+    [
+      "src/components/finder",
+      true
+    ],
+    [
+      "src/components/home",
+      true
+    ],
+    [
+      "src/components/layout",
+      true
+    ],
+    [
+      "src/components/product",
+      true
+    ],
+    [
+      "src/components/search",
+      true
+    ],
+    [
+      "src/components/static",
+      true
+    ],
+    [
+      "src/components/track",
+      true
+    ],
+    [
+      "src/components/ui",
+      true
+    ],
+    [
+      "src/components/wishlist",
+      true
+    ],
+    [
+      "src/components/home/benefits.tsx",
+      false
+    ],
+    [
+      "src/components/home/brand-bar.tsx",
+      false
+    ],
+    [
+      "src/components/home/categories.tsx",
+      false
+    ],
+    [
+      "src/components/home/collection-cards.tsx",
+      false
+    ],
+    [
+      "src/components/home/editorial.tsx",
+      false
+    ],
+    [
+      "src/components/home/hero-video.tsx",
+      false
+    ],
+    [
+      "src/components/home/hero.tsx",
+      false
+    ],
+    [
+      "src/components/home/house-details.tsx",
+      false
+    ],
+    [
+      "src/components/home/inspire-strip.tsx",
+      false
+    ],
+    [
+      "src/components/home/marquee.tsx",
+      false
+    ],
+    [
+      "src/components/home/new-watches-band.tsx",
+      false
+    ],
+    [
+      "src/components/home/newsletter-banner.tsx",
+      false
+    ],
+    [
+      "src/components/home/newsletter-form.tsx",
+      false
+    ],
+    [
+      "src/components/home/promo-banner.tsx",
+      false
+    ],
+    [
+      "src/components/home/section-header.tsx",
+      false
+    ],
+    [
+      "src/components/home/shop-by-brands.tsx",
+      false
+    ],
+    [
+      "src/components/home/testimonials.tsx",
+      false
+    ],
+    [
+      "src/components/home/watch-family.tsx",
+      false
+    ],
+    [
+      "src/components/home/watch-finder-cta.tsx",
+      false
+    ],
+    [
+      "src/components/home/watchmaking-band.tsx",
+      false
+    ],
+    [
+      "src/components/layout/customer-layout.tsx",
+      false
+    ],
+    [
+      "src/components/layout/footer.tsx",
+      false
+    ],
+    [
+      "src/components/layout/header.tsx",
+      false
+    ],
+    [
+      "src/components/layout/mobile-nav.tsx",
+      false
+    ],
+    [
+      "src/components/product/filters.tsx",
+      false
+    ],
+    [
+      "src/components/product/pagination.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-actions.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-card.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-gallery.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-grid.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-rail.tsx",
+      false
+    ],
+    [
+      "src/components/product/product-tabs.tsx",
+      false
+    ],
+    [
+      "src/components/product/quick-view.tsx",
+      false
+    ],
+    [
+      "src/components/product/review-form.tsx",
+      false
+    ],
+    [
+      "src/components/product/sort-control.tsx",
+      false
+    ],
+    [
+      "src/components/product/watches-layout.tsx",
+      false
+    ],
+    [
+      "src/components/finder/watch-finder.tsx",
+      false
+    ],
+    [
+      "src/components/checkout/checkout-page.tsx",
+      false
+    ],
+    [
+      "src/components/auth/account-button.tsx",
+      false
+    ],
+    [
+      "src/components/auth/auth-form.tsx",
+      false
+    ],
+    [
+      "src/components/search/search-overlay.tsx",
+      false
+    ],
+    [
+      "src/components/static/about.tsx",
+      false
+    ],
+    [
+      "src/components/static/faq.tsx",
+      false
+    ],
+    [
+      "src/components/static/policy-shell.tsx",
+      false
+    ],
+    [
+      "src/components/brand/logo.tsx",
+      false
+    ],
+    [
+      "src/components/brand/social-icons.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-addresses.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-nav.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-order-detail.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-orders.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-overview.tsx",
+      false
+    ],
+    [
+      "src/components/account/account-settings.tsx",
+      false
+    ],
+    [
+      "src/components/ui/accordion.tsx",
+      false
+    ],
+    [
+      "src/components/ui/badge.tsx",
+      false
+    ],
+    [
+      "src/components/ui/button.tsx",
+      false
+    ],
+    [
+      "src/components/ui/count-up.tsx",
+      false
+    ],
+    [
+      "src/components/ui/dialog.tsx",
+      false
+    ],
+    [
+      "src/components/ui/dropdown-menu.tsx",
+      false
+    ],
+    [
+      "src/components/ui/input.tsx",
+      false
+    ],
+    [
+      "src/components/ui/label.tsx",
+      false
+    ],
+    [
+      "src/components/ui/rating-input.tsx",
+      false
+    ],
+    [
+      "src/components/ui/rating.tsx",
+      false
+    ],
+    [
+      "src/components/ui/reveal.tsx",
+      false
+    ],
+    [
+      "src/components/ui/select.tsx",
+      false
+    ],
+    [
+      "src/components/ui/separator.tsx",
+      false
+    ],
+    [
+      "src/components/ui/skeleton.tsx",
+      false
+    ],
+    [
+      "src/components/ui/tabs.tsx",
+      false
+    ],
+    [
+      "src/components/ui/textarea.tsx",
+      false
+    ],
+    [
+      "src/components/wishlist/wishlist-page.tsx",
+      false
+    ],
+    [
+      "src/components/admin/admin-nav.tsx",
+      false
+    ],
+    [
+      "src/components/admin/admin-prefetcher.tsx",
+      false
+    ],
+    [
+      "src/components/admin/admin-settings.tsx",
+      false
+    ],
+    [
+      "src/components/admin/admin-stat-card.tsx",
+      false
+    ],
+    [
+      "src/components/admin/admin-table.tsx",
+      false
+    ],
+    [
+      "src/components/admin/brands-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/categories-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/contact-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/coupons-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/customers-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/dashboard-chart-grid.tsx",
+      false
+    ],
+    [
+      "src/components/admin/dashboard-charts.tsx",
+      false
+    ],
+    [
+      "src/components/admin/orders-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/products-manager.tsx",
+      false
+    ],
+    [
+      "src/components/admin/reviews-manager.tsx",
+      false
+    ],
+    [
+      "src/components/track/track-order-page.tsx",
+      false
+    ],
+    [
+      "src/components/cart/cart-drawer.tsx",
+      false
+    ],
+    [
+      "src/components/cart/cart-page.tsx",
+      false
+    ],
+    [
+      "src/components/contact/contact-form.tsx",
+      false
+    ],
+    [
+      "src/hooks/use-local-storage.ts",
+      false
+    ],
+    [
+      "supabase/.gitignore",
+      false
+    ],
+    [
+      "supabase/config.toml",
+      false
+    ],
+    [
+      "supabase/security-hardening.sql",
+      false
+    ],
+    [
+      "supabase/setup.sql",
+      false
+    ],
+    [
+      "docs/_analysis",
+      true
+    ],
+    [
+      "docs/_audit",
+      true
+    ],
+    [
+      "docs/diagrams",
+      true
+    ],
+    [
+      "docs/markdown",
+      true
+    ],
+    [
+      "docs/presentations",
+      true
+    ],
+    [
+      "docs/reports",
+      true
+    ],
+    [
+      "docs/_analysis/knowledge.json",
+      false
+    ],
+    [
+      "docs/presentations/presentation.manifest.json",
+      false
+    ],
+    [
+      "docs/presentations/presentation.pptx",
+      false
+    ],
+    [
+      "docs/markdown/overview.md",
+      false
+    ],
+    [
+      "docs/_audit/audit.manifest.clean.json",
+      false
+    ],
+    [
+      "docs/_audit/audit.manifest.json",
+      false
+    ],
+    [
+      "docs/_audit/report-clean.json",
+      false
+    ],
+    [
+      "docs/_audit/report-clean.md",
+      false
+    ],
+    [
+      "docs/_audit/report-secret.json",
+      false
+    ],
+    [
+      "docs/_audit/report-secret.md",
+      false
+    ],
+    [
+      "docs/_audit/report.json",
+      false
+    ],
+    [
+      "docs/_audit/report.md",
+      false
+    ],
+    [
+      "docs/diagrams/architecture",
+      true
+    ],
+    [
+      "docs/diagrams/erd",
+      true
+    ],
+    [
+      "docs/diagrams/uml",
+      true
+    ],
+    [
+      "docs/diagrams/workflows",
+      true
+    ],
+    [
+      "docs/diagrams/erd/erd.mmd",
+      false
+    ],
+    [
+      "docs/diagrams/erd/erd.png",
+      false
+    ],
+    [
+      "docs/diagrams/erd/erd.svg",
+      false
+    ],
+    [
+      "docs/diagrams/workflows/sequence-login.mmd",
+      false
+    ],
+    [
+      "docs/diagrams/workflows/sequence-login.png",
+      false
+    ],
+    [
+      "docs/diagrams/workflows/sequence-login.svg",
+      false
+    ],
+    [
+      "docs/diagrams/uml/use-case.png",
+      false
+    ],
+    [
+      "docs/diagrams/uml/use-case.puml",
+      false
+    ],
+    [
+      "docs/diagrams/uml/use-case.svg",
+      false
+    ],
+    [
+      "docs/diagrams/architecture/architecture.mmd",
+      false
+    ],
+    [
+      "docs/diagrams/architecture/architecture.png",
+      false
+    ],
+    [
+      "docs/diagrams/architecture/architecture.svg",
+      false
+    ],
+    [
+      "docs/reports/report.docx",
+      false
+    ],
+    [
+      "docs/reports/report.manifest.json",
+      false
+    ],
+    [
+      "docs/reports/report.pdf",
+      false
+    ],
+    [
+      "scripts/generate-mockups.mjs",
+      false
+    ],
+    [
+      "public/images",
+      true
+    ],
+    [
+      "public/videos",
+      true
+    ],
+    [
+      "public/file.svg",
+      false
+    ],
+    [
+      "public/globe.svg",
+      false
+    ],
+    [
+      "public/next.svg",
+      false
+    ],
+    [
+      "public/vercel.svg",
+      false
+    ],
+    [
+      "public/window.svg",
+      false
+    ],
+    [
+      "public/images/brands",
+      true
+    ],
+    [
+      "public/images/categories",
+      true
+    ],
+    [
+      "public/images/home",
+      true
+    ],
+    [
+      "public/images/products",
+      true
+    ],
+    [
+      "public/images/README.txt",
+      false
+    ],
+    [
+      "public/images/video-poster.jpg",
+      false
+    ],
+    [
+      "public/images/home/editorial.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-1.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-2.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-3.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-4.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-5.svg",
+      false
+    ],
+    [
+      "public/images/home/inspire-6.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-curv-2.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-curv-3.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-curv-4.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-curv.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-marine-star-2.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-marine-star-3.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-marine-star-4.svg",
+      false
+    ],
+    [
+      "public/images/products/bulova-marine-star.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-edifice-2.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-edifice-3.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-edifice-4.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-edifice.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-g-shock-ga2100-2.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-g-shock-ga2100-3.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-g-shock-ga2100-4.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-g-shock-ga2100.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mq24-2.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mq24-3.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mq24-4.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mq24.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mtp-123-2.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mtp-123-3.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mtp-123-4.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-mtp-123.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-vintage-a168-2.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-vintage-a168-3.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-vintage-a168-4.svg",
+      false
+    ],
+    [
+      "public/images/products/casio-vintage-a168.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-ana-digi-2.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-ana-digi-3.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-ana-digi-4.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-ana-digi.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-eco-drive-2.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-eco-drive-3.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-eco-drive-4.svg",
+      false
+    ],
+    [
+      "public/images/products/citizen-eco-drive.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-gen6-2.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-gen6-3.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-gen6-4.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-gen6.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-grant-chrono-2.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-grant-chrono-3.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-grant-chrono-4.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-grant-chrono.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-jacqueline-2.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-jacqueline-3.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-jacqueline-4.svg",
+      false
+    ],
+    [
+      "public/images/products/fossil-jacqueline.svg",
+      false
+    ],
+    [
+      "public/images/products/invicta-pro-diver-2.svg",
+      false
+    ],
+    [
+      "public/images/products/invicta-pro-diver-3.svg",
+      false
+    ],
+    [
+      "public/images/products/invicta-pro-diver-4.svg",
+      false
+    ],
+    [
+      "public/images/products/invicta-pro-diver.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-bambino-v2-2.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-bambino-v2-3.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-bambino-v2-4.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-bambino-v2.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-kamasu-2.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-kamasu-3.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-kamasu-4.svg",
+      false
+    ],
+    [
+      "public/images/products/orient-kamasu.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-5-automatic-2.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-5-automatic-3.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-5-automatic-4.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-5-automatic.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-presage-cocktail-2.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-presage-cocktail-3.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-presage-cocktail-4.svg",
+      false
+    ],
+    [
+      "public/images/products/seiko-presage-cocktail.svg",
+      false
+    ],
+    [
+      "public/images/products/smartwatch-s8-2.svg",
+      false
+    ],
+    [
+      "public/images/products/smartwatch-s8-3.svg",
+      false
+    ],
+    [
+      "public/images/products/smartwatch-s8-4.svg",
+      false
+    ],
+    [
+      "public/images/products/smartwatch-s8.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-expedition-2.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-expedition-3.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-expedition-4.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-expedition.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-weekender-2.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-weekender-3.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-weekender-4.svg",
+      false
+    ],
+    [
+      "public/images/products/timex-weekender.svg",
+      false
+    ],
+    [
+      "public/images/products/tissot-prx-quartz-2.svg",
+      false
+    ],
+    [
+      "public/images/products/tissot-prx-quartz-3.svg",
+      false
+    ],
+    [
+      "public/images/products/tissot-prx-quartz-4.svg",
+      false
+    ],
+    [
+      "public/images/products/tissot-prx-quartz.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-edge-slim-2.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-edge-slim-3.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-edge-slim-4.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-edge-slim.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-regalia-2.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-regalia-3.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-regalia-4.svg",
+      false
+    ],
+    [
+      "public/images/products/titan-regalia.svg",
+      false
+    ],
+    [
+      "public/images/brands/bulova.svg",
+      false
+    ],
+    [
+      "public/images/brands/casio.svg",
+      false
+    ],
+    [
+      "public/images/brands/citizen.svg",
+      false
+    ],
+    [
+      "public/images/brands/fossil.svg",
+      false
+    ],
+    [
+      "public/images/brands/invicta.svg",
+      false
+    ],
+    [
+      "public/images/brands/orient.svg",
+      false
+    ],
+    [
+      "public/images/brands/seiko.svg",
+      false
+    ],
+    [
+      "public/images/brands/timex.svg",
+      false
+    ],
+    [
+      "public/images/brands/tissot.svg",
+      false
+    ],
+    [
+      "public/images/brands/titan.svg",
+      false
+    ],
+    [
+      "public/images/categories/automatic.svg",
+      false
+    ],
+    [
+      "public/images/categories/casual.svg",
+      false
+    ],
+    [
+      "public/images/categories/luxury.svg",
+      false
+    ],
+    [
+      "public/images/categories/mens-watches.svg",
+      false
+    ],
+    [
+      "public/images/categories/quartz.svg",
+      false
+    ],
+    [
+      "public/images/categories/smart-watches.svg",
+      false
+    ],
+    [
+      "public/images/categories/sports.svg",
+      false
+    ],
+    [
+      "public/images/categories/womens-watches.svg",
+      false
+    ],
+    [
+      "public/videos/animatio-15fps.mp4",
+      false
+    ],
+    [
+      "public/videos/animatio-mobile-15fps.mp4",
+      false
+    ],
+    [
+      "prisma/schema.prisma",
+      false
+    ],
+    [
+      "prisma/seed.ts",
+      false
+    ]
+  ],
+  "languages": [
+    {
+      "language": "TypeScript",
+      "files": 208
+    },
+    {
+      "language": "Other",
+      "files": 138
+    },
+    {
+      "language": "JSON",
+      "files": 4
+    },
+    {
+      "language": "Mermaid",
+      "files": 3
+    },
+    {
+      "language": "SQL",
+      "files": 2
+    },
+    {
+      "language": "YAML",
+      "files": 1
+    },
+    {
+      "language": "CSS",
+      "files": 1
+    },
+    {
+      "language": "TOML",
+      "files": 1
+    },
+    {
+      "language": "PlantUML",
+      "files": 1
+    }
+  ],
+  "stack": {
+    "manifests": {
+      "package.json": {
+        "path": "package.json",
+        "size": 1731,
+        "text": "{\n  \"name\": \"timecart\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"prisma generate && next build\",\n    \"start\": \"next start\",\n    \"lint\": \"eslint\",\n    \"db:generate\": \"prisma generate\",\n    \"db:push\": \"prisma db push\",\n    \"db:seed\": \"node prisma/seed.ts\"\n  },\n  \"dependencies\": {\n    \"@prisma/adapter-pg\": \"^7.10.0\",\n    \"@prisma/client\": \"^7.10.0\",\n    \"@radix-ui/react-accordion\": \"^1.2.20\",\n    \"@radix-ui/react-checkbox\": \"^1.3.11\",\n    \"@radix-ui/react-dialog\": \"^1.1.23\",\n    \"@radix-ui/react-dropdown-menu\": \"^2.1.24\",\n    \"@radix-ui/react-label\": \"^2.1.15\",\n    \"@radix-ui/react-popover\": \"^1.1.23\",\n    \"@radix-ui/react-select\": \"^2.3.7\",\n    \"@radix-ui/react-slot\": \"^1.3.3\",\n    \"@radix-ui/react-tabs\": \"^1.1.21\",\n    \"@supabase/ssr\": \"^0.12.7\",\n    \"@supabase/supabase-js\": \"^2.116.0\",\n    \"@tanstack/react-query\": \"^5.102.8\",\n    \"bcryptjs\": \"^3.0.3\",\n    \"class-variance-authority\": \"^0.7.1\",\n    \"clsx\": \"^2.1.1\",\n    \"lucide-react\": \"^1.44.0\",\n    \"next\": \"16.3.4\",\n    \"pg\": \"^8.23.0\",\n    \"react\": \"19.2.8\",\n    \"react-dom\": \"19.2.8\",\n    \"recharts\": \"^3.10.1\",\n    \"resend\": \"^6.27.0\",\n    \"sonner\": \"^2.0.8\",\n    \"tailwind-merge\": \"^3.6.0\",\n    \"zod\": \"^4.6.2\"\n  },\n  \"devDependencies\": {\n    \"@tailwindcss/postcss\": \"^4\",\n    \"@types/bcryptjs\": \"^2.4.6\",\n    \"@types/node\": \"^20\",\n    \"@types/pg\": \"^8.23.1\",\n    \"@types/react\": \"^19\",\n    \"@types/react-dom\": \"^19\",\n    \"eslint\": \"^9\",\n    \"eslint-config-next\": \"16.3.4\",\n    \"prisma\": \"^7.10.0\",\n    \"tailwindcss\": \"^4\",\n    \"typescript\": \"^5\"\n  },\n  \"packageManager\": \"pnpm@11.25.0\",\n  \"allowScripts\": {\n    \"unrs-resolver@1.12.2\": true,\n    \"@prisma/engines@7.10.0\": true,\n    \"prisma@7.10.0\": true\n  }\n}\n"
+      }
+    },
+    "deps": [
+      "@prisma/adapter-pg",
+      "@prisma/client",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-label",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-select",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-tabs",
+      "@supabase/ssr",
+      "@supabase/supabase-js",
+      "@tailwindcss/postcss",
+      "@tanstack/react-query",
+      "@types/bcryptjs",
+      "@types/node",
+      "@types/pg",
+      "@types/react",
+      "@types/react-dom",
+      "bcryptjs",
+      "class-variance-authority",
+      "clsx",
+      "eslint",
+      "eslint-config-next",
+      "lucide-react",
+      "next",
+      "pg",
+      "prisma",
+      "react",
+      "react-dom",
+      "recharts",
+      "resend",
+      "sonner",
+      "tailwind-merge",
+      "tailwindcss",
+      "typescript",
+      "zod"
+    ],
+    "technologies": [
+      "auth",
+      "next",
+      "postgres",
+      "prisma",
+      "react",
+      "supabase",
+      "tailwind",
+      "typescript"
+    ]
+  },
+  "routes": {
+    "Next.js user screens": [
+      {
+        "route": "/",
+        "file": "src/app/(customer)/page.tsx"
+      },
+      {
+        "route": "/find-watch",
+        "file": "src/app/(customer)/find-watch/page.tsx"
+      },
+      {
+        "route": "/returns-policy",
+        "file": "src/app/(customer)/returns-policy/page.tsx"
+      },
+      {
+        "route": "/watches",
+        "file": "src/app/(customer)/watches/page.tsx"
+      },
+      {
+        "route": "/watches/[slug]",
+        "file": "src/app/(customer)/watches/[slug]/page.tsx"
+      },
+      {
+        "route": "/about-us",
+        "file": "src/app/(customer)/about-us/page.tsx"
+      },
+      {
+        "route": "/terms",
+        "file": "src/app/(customer)/terms/page.tsx"
+      },
+      {
+        "route": "/checkout",
+        "file": "src/app/(customer)/checkout/page.tsx"
+      },
+      {
+        "route": "/track-order",
+        "file": "src/app/(customer)/track-order/page.tsx"
+      },
+      {
+        "route": "/privacy-policy",
+        "file": "src/app/(customer)/privacy-policy/page.tsx"
+      },
+      {
+        "route": "/account",
+        "file": "src/app/(customer)/account/page.tsx"
+      },
+      {
+        "route": "/account/settings",
+        "file": "src/app/(customer)/account/settings/page.tsx"
+      },
+      {
+        "route": "/account/addresses",
+        "file": "src/app/(customer)/account/addresses/page.tsx"
+      },
+      {
+        "route": "/account/orders",
+        "file": "src/app/(customer)/account/orders/page.tsx"
+      },
+      {
+        "route": "/account/orders/[number]",
+        "file": "src/app/(customer)/account/orders/[number]/page.tsx"
+      },
+      {
+        "route": "/shipping-and-delivery",
+        "file": "src/app/(customer)/shipping-and-delivery/page.tsx"
+      },
+      {
+        "route": "/faq",
+        "file": "src/app/(customer)/faq/page.tsx"
+      },
+      {
+        "route": "/wishlist",
+        "file": "src/app/(customer)/wishlist/page.tsx"
+      },
+      {
+        "route": "/cart",
+        "file": "src/app/(customer)/cart/page.tsx"
+      },
+      {
+        "route": "/warranty-policy",
+        "file": "src/app/(customer)/warranty-policy/page.tsx"
+      },
+      {
+        "route": "/contact",
+        "file": "src/app/(customer)/contact/page.tsx"
+      },
+      {
+        "route": "/register",
+        "file": "src/app/(auth)/register/page.tsx"
+      },
+      {
+        "route": "/login",
+        "file": "src/app/(auth)/login/page.tsx"
+      },
+      {
+        "route": "/admin",
+        "file": "src/app/admin/page.tsx"
+      },
+      {
+        "route": "/admin/customers",
+        "file": "src/app/admin/customers/page.tsx"
+      },
+      {
+        "route": "/admin/settings",
+        "file": "src/app/admin/settings/page.tsx"
+      },
+      {
+        "route": "/admin/pages",
+        "file": "src/app/admin/pages/page.tsx"
+      },
+      {
+        "route": "/admin/coupons",
+        "file": "src/app/admin/coupons/page.tsx"
+      },
+      {
+        "route": "/admin/products",
+        "file": "src/app/admin/products/page.tsx"
+      },
+      {
+        "route": "/admin/reviews",
+        "file": "src/app/admin/reviews/page.tsx"
+      },
+      {
+        "route": "/admin/login",
+        "file": "src/app/admin/login/page.tsx"
+      },
+      {
+        "route": "/admin/brands",
+        "file": "src/app/admin/brands/page.tsx"
+      },
+      {
+        "route": "/admin/inventory",
+        "file": "src/app/admin/inventory/page.tsx"
+      },
+      {
+        "route": "/admin/contact-submissions",
+        "file": "src/app/admin/contact-submissions/page.tsx"
+      },
+      {
+        "route": "/admin/categories",
+        "file": "src/app/admin/categories/page.tsx"
+      },
+      {
+        "route": "/admin/orders",
+        "file": "src/app/admin/orders/page.tsx"
+      }
+    ],
+    "Next.js API routes (app router)": [
+      {
+        "route": "/api/newsletter",
+        "file": "src/app/api/newsletter/route.ts"
+      },
+      {
+        "route": "/api/coupons/validate",
+        "file": "src/app/api/coupons/validate/route.ts"
+      },
+      {
+        "route": "/api/products",
+        "file": "src/app/api/products/route.ts"
+      },
+      {
+        "route": "/api/reviews",
+        "file": "src/app/api/reviews/route.ts"
+      },
+      {
+        "route": "/api/search",
+        "file": "src/app/api/search/route.ts"
+      },
+      {
+        "route": "/api/track-order",
+        "file": "src/app/api/track-order/route.ts"
+      },
+      {
+        "route": "/api/upload",
+        "file": "src/app/api/upload/route.ts"
+      },
+      {
+        "route": "/api/profile",
+        "file": "src/app/api/profile/route.ts"
+      },
+      {
+        "route": "/api/config",
+        "file": "src/app/api/config/route.ts"
+      },
+      {
+        "route": "/api/account/delete",
+        "file": "src/app/api/account/delete/route.ts"
+      },
+      {
+        "route": "/api/media/[id]",
+        "file": "src/app/api/media/[id]/route.ts"
+      },
+      {
+        "route": "/api/admin/customers",
+        "file": "src/app/api/admin/customers/route.ts"
+      },
+      {
+        "route": "/api/admin/coupons",
+        "file": "src/app/api/admin/coupons/route.ts"
+      },
+      {
+        "route": "/api/admin/products",
+        "file": "src/app/api/admin/products/route.ts"
+      },
+      {
+        "route": "/api/admin/reviews",
+        "file": "src/app/api/admin/reviews/route.ts"
+      },
+      {
+        "route": "/api/admin/brands",
+        "file": "src/app/api/admin/brands/route.ts"
+      },
+      {
+        "route": "/api/admin/contact",
+        "file": "src/app/api/admin/contact/route.ts"
+      },
+      {
+        "route": "/api/admin/categories",
+        "file": "src/app/api/admin/categories/route.ts"
+      },
+      {
+        "route": "/api/admin/orders",
+        "file": "src/app/api/admin/orders/route.ts"
+      },
+      {
+        "route": "/api/contact",
+        "file": "src/app/api/contact/route.ts"
+      },
+      {
+        "route": "/api/orders",
+        "file": "src/app/api/orders/route.ts"
+      }
+    ]
+  },
+  "db": {
+    "kind": "relational",
+    "engine": "prisma",
+    "schema_file": "prisma/schema.prisma",
+    "tables": [
+      {
+        "name": "Profile",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "role",
+            "type": "UserRole",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "firstName",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "lastName",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "email",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "phone",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "avatarUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "newsletter",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "userId",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "user",
+            "type": "User",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "addresses",
+            "type": "Address[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orders",
+            "type": "Order[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "reviews",
+            "type": "Review[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "wishlist",
+            "type": "Wishlist[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "couponUsages",
+            "type": "CouponUsage[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "notifications",
+            "type": "Notification[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "User",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "email",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "provider",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Category",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "slug",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "imageUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "parentId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "parent",
+            "type": "Category?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "children",
+            "type": "Category[]",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sortOrder",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "products",
+            "type": "Product[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Brand",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "slug",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "logoUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "description",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "country",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "website",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sortOrder",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "products",
+            "type": "Product[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Product",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "slug",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sku",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "description",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "price",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "discount",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "gender",
+            "type": "Gender",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isFeatured",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isBestSeller",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isNewArrival",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "ratingAvg",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "ratingCount",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "strapMaterial",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "caseMaterial",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "movement",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "caseDiameter",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "waterResistance",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "warranty",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "displayType",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "occasion",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "style",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "colors",
+            "type": "Json?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "specifications",
+            "type": "Json?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "featuredImageUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "videoUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "status",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "brandId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "brand",
+            "type": "Brand",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "categoryId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "category",
+            "type": "Category",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "variants",
+            "type": "ProductVariant[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "images",
+            "type": "ProductImage[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orderItems",
+            "type": "OrderItem[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "reviews",
+            "type": "Review[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "wishlistedBy",
+            "type": "Wishlist[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "inventoryLogs",
+            "type": "InventoryLog[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "ProductVariant",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sku",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "color",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "size",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "price",
+            "type": "Decimal?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "stock",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "stockStatus",
+            "type": "StockStatus",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isDefault",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "productId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "ProductImage",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "url",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "alt",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sortOrder",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "productId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Address",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "label",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "firstName",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "lastName",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "phone",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "house",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "street",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "area",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "city",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "province",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "postalCode",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "country",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isDefault",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "orders",
+            "type": "Order[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Order",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orderNumber",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "customerName",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "customerEmail",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "customerPhone",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "subtotal",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "discount",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "shipping",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "tax",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "total",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "couponCode",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "couponDiscount",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "status",
+            "type": "OrderStatus",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "paymentMethod",
+            "type": "PaymentMethod",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "paymentStatus",
+            "type": "PaymentStatus",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "shippingMethod",
+            "type": "ShippingMethod",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "shippingAddress",
+            "type": "Json",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "estimatedDelivery",
+            "type": "DateTime?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "deliveredAt",
+            "type": "DateTime?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "notes",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "addressId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "address",
+            "type": "Address?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "items",
+            "type": "OrderItem[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "payments",
+            "type": "Payment[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "couponUsages",
+            "type": "CouponUsage[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "OrderItem",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "productName",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "sku",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "imageUrl",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "variantName",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "unitPrice",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "quantity",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "total",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orderId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "order",
+            "type": "Order",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "productId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Payment",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "method",
+            "type": "PaymentMethod",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "status",
+            "type": "PaymentStatus",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "amount",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "transactionId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "reference",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "paidAt",
+            "type": "DateTime?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orderId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "order",
+            "type": "Order",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Wishlist",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "productId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Review",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "rating",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "title",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "content",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "status",
+            "type": "ReviewStatus",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "productId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "images",
+            "type": "ReviewImage[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "ReviewImage",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "url",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "reviewId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "review",
+            "type": "Review",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Media",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "dataUrl",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Coupon",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "code",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "type",
+            "type": "CouponType",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "value",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "minOrder",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "maxDiscount",
+            "type": "Decimal?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "startDate",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "expiryDate",
+            "type": "DateTime?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "usageLimit",
+            "type": "Int?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "usedCount",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "applicableProductIds",
+            "type": "Json?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "applicableCategoryIds",
+            "type": "Json?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "usages",
+            "type": "CouponUsage[]",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "CouponUsage",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "usedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "orderId",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "order",
+            "type": "Order",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "couponId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "coupon",
+            "type": "Coupon",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "profileId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "discount",
+            "type": "Decimal",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "InventoryLog",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "productId",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "product",
+            "type": "Product",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          },
+          {
+            "name": "variantId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "change",
+            "type": "Int",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "reason",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Notification",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "type",
+            "type": "NotificationType",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "title",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "message",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "link",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isRead",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profile",
+            "type": "Profile?",
+            "pk": false,
+            "unique": false,
+            "relation": true,
+            "references": "id"
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "Page",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "slug",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "title",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "content",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "updatedAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "ContactSubmission",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "name",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "email",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "subject",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "message",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isRead",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "NewsletterSubscriber",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "email",
+            "type": "String",
+            "pk": false,
+            "unique": true,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "isActive",
+            "type": "Boolean",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      },
+      {
+        "name": "AdminLog",
+        "fields": [
+          {
+            "name": "id",
+            "type": "String",
+            "pk": true,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "profileId",
+            "type": "String?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "action",
+            "type": "String",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "details",
+            "type": "Json?",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          },
+          {
+            "name": "createdAt",
+            "type": "DateTime",
+            "pk": false,
+            "unique": false,
+            "relation": false,
+            "references": null
+          }
+        ],
+        "type": "model"
+      }
+    ],
+    "enums": [
+      {
+        "name": "UserRole",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "Gender",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "OrderStatus",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "PaymentMethod",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "PaymentStatus",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "ShippingMethod",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "StockStatus",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "ReviewStatus",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "CouponType",
+        "fields": [],
+        "type": "enum"
+      },
+      {
+        "name": "NotificationType",
+        "fields": [],
+        "type": "enum"
+      }
+    ],
+    "matches": 0
+  },
+  "tests": {
+    "count": 1,
+    "files": [
+      "src/components/home/testimonials.tsx"
+    ]
+  },
+  "env": {
+    "env_files": [
+      "/home/abdulrehman/timecart/.env",
+      "/home/abdulrehman/timecart/.env.example",
+      "/home/abdulrehman/timecart/.env.local"
+    ],
+    "referenced_vars": [
+      "ADMIN_PASSWORD",
+      "ADMIN_SECRET",
+      "ADMIN_USERNAME",
+      "DATABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NODE_ENV",
+      "SEED_ADMIN_EMAIL",
+      "SUPABASE_SERVICE_ROLE_KEY"
+    ]
+  },
+  "ai": {
+    "count": 0,
+    "files": []
+  },
+  "auth": {
+    "files": [
+      "src/middleware.ts",
+      "src/lib/admin-auth.ts",
+      "src/lib/session.ts",
+      "src/app/auth/callback/route.ts",
+      "src/app/(auth)/layout.tsx",
+      "src/app/(auth)/register/page.tsx",
+      "src/app/(auth)/login/page.tsx",
+      "src/app/admin/login/actions.ts",
+      "src/app/admin/login/login-form.tsx",
+      "src/app/admin/login/page.tsx",
+      "src/components/auth/account-button.tsx",
+      "src/components/auth/auth-form.tsx"
+    ]
+  },
+  "screens": [
+    "src/providers/store-provider.tsx",
+    "src/app/layout.tsx",
+    "src/app/(customer)/layout.tsx",
+    "src/app/(customer)/page.tsx",
+    "src/app/(customer)/find-watch/page.tsx",
+    "src/app/(customer)/returns-policy/page.tsx",
+    "src/app/(customer)/watches/page.tsx",
+    "src/app/(customer)/watches/[slug]/page.tsx",
+    "src/app/(customer)/about-us/page.tsx",
+    "src/app/(customer)/terms/page.tsx",
+    "src/app/(customer)/checkout/page.tsx",
+    "src/app/(customer)/track-order/page.tsx",
+    "src/app/(customer)/privacy-policy/page.tsx",
+    "src/app/(customer)/account/layout.tsx",
+    "src/app/(customer)/account/page.tsx",
+    "src/app/(customer)/account/settings/page.tsx",
+    "src/app/(customer)/account/addresses/page.tsx",
+    "src/app/(customer)/account/orders/page.tsx",
+    "src/app/(customer)/account/orders/[number]/page.tsx",
+    "src/app/(customer)/shipping-and-delivery/page.tsx",
+    "src/app/(customer)/faq/page.tsx",
+    "src/app/(customer)/wishlist/page.tsx",
+    "src/app/(customer)/cart/page.tsx",
+    "src/app/(customer)/warranty-policy/page.tsx",
+    "src/app/(customer)/contact/page.tsx",
+    "src/app/(auth)/layout.tsx",
+    "src/app/(auth)/register/page.tsx",
+    "src/app/(auth)/login/page.tsx",
+    "src/app/admin/layout.tsx",
+    "src/app/admin/page.tsx",
+    "src/app/admin/customers/page.tsx",
+    "src/app/admin/settings/page.tsx",
+    "src/app/admin/pages/page.tsx",
+    "src/app/admin/coupons/page.tsx",
+    "src/app/admin/products/page.tsx",
+    "src/app/admin/reviews/page.tsx",
+    "src/app/admin/login/login-form.tsx",
+    "src/app/admin/login/page.tsx",
+    "src/app/admin/brands/page.tsx",
+    "src/app/admin/inventory/page.tsx",
+    "src/app/admin/contact-submissions/page.tsx",
+    "src/app/admin/categories/page.tsx",
+    "src/app/admin/orders/page.tsx",
+    "src/components/home/benefits.tsx",
+    "src/components/home/brand-bar.tsx",
+    "src/components/home/categories.tsx",
+    "src/components/home/collection-cards.tsx",
+    "src/components/home/editorial.tsx",
+    "src/components/home/hero-video.tsx",
+    "src/components/home/hero.tsx",
+    "src/components/home/house-details.tsx",
+    "src/components/home/inspire-strip.tsx",
+    "src/components/home/marquee.tsx",
+    "src/components/home/new-watches-band.tsx",
+    "src/components/home/newsletter-banner.tsx",
+    "src/components/home/newsletter-form.tsx",
+    "src/components/home/promo-banner.tsx",
+    "src/components/home/section-header.tsx",
+    "src/components/home/shop-by-brands.tsx",
+    "src/components/home/watch-family.tsx",
+    "src/components/home/watch-finder-cta.tsx",
+    "src/components/home/watchmaking-band.tsx",
+    "src/components/layout/customer-layout.tsx",
+    "src/components/layout/footer.tsx",
+    "src/components/layout/header.tsx",
+    "src/components/layout/mobile-nav.tsx",
+    "src/components/product/filters.tsx",
+    "src/components/product/pagination.tsx",
+    "src/components/product/product-actions.tsx",
+    "src/components/product/product-card.tsx",
+    "src/components/product/product-gallery.tsx",
+    "src/components/product/product-grid.tsx",
+    "src/components/product/product-rail.tsx",
+    "src/components/product/product-tabs.tsx",
+    "src/components/product/quick-view.tsx",
+    "src/components/product/review-form.tsx",
+    "src/components/product/sort-control.tsx",
+    "src/components/product/watches-layout.tsx",
+    "src/components/finder/watch-finder.tsx",
+    "src/components/checkout/checkout-page.tsx",
+    "src/components/auth/account-button.tsx",
+    "src/components/auth/auth-form.tsx",
+    "src/components/search/search-overlay.tsx",
+    "src/components/static/about.tsx",
+    "src/components/static/faq.tsx",
+    "src/components/static/policy-shell.tsx",
+    "src/components/brand/logo.tsx",
+    "src/components/brand/social-icons.tsx",
+    "src/components/account/account-addresses.tsx",
+    "src/components/account/account-nav.tsx",
+    "src/components/account/account-order-detail.tsx",
+    "src/components/account/account-orders.tsx",
+    "src/components/account/account-overview.tsx",
+    "src/components/account/account-settings.tsx",
+    "src/components/ui/accordion.tsx",
+    "src/components/ui/badge.tsx",
+    "src/components/ui/button.tsx",
+    "src/components/ui/count-up.tsx",
+    "src/components/ui/dialog.tsx",
+    "src/components/ui/dropdown-menu.tsx",
+    "src/components/ui/input.tsx",
+    "src/components/ui/label.tsx",
+    "src/components/ui/rating-input.tsx",
+    "src/components/ui/rating.tsx",
+    "src/components/ui/reveal.tsx",
+    "src/components/ui/select.tsx",
+    "src/components/ui/separator.tsx",
+    "src/components/ui/skeleton.tsx",
+    "src/components/ui/tabs.tsx",
+    "src/components/ui/textarea.tsx",
+    "src/components/wishlist/wishlist-page.tsx",
+    "src/components/admin/admin-nav.tsx",
+    "src/components/admin/admin-prefetcher.tsx",
+    "src/components/admin/admin-settings.tsx",
+    "src/components/admin/admin-stat-card.tsx",
+    "src/components/admin/admin-table.tsx",
+    "src/components/admin/brands-manager.tsx",
+    "src/components/admin/categories-manager.tsx",
+    "src/components/admin/contact-manager.tsx",
+    "src/components/admin/coupons-manager.tsx",
+    "src/components/admin/customers-manager.tsx",
+    "src/components/admin/dashboard-chart-grid.tsx",
+    "src/components/admin/dashboard-charts.tsx",
+    "src/components/admin/orders-manager.tsx",
+    "src/components/admin/products-manager.tsx",
+    "src/components/admin/reviews-manager.tsx",
+    "src/components/track/track-order-page.tsx",
+    "src/components/cart/cart-drawer.tsx",
+    "src/components/cart/cart-page.tsx",
+    "src/components/contact/contact-form.tsx"
+  ],
+  "readme": "# TimeCart\n\n**Where Time Meets Style** — a premium watch e-commerce storefront built with Next.js 16 (App Router), Supabase (Postgres / Auth / Storage), Prisma 7, Tailwind CSS 4, and Recharts.\n\n## Features\n\n- **Home** — Rolex-inspired black &amp; off-white editorial design with an autoplay 15fps hero video (`/videos/animatio-15fps.mp4`, mobile variant) and full-bleed bands\n- **Catalog** — `/watches` with URL-driven filters (category, brand, gender, price, rating, movement, style, availability), sorting, and pagination\n- **Product detail** — `/watches/[slug]` with gallery, add-to-cart / buy-now, tabs (description / specs / reviews), and related products\n- **Cart, Wishlist, Checkout** — client-persisted (localStorage) flows; COD up to Rs. 60,000, Bank Transfer (50% advance) above it; coupon validation API\n- **Order tracking** — `/track-order` reads orders stored client-side with a live status timeline\n- **Account dashboard** — `/account/*` with overview, orders, addresses, settings\n- **Auth** — `/login` + `/register` backed by Supabase when configured, otherwise a local demo session\n- **Watch Finder** — `/find-watch` rule-based quiz that recommends watches from the catalog\n- **Admin panel** — `/admin` with dashboard, products, orders, coupons, categories, brands, reviews, inventory, pages, contact inquiries, and settings (demo-mode CRUD until a database is wired up)\n- **Static pages** — about, FAQ, contact, shipping & delivery, returns, warranty, privacy, terms\n\n## Demo mode vs. live mode\n\nThe app runs fully in **demo mode** when Supabase environment variables are placeholders:\n\n- Catalog, search, and home content come from `src/lib/demo-data.ts` (Picsum images)\n- Order / address / profile data persist in the browser via `localStorage` (`tc-orders`, `tc-order-<num>`, `tc-addresses`, `tc-profile`, `tc-session`)\n- Admin mutations (`/api/admin/*`) return `{ ok: true, demo: true }` and warn that changes won't persist\n\nWith real credentials, the app switches to Supabase Auth + Postgres (Prisma). No code changes needed.\n\n## Getting started\n\n```bash\nnpm install\ncp .env.example .env        # fill in real values to enable live mode\nnpm run dev\n```\n\n## Database (Prisma 7)\n\nPrisma 7 uses a driver adapter (`@prisma/adapter-pg`) — the URL lives in `prisma.config.ts`, not the schema.\n\n```bash\nnpm run db:generate   # regenerate the client into src/generated/prisma\nnpm run db:push       # create tables\nnpm run db:seed       # node prisma/seed.ts — admin + brands + categories + products + coupons\n```\n\nThe seed creates an admin profile (email from `SEED_ADMIN_EMAIL`, default `admin@timecart.pk`) on the `users`/`profiles` tables.\n\n## Scripts\n\n| Script | Purpose |\n| --- | --- |\n| `npm run dev` | Development server |\n| `npm run build` | Production build |\n| `npm run start` | Run the production build |\n| `npm run lint` | ESLint |\n| `npm run db:generate` | Generate Prisma client |\n| `npm run db:push` | Push schema to the database |\n| `npm run db:seed` | Seed the database |\n\n## Tech notes\n\n- **Next.js 16** — `useSearchParams()` needs a `<Suspense>` boundary on prerendered pages; the `middleware` file convention is deprecated in favor of `proxy` (build warning only).\n- **Prisma 7** — `generator client` outputs to `src/generated/prisma` (gitignored).\n- **Client components must not import `@/lib/data`** or anything that pulls `pg`/Prisma into the browser bundle.\n- Package manager: npm only (pnpm is not usable in this environment).",
+  "open_questions": [
+    "Purpose and target users: derive from README/source, do not guess.",
+    "Auth mechanism: confirm from code (JWT/session/third-party).",
+    "Deployment target: confirm from Dockerfile/CI/config or mark as NOT DETECTED.",
+    "Roles/actors: enumerate only those visible in code."
+  ],
+  "secret_scan": {
+    "note": "Value-entropy scan of source. Names alone are safe; actual values are not.",
+    "hits": []
+  }
+}

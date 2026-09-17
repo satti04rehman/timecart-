@@ -1,0 +1,53 @@
+{
+  "title": "TimeCart — System Documentation",
+  "subtitle": "Professional Technical Report",
+  "author": "Documentation Team",
+  "date": "2026-09-14",
+  "version": "v0.1.0",
+  "profile": "professional",
+  "out": "docs/reports/report.docx",
+  "toc": true,
+  "sections": [
+    {
+      "heading": "1. Introduction",
+      "blocks": [
+        {"t": "p", "text": "TimeCart (\"Where Time Meets Style\") is a premium watch e-commerce storefront. From the project README and source, it is built with Next.js 16 (App Router), Supabase (Postgres / Auth / Storage), Prisma 7, Tailwind CSS 4, and Recharts. It supports customer browsing, cart, checkout, order tracking and reviews, plus an admin area for products, coupons, customers and orders."},
+        {"t": "bullets", "items": [
+          "Frontend and API: Next.js 16 App Router (evidence: package.json, src/app).",
+          "Database engine: relational Postgres via Supabase (evidence: prisma/schema.prisma, datasource db).",
+          "Authentication: Supabase Auth with custom middleware (evidence: src/middleware.ts, src/lib/session.ts).",
+          "Email delivery: Resend (evidence: package.json dependency + usage)."
+        ]},
+        {"t": "figure", "src": "docs/diagrams/architecture/architecture.png", "caption": "Figure 1.1 — System architecture (from source structure and configuration)."},
+        {"t": "spacer"}
+      ]
+    },
+    {
+      "heading": "2. Database Design",
+      "blocks": [
+        {"t": "p", "text": "The relational schema is defined in prisma/schema.prisma as a Postgres database with 23 models (e.g. User, Profile, Product, Order, OrderItem, Payment, Review, Coupon) and 10 enums (UserRole, OrderStatus, PaymentMethod, …)."},
+        {"t": "table", "header": ["Table", "Key fields / purpose"], "rows": [
+          ["User", "auth accounts; role enum CUSTOMER | ADMIN"],
+          ["Profile", "1:1 with User; name, contact details"],
+          ["Product", "catalog item; brand and category relations"],
+          ["ProductVariant", "size/color stock per product"],
+          ["Order", "customer order; status enum lifecycle"],
+          ["OrderItem", "line items per order; product relation"],
+          ["Payment", "1:1 with Order; method + status"],
+          ["Review", "product reviews by user"],
+          ["Coupon + CouponUsage", "discounts and their redemption tracking"]
+        ], "caption": "Table 2.1 — Core tables detected in the Prisma schema."},
+        {"t": "figure", "src": "docs/diagrams/erd/erd.png", "caption": "Figure 2.1 — Entity Relationship Diagram (generated from prisma/schema.prisma relations)."},
+        {"t": "spacer"}
+      ]
+    },
+    {
+      "heading": "3. Key Workflows",
+      "blocks": [
+        {"t": "p", "text": "Authentication flow: the user signs in to the Next.js frontend, the API route delegates to Supabase Auth and a session is stored; subsequent requests go through middleware and read session data (evidence: src/app/auth/callback, src/lib/session.ts, src/middleware.ts)."},
+        {"t": "figure", "src": "docs/diagrams/workflows/sequence-login.png", "caption": "Figure 3.1 — Login / session sequence (from auth callback route and lib code)."},
+        {"t": "p", "text": "Public API surface observed (src/app/api): products, search, reviews, coupons/validate, orders, track-order, wishlist-related, newsletter, contact, config, upload, profile, and an /api/admin/* set (customers, orders, products, reviews, brands, coupons, categories, contact)."}
+      ]
+    }
+  ]
+}

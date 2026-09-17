@@ -138,14 +138,14 @@ export function HeroVideo({ products = [] }: { products?: ProductSummary[] }) {
             <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-14">
               <Link
                 href="/watches"
-                className="group inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
+                className="group inline-flex items-center gap-3 border-b border-ivory/50 pt-4 pb-2 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
               >
                 Shop the Collection
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="#collection"
-                className="group inline-flex items-center gap-3 border-b border-ivory/30 pb-1 text-xs font-light uppercase tracking-[0.35em] text-ivory/80 transition-colors hover:border-ivory hover:text-ivory"
+                className="group inline-flex items-center gap-3 border-b border-ivory/30 pt-4 pb-2 text-xs font-light uppercase tracking-[0.35em] text-ivory/80 transition-colors hover:border-ivory hover:text-ivory"
               >
                 New Arrivals
                 <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />

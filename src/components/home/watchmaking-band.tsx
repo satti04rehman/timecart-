@@ -36,7 +36,7 @@ export function WatchmakingBand() {
           </p>
           <Link
             href="/watches"
-            className="group mt-10 inline-flex items-center gap-3 border-b border-ivory/50 pb-1 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
+            className="group mt-10 inline-flex items-center gap-3 border-b border-ivory/50 pt-4 pb-2 text-xs font-medium uppercase tracking-[0.35em] text-ivory transition-colors hover:border-champagne hover:text-champagne"
           >
             Discover the collection
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />

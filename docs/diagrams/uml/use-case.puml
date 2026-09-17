@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+!theme plain
+skinparam actorStyle awesome
+actor "Customer" as C
+actor "Admin" as Ad
+actor "System" as Sys
+
+usecase "Browse watches" as U1
+usecase "Search / filter products" as U2
+usecase "Add to wishlist" as U3
+usecase "Add to cart" as U4
+usecase "Checkout & place order" as U5
+usecase "Track order" as U6
+usecase "Write a product review" as U7
+usecase "Manage coupons" as U8
+usecase "Manage products & inventory" as U9
+usecase "Manage orders" as U10
+usecase "View admin customers" as U11
+usecase "Send notifications" as U12
+
+C --> U1
+C --> U2
+C --> U3
+C --> U4
+C --> U5
+C --> U6
+C --> U7
+Ad --> U8
+Ad --> U9
+Ad --> U10
+Ad --> U11
+Sys --> U12
+
+U1 ..> U2 : <<extend>>
+U5 ..> U4 : <<include>>
+U7 ..> U5 : <<extend>>
+U12 ..> U6 : <<extend>>
+@enduml
