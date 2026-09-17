@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     type: "website",
   },
   metadataBase: new URL("https://timecart.example.com"),
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+  ],
 };
 
 export default function RootLayout({

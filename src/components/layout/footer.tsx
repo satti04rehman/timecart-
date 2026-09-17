@@ -55,7 +55,9 @@ export function Footer() {
                 <FacebookIcon className="h-4 w-4" />
               </a>
               <a
-                href="#"
+                href="https://wa.me/923001234567"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="WhatsApp"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/70 transition-colors hover:border-champagne hover:text-champagne"
               >

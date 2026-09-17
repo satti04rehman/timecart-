@@ -52,6 +52,15 @@
     background-color: var(--champagne);
     color: var(--obsidian);
   }
+
+  /* Fallback visible focus for bare interactive elements that don't already
+     use Tailwind ring utilities (drawer controls, hero dots, cart actions…) */
+  :where(button, [role="button"], a[href], [tabindex]:not([tabindex="-1"])):not(
+      [class*="ring"]
+    ):focus-visible {
+    outline: 2px solid var(--obsidian);
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
