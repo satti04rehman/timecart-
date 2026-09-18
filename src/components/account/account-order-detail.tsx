@@ -163,7 +163,7 @@ export function OrderDetail() {
           {order.paymentMethod === "Bank Transfer" && (
             <div className="mt-4 rounded-lg bg-soft-gray/40 p-3 text-xs text-text-gray">
               Bank account: Meezan Bank · TimeCart Retail · IBAN: PK36 MEZN
-              0000 1234 5678 9012. Please share your transaction ID.
+              0000 1428 6013 0014. Please share your transaction ID.
             </div>
           )}
         </div>

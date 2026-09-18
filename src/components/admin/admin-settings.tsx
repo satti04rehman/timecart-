@@ -11,7 +11,7 @@ const DEFAULTS = {
   storeName: "TimeCart",
   tagline: "Where Time Meets Style.",
   currency: "PKR",
-  supportPhone: "+92 300 1234567",
+  supportPhone: "support@timecart.pk",
   supportEmail: "support@timecart.pk",
   freeShippingAbove: "10000",
   shippingFee: "199",

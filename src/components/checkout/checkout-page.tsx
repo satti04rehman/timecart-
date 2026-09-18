@@ -422,7 +422,7 @@ export function CheckoutPage() {
                   </p>
                   <p className="mt-1">
                     Bank: Meezan Bank · Account Title: TimeCart Retail ·
-                    IBAN: PK36 MEZN 0000 1234 5678 9012
+                    IBAN: PK36 MEZN 0000 1428 6013 0014
                   </p>
                   <p className="mt-2 text-xs">
                     After transferring the{" "}
@@ -840,7 +840,7 @@ function OrderSuccess({
                 : formatPrice(order.total * DEPOSIT_RATE)}
             </span>{" "}
             to <span className="font-semibold text-obsidian">Meezan Bank</span>{" "}
-            (Account: TimeCart Retail · IBAN: PK36 MEZN 0000 1234 5678 9012)
+            (Account: TimeCart Retail · IBAN: PK36 MEZN 0000 1428 6013 0014)
             and share the transaction ID with our team to confirm. Balance is
             payable on delivery.
           </p>

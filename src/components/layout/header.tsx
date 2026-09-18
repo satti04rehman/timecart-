@@ -64,7 +64,7 @@ export function Header() {
         )}
       >
         <div className="container-tc">
-          <div className="flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+          <div className="tc-header-reveal flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
             {/* Mobile menu button */}
             <button
               type="button"
@@ -76,7 +76,7 @@ export function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="shrink-0 py-1" aria-label="TimeCart home">
+            <Link href="/" className="tc-logo-pop shrink-0 py-1" aria-label="TimeCart home">
               <Logo />
             </Link>
 
@@ -87,7 +87,7 @@ export function Header() {
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    "py-3 text-xs font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
+                    "tc-navlink py-3 text-xs font-light uppercase tracking-[0.28em] transition-colors hover:text-champagne",
                     link.sale ? "text-champagne" : "text-obsidian",
                     pathname === link.href && "text-champagne"
                   )}

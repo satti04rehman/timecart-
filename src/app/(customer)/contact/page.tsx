@@ -1,10 +1,9 @@
 import { ContactForm } from "@/components/contact/contact-form";
-import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
+import { Mail, MessageCircle, MapPin } from "lucide-react";
 
 const CHANNELS = [
-  { icon: Phone, title: "Call Us", desc: "+92 300 1234567", note: "Mon–Sat, 10am–7pm" },
   { icon: Mail, title: "Email", desc: "support@timecart.pk", note: "Replies within 24h" },
-  { icon: MessageCircle, title: "WhatsApp", desc: "+92 300 1234567", note: "Fastest response" },
+  { icon: MessageCircle, title: "Chat", desc: "Live support", note: "Mon–Sat, 10am–7pm" },
   { icon: MapPin, title: "Visit Us", desc: "Gulshan-e-Iqbal, Karachi", note: "By appointment" },
 ];
 
