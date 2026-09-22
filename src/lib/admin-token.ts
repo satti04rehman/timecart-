@@ -15,7 +15,9 @@ function signingSecret(): string {
     if (process.env.NODE_ENV === "production") {
       throw new Error("ADMIN_SECRET is required in production.");
     }
-    return "timecart-dev-admin-secret-do-not-use-in-prod";
+    // Random per-process secret in dev — sessions end on restart, but the
+    // key is never a published constant anyone could forge a cookie with.
+    return `dev-${crypto.randomUUID()}`;
   }
   return secret;
 }

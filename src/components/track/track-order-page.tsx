@@ -39,12 +39,14 @@ function statusIndex(status: string): number {
 export function TrackOrderPage() {
   const searchParams = useSearchParams();
   const initial = searchParams.get("number") ?? "";
+  const initialToken = searchParams.get("token") ?? "";
   const [query, setQuery] = React.useState(initial);
+  const [token, setToken] = React.useState(initialToken);
   const [input, setInput] = React.useState(initial);
   const [order, setOrder] = React.useState<TrackedOrder | null>(null);
   const [notFound, setNotFound] = React.useState(false);
 
-  const lookup = React.useCallback((num: string) => {
+  const lookup = React.useCallback((num: string, tok: string) => {
     if (!num) {
       setOrder(null);
       setNotFound(false);
@@ -71,7 +73,8 @@ export function TrackOrderPage() {
       setNotFound(false);
       return;
     }
-    fetch(`/api/track-order?number=${encodeURIComponent(num.trim())}`)
+    const tokenParam = tok ? `&token=${encodeURIComponent(tok)}` : "";
+    fetch(`/api/track-order?number=${encodeURIComponent(num.trim())}${tokenParam}`)
       .then((r) => r.json())
       .then((d) => {
         setOrder(d.order ?? null);
@@ -84,8 +87,8 @@ export function TrackOrderPage() {
   }, []);
 
   React.useEffect(() => {
-    lookup(query);
-  }, [query, lookup]);
+    lookup(query, token);
+  }, [query, token, lookup]);
 
   const current = order ? statusIndex(order.status) : 0;
 

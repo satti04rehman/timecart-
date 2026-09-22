@@ -1,5 +1,6 @@
 export interface StoredOrder {
   orderNumber: string;
+  trackingToken?: string;
   date: string;
   customerName: string;
   phone: string;

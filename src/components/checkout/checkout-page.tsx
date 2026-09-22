@@ -55,6 +55,7 @@ export function CheckoutPage() {
   const [step, setStep] = React.useState(1);
   const [orderNumber, setOrderNumber] = React.useState<string | null>(null);
   const [placedOrder, setPlacedOrder] = React.useState<StoredOrder | null>(null);
+  const [successToken, setSuccessToken] = React.useState<string | null>(null);
 
   const [form, setForm] = React.useState({
     name: "",
@@ -190,12 +191,19 @@ export function CheckoutPage() {
         unitPrice: i.unitPrice,
         quantity: i.quantity,
       })),
+    }).then((data) => {
+      const token = (data as { trackingToken?: string } | null)?.trackingToken;
+      if (token) {
+        order.trackingToken = token;
+        saveStoredOrder(order);
+        setSuccessToken(token);
+      }
     });
   };
 
   if (orderNumber && placedOrder) {
     return (
-      <OrderSuccess order={placedOrder} paymentDetail={payment} cardTail={cardTail} />
+      <OrderSuccess order={placedOrder} paymentDetail={payment} cardTail={cardTail} trackingToken={successToken} />
     );
   }
 
@@ -731,14 +739,21 @@ export function CheckoutPage() {
   );
 }
 
-function persistOrder(payload: Record<string, unknown>) {
-  fetch("/api/orders", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  }).catch(() => {
+async function persistOrder(
+  payload: Record<string, unknown>
+): Promise<{ trackingToken?: string } | null> {
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) return null;
+    return res.json().catch(() => null);
+  } catch {
     // Local backup keeps the order visible; DB sync may be retried by support.
-  });
+    return null;
+  }
 }
 
 function Field({
@@ -777,10 +792,12 @@ function OrderSuccess({
   order,
   paymentDetail,
   cardTail,
+  trackingToken,
 }: {
   order: StoredOrder;
   paymentDetail: string | null;
   cardTail?: string;
+  trackingToken?: string | null;
 }) {
   return (
     <div className="container-tc flex flex-col items-center py-16 text-center lg:py-24">
@@ -870,7 +887,7 @@ function OrderSuccess({
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <Button asChild>
-          <Link href={`/track-order?number=${order.orderNumber}`}>
+          <Link href={`/track-order?number=${order.orderNumber}${order.trackingToken || trackingToken ? `&token=${order.trackingToken || trackingToken}` : ""}`}>
             Track Order
           </Link>
         </Button>

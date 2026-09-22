@@ -62,8 +62,9 @@ export async function POST(req: Request) {
     revalidatePath("/watches");
     return NextResponse.json({ ok: true, id: brand.id });
   } catch (e) {
+    console.error("[api/admin/brands] create failed", e);
     return NextResponse.json(
-      { ok: false, error: e instanceof Error ? e.message : "Create failed" },
+      { ok: false, error: "Create failed" },
       { status: 400 }
     );
   }
@@ -101,8 +102,9 @@ export async function PUT(req: Request) {
     revalidatePath("/watches");
     return NextResponse.json({ ok: true, id });
   } catch (e) {
+    console.error("[api/admin/brands] update failed", e);
     return NextResponse.json(
-      { ok: false, error: e instanceof Error ? e.message : "Update failed" },
+      { ok: false, error: "Update failed" },
       { status: 400 }
     );
   }

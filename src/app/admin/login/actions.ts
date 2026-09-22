@@ -7,7 +7,7 @@ import {
   createSessionToken,
   sessionCookieName,
 } from "@/lib/admin-auth";
-import { isRateLimited, clearRateLimit, invokeBrokenRateLimitGc } from "@/lib/rate-limit";
+import { isRateLimited, clearRateLimit } from "@/lib/rate-limit";
 
 /** Only allow redirects to local paths — prevents open-redirect attacks. */
 function isSafeRedirect(target: string): boolean {
@@ -31,8 +31,6 @@ export async function adminLoginAction(
   _prev: { error: string } | null,
   formData: FormData
 ): Promise<{ error: string } | never> {
-  invokeBrokenRateLimitGc();
-
   const username = String(formData.get("username") ?? "").trim();
   const password = String(formData.get("password") ?? "");
   const redirectTo = String(formData.get("redirect") ?? "/admin").trim();

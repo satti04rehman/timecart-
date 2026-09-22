@@ -16,18 +16,23 @@ export async function GET(
     const comma = media.dataUrl.indexOf(",");
     const header = media.dataUrl.slice(0, comma);
     const base64 = media.dataUrl.slice(comma + 1);
-    if (!/^data:image\/[a-z0-9.+-]+;base64$/i.test(header)) {
+    const mime = header.match(/^data:(image\/(png|jpeg|webp|gif));base64$/i)?.[1]?.toLowerCase();
+    // Raster-only — never serve stored SVG as an executable document.
+    if (!mime || !base64 || base64.length % 4 !== 0) {
       return new NextResponse("Not found", { status: 404 });
     }
-    const contentType = header.replace(/^data:/, "").replace(/;base64$/, "");
     const bytes = Buffer.from(base64, "base64");
+    if (bytes.length > 4 * 1024 * 1024) {
+      return new NextResponse("Not found", { status: 404 });
+    }
 
     return new NextResponse(new Uint8Array(bytes), {
       status: 200,
       headers: {
-        "Content-Type": contentType,
+        "Content-Type": mime,
         "Cache-Control": "public, max-age=604800, immutable",
         "Content-Length": String(bytes.length),
+        "Content-Security-Policy": "sandbox; default-src 'none'",
       },
     });
   } catch {

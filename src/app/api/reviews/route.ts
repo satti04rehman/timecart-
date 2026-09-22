@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient as createSupabaseClient } from "@/lib/supabase/server";
 import { prisma, getPrismaClient } from "@/lib/prisma";
+import { rateLimit } from "@/lib/rate-limit";
 
 const reviewSchema = z.object({
   productId: z.string().min(1),
@@ -13,6 +14,17 @@ const reviewSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  const rl = rateLimit(req, "reviews", 10, 60 * 1000);
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: "Too many reviews. Try again shortly." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(rl.retryAfterMs / 1000)) },
+      }
+    );
+  }
+
   const supabase = await createSupabaseClient();
   const {
     data: { user },

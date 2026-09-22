@@ -173,8 +173,9 @@ export async function POST(req: Request) {
     invalidateProductCache(slug);
     return NextResponse.json({ ok: true, id: product.id });
   } catch (e) {
+    console.error("[api/admin/products] create failed", e);
     return NextResponse.json(
-      { ok: false, error: e instanceof Error ? e.message : "Save failed" },
+      { ok: false, error: "Save failed" },
       { status: 400 }
     );
   }
@@ -201,8 +202,9 @@ export async function PUT(req: Request) {
     invalidateProductCache(slug);
     return NextResponse.json({ ok: true, id });
   } catch (e) {
+    console.error("[api/admin/products] update failed", e);
     return NextResponse.json(
-      { ok: false, error: e instanceof Error ? e.message : "Update failed" },
+      { ok: false, error: "Update failed" },
       { status: 400 }
     );
   }
