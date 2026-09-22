@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     default: "TIME CART — Where Time Meets Style",
     template: "%s | TIME CART",
   },
+  icons: { icon: "/favicon.svg" },
   description:
     "TIME CART — a premium online watch destination. Discover authentic watches from trusted brands, designed for every moment.",
   keywords: [
