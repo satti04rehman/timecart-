@@ -8,10 +8,8 @@ import {
   TabsContent,
 } from "@/components/ui/tabs";
 import { Rating } from "@/components/ui/rating";
-import { Badge } from "@/components/ui/badge";
 import { ReviewForm } from "@/components/product/review-form";
 import { resolveProductImage } from "@/lib/product-images";
-import { ShieldCheck } from "lucide-react";
 
 export interface ProductReviewData {
   id: string;
@@ -101,7 +99,9 @@ export function ProductTabs({
               <Rating value={ratingAvg} size="md" showValue={false} />
             </div>
             <p className="mt-2 text-sm text-text-gray">
-              {ratingCount} verified review{ratingCount === 1 ? "" : "s"}
+              {ratingCount === 0
+                ? "No reviews yet"
+                : `${ratingCount} review${ratingCount === 1 ? "" : "s"}`}
             </p>
           </div>
 
@@ -131,11 +131,9 @@ export function ProductTabs({
                           <p className="text-sm font-semibold text-obsidian">
                             {r.author}
                           </p>
-                          {r.verified && (
-                            <Badge variant="success" className="gap-1 px-2 py-0">
-                              <ShieldCheck className="h-3 w-3" /> Verified
-                            </Badge>
-                          )}
+                          <span className="text-xs text-text-gray">
+                            Sample review
+                          </span>
                         </div>
                         <div className="mt-0.5 flex items-center gap-2">
                           <Rating value={r.rating} size="sm" />

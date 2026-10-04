@@ -129,7 +129,7 @@ function demoProduct(input: {
     gender: input.gender,
     imageUrl: img(input.slug),
     ratingAvg: input.rating ?? 4.5,
-    ratingCount: input.ratingCount ?? 24,
+    ratingCount: input.ratingCount ?? 0,
     stockStatus: st <= 0 ? "OUT_OF_STOCK" : st < 5 ? "LOW_STOCK" : "IN_STOCK",
     stock: st,
     isNewArrival: input.newArrival ?? false,
@@ -189,7 +189,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Casual",
     colors: ["Black", "Silver"],
     rating: 4.8,
-    ratingCount: 320,
+    ratingCount: 0,
     bestSeller: true,
     featured: true,
     stock: 34,
@@ -224,7 +224,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Silver", "Blue"],
     rating: 4.6,
-    ratingCount: 185,
+    ratingCount: 0,
     newArrival: true,
     stock: 18,
     description:
@@ -258,7 +258,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Blue", "Green"],
     rating: 4.9,
-    ratingCount: 98,
+    ratingCount: 0,
     bestSeller: true,
     featured: true,
     stock: 12,
@@ -293,7 +293,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Silver", "Black"],
     rating: 4.7,
-    ratingCount: 76,
+    ratingCount: 0,
     featured: true,
     stock: 15,
     description:
@@ -327,7 +327,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Brown", "Black"],
     rating: 4.5,
-    ratingCount: 142,
+    ratingCount: 0,
     bestSeller: true,
     stock: 9,
     description:
@@ -360,7 +360,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Minimal",
     colors: ["Navy", "Black", "Olive"],
     rating: 4.4,
-    ratingCount: 210,
+    ratingCount: 0,
     newArrival: true,
     stock: 40,
     description:
@@ -394,7 +394,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Brown", "Gold"],
     rating: 4.5,
-    ratingCount: 88,
+    ratingCount: 0,
     featured: true,    stock: 18,
     description:
       "Clean lines and a slim profile make this an effortless everyday dress watch, equally at home in the office or at dinner.",
@@ -426,7 +426,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Green", "Red", "Black"],
     rating: 4.8,
-    ratingCount: 88,
+    ratingCount: 0,
     bestSeller: true,
     stock: 11,
     description:
@@ -460,7 +460,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Silver", "Blue"],
     rating: 4.6,
-    ratingCount: 142,
+    ratingCount: 0,
     bestSeller: true,    stock: 12,
     description:
       "A sharp steel chronograph with a sunray blue dial and clean sub-dials — a confident everyday statement piece.",
@@ -492,7 +492,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Black", "Red", "Green"],
     rating: 4.7,
-    ratingCount: 260,
+    ratingCount: 0,
     bestSeller: true,
     stock: 28,
     description:
@@ -526,7 +526,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Rose Gold", "Silver"],
     rating: 4.5,
-    ratingCount: 47,
+    ratingCount: 0,
     featured: true,
     stock: 16,
     description:
@@ -559,7 +559,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Blush", "Black"],
     rating: 4.6,
-    ratingCount: 73,
+    ratingCount: 0,
     newArrival: true,
     stock: 22,
     description:
@@ -591,7 +591,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Black", "White"],
     rating: 4.7,
-    ratingCount: 265,
+    ratingCount: 0,
     bestSeller: true,    stock: 16,
     description:
       "A cult-favourite automatic with a crisp white dial and date at 3 o’clock, running on Seiko’s 4R self-winding movement.",
@@ -623,7 +623,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Black", "Blue", "Pink"],
     rating: 4.6,
-    ratingCount: 210,
+    ratingCount: 0,
     newArrival: true,    stock: 42,
     description:
       "An AMOLED fitness watch with built-in GPS, stress tracking and sleep coaching, with a battery that lasts up to 11 days.",
@@ -656,7 +656,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Minimal",
     colors: ["White", "Pink"],
     rating: 4.5,
-    ratingCount: 120,
+    ratingCount: 0,
     featured: true,
     stock: 60,
     description:
@@ -688,7 +688,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Blue", "Green"],
     rating: 4.9,
-    ratingCount: 42,
+    ratingCount: 0,
     featured: true,
     stock: 5,
     description:
@@ -721,7 +721,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Blue", "Black"],
     rating: 4.6,
-    ratingCount: 95,
+    ratingCount: 0,
     bestSeller: true,
     stock: 19,
     description:
@@ -754,7 +754,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Classic",
     colors: ["Gold", "Silver"],
     rating: 4.7,
-    ratingCount: 67,
+    ratingCount: 0,
     featured: true,
     stock: 7,
     description:
@@ -787,7 +787,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Casual",
     colors: ["Gold", "White"],
     rating: 4.4,
-    ratingCount: 74,
+    ratingCount: 0,
     stock: 26,
     description:
       "A slim everyday quartz watch for her: a clean dial, a light bracelet and 50m water resistance that handles daily splashes.",
@@ -819,7 +819,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Black", "White"],
     rating: 4.7,
-    ratingCount: 178,
+    ratingCount: 0,
     newArrival: true,    stock: 22,
     description:
       "A lightweight GPS running watch with an AMOLED display, race insights and up to 13 days of battery life.",
@@ -852,7 +852,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Green", "Black"],
     rating: 4.5,
-    ratingCount: 130,
+    ratingCount: 0,
     newArrival: true,
     stock: 25,
     description:
@@ -885,7 +885,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Minimal",
     colors: ["Silver", "Rose Gold"],
     rating: 4.6,
-    ratingCount: 59,
+    ratingCount: 0,
     stock: 13,
     description:
       "A record-settingly slim case at just 6.14mm. Designed in India, worn across the world.",
@@ -917,7 +917,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
     style: "Sport",
     colors: ["Blue", "Black"],
     rating: 4.3,
-    ratingCount: 84,
+    ratingCount: 0,
     stock: 21,
     description:
       "A rugged analog-digital combination watch with thermometer and chronograph. Retro cool, built to last.",
@@ -933,6 +933,7 @@ export const DEMO_PRODUCTS: DemoProduct[] = [
   }),
 ];
 
+// Demo/practice build: sample reviews for layout only — not real customers.
 export const DEMO_REVIEWS = [
   {
     id: "r1",
@@ -941,7 +942,7 @@ export const DEMO_REVIEWS = [
     content:
       "The watch looked even better than the pictures. Delivery was fast and packaging was premium. Highly recommended!",
     date: new Date("2026-08-12"),
-    verified: true,
+    verified: false,
     productId: "p_casio_a168",
   },
   {
@@ -951,7 +952,7 @@ export const DEMO_REVIEWS = [
     content:
       "Gorgeous piece. Feels much more expensive than it is. The dial is stunning in natural light.",
     date: new Date("2026-07-28"),
-    verified: true,
+    verified: false,
     productId: "p_seiko_presage",
   },
   {
@@ -961,7 +962,7 @@ export const DEMO_REVIEWS = [
     content:
       "Solid build quality and accurate timekeeping. Strap is a bit stiff initially but softens with wear.",
     date: new Date("2026-08-03"),
-    verified: true,
+    verified: false,
     productId: "p_casio_gshock",
   },
   {
@@ -971,7 +972,7 @@ export const DEMO_REVIEWS = [
     content:
       "Bought this for my wife's birthday. She hasn't taken it off since! Beautiful rose-gold finish.",
     date: new Date("2026-06-19"),
-    verified: true,
+    verified: false,
     productId: "p_titan_regalia",
   },
   {
@@ -981,30 +982,31 @@ export const DEMO_REVIEWS = [
     content:
       "Excellent automatic watch for the price. The exhibition case back is a nice touch. Shipping took 3 days.",
     date: new Date("2026-05-30"),
-    verified: true,
+    verified: false,
     productId: "p_orient_kamasu",
   },
 ];
 
+// Demo/practice build: sample reviews for layout only — not real customers.
 export const DEMO_TESTIMONIALS = [
   {
     quote:
       "Coming from a big watch store, the experience here was honestly smoother. Great products, real quality.",
     author: "Ahmed R.",
-    role: "Verified Purchase",
+    role: "Sample review",
     rating: 5,
   },
   {
     quote:
       "I found exactly the watch I wanted using the Watch Finder. It felt like they read my mind.",
     author: "Hira M.",
-    role: "Verified Purchase",
+    role: "Sample review",
     rating: 5,
   },
   {
     quote: "A timeless classic, delivered in two days. This is how online shopping should feel.",
     author: "Zain B.",
-    role: "Verified Purchase",
+    role: "Sample review",
     rating: 5,
   },
 ];
