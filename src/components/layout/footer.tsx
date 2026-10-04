@@ -141,14 +141,25 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-ivory/10 pt-8 text-xs text-ivory/40 sm:flex-row">
-          <p>© 2026 TimeCart. All rights reserved.</p>
-          <p>
-            Made with <span className="text-champagne">care</span> for watch
-            lovers.
-          </p>
-        </div>
+{/* Bottom bar */}
+          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-ivory/10 pt-8 text-xs text-ivory/40 sm:flex-row">
+            <p>© 2026 TimeCart. All rights reserved.</p>
+            <p>
+              Made with <span className="text-champagne">care</span> for watch
+              lovers.
+            </p>
+          </div>
+
+          {/* Practice build: say so plainly, so no visitor mistakes this for a
+              trading store. Orders placed here are not charged and not shipped. */}
+          <div className="border-t border-ivory/10 py-5 text-xs leading-relaxed text-ivory/45">
+            <p className="max-w-3xl">
+              <span className="text-ivory/70">Demonstration project.</span>{" "}
+              TimeCart is a portfolio build by Abdul Rehman Satti, not a trading
+              business. Products, brands and prices are illustrative, reviews are
+              samples, and the cart does not take payment or dispatch goods.
+            </p>
+          </div>
       </div>
     </footer>
   );
