@@ -48,7 +48,33 @@ export const DEMO_CATEGORIES: DemoCategory[] = [
   { id: "c_quartz", name: "Quartz", slug: "quartz", imageUrl: "/images/categories/quartz.svg", parentId: null },
 ];
 
+// Catalogue slugs predate the real product photos in src/images/products/*.jpg.
+// Map each slug to its photo; resolveProductImage() turns the .jpg path into the
+// optimized static import. Unmapped products fall back to their SVG mockup.
+const PRODUCT_PHOTOS: Record<string, string> = {
+  "casio-vintage-a168": "casio-a168-classic-digital",
+  "casio-mtp-123": "casio-f91w-classic",
+  "casio-g-shock-ga2100": "casio-g-shock-ga-2100",
+  "casio-mq24": "casio-classic-illuminator-ca53w",
+  "casio-edifice": "casio-edifice-ecb-900",
+  "seiko-5-automatic": "seiko-5-sports-automatic",
+  "seiko-presage-cocktail": "seiko-presage-cocktail",
+  "citizen-eco-drive": "citizen-ecco-drive-promaster",
+  "citizen-ana-digi": "citizen-ecco-drive-ladies",
+  "fossil-grant-chrono": "fossil-jr1437-chronograph",
+  "fossil-jacqueline": "fossil-caroline-mini",
+  "timex-weekender": "timex-weekender-38",
+  "timex-expedition": "timex-expedition-field",
+  "orient-kamasu": "orient-kamasu-diver",
+  "orient-bambino-v2": "orient-bambino-v2",
+  "titan-regalia": "titan-regalia-automatic",
+  "titan-edge-slim": "titan-edge-ladies",
+};
+
 const img = (slug: string, n = 1) => {
+  const photo = PRODUCT_PHOTOS[slug];
+  // One photo per product, so every gallery angle resolves to the same image.
+  if (photo) return `/images/products/${photo}.jpg`;
   const suffix = n === 1 ? "" : `-${n}`;
   return `/images/products/${slug}${suffix}.svg`;
 };
